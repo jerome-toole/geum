@@ -108,20 +108,6 @@ wp plugin activate --all --skip-themes --quiet
 echo -e "${GREEN}Done!${NC}"
 
 printf '\n'
-<<<<<<< HEAD
-read -r -p $'\e[34mInstall ACF Pro plugin? (Y/n) \e[0m' install_acf
-
-if [ "$install_acf" != "n" ]; then
-    read -r -p $'\e[34mEnter your ACF Pro license key: \e[0m' acf_key
-    acf_url="http://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=$acf_key"
-    echo "Installing ACF Pro..."
-    wp plugin install "$acf_url" --activate
-    echo -e "${GREEN}ACF Pro installed!${NC}"
-fi
-
-printf '\n'
-=======
->>>>>>> 580d79d948227ff5a0509f09657eb970e318a72e
 echo "Activating theme..."
 wp theme activate "$(basename "$(pwd)")"
 echo -e "${GREEN}Done!${NC}"
