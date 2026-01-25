@@ -1,0 +1,52 @@
+.group {
+    --group--padding-x: var(--block--padding-x);
+    --group--padding-y: var(--block--padding-y);
+
+    position: relative;
+
+    :where(.group__inner) {
+        position: relative;
+        padding-inline: var(--group--padding-x);
+    }
+
+    /* Top level group */
+    .blocks > & {
+        .group__inner {
+            max-width: calc(var(--container-sm) + (var(--group--padding-x) * 2));
+            margin-inline: auto;
+
+            /* stylelint-disable-next-line selector-max-compound-selectors */
+            > * {
+                max-width: var(--block--inner--max-width);
+                margin-inline: auto;
+            }
+        }
+
+        &.has-background {
+            --group--padding-x: spaceFluid(12, 16);
+        }
+    }
+
+    &.has-background {
+        padding-top: var(--group--padding-y);
+        padding-bottom: var(--group--padding-y);
+    }
+
+    :where(.group__background-image) {
+        position: absolute;
+        inset: 0;
+
+        &::after {
+            position: absolute;
+            background-color: var(--group--overlay--color, transparent);
+            content: '';
+            inset: 0;
+            /* mix-blend-mode: multiply; */
+            opacity: var(--group--overlay--opacity, 0);
+        }
+    }
+
+    &.is-style-thin {
+        --group--padding-y: var(--space--base);
+    }
+}

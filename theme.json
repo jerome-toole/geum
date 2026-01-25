@@ -1,0 +1,86 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/theme.json",
+    "version": 2,
+    "settings": {
+        "appearanceTools": false,
+        "blocks": {
+            "core/button": {
+                "appearanceTools": false,
+                "border": {
+                    "radius": false
+                },
+                "color": {
+                    "background": false
+                },
+                "layout": {},
+                "spacing": {
+                    "margin": false,
+                    "padding": false
+                },
+                "typography": {}
+            },
+            "core/column": {
+                "appearanceTools": false,
+                "spacing": {
+                    "units": ["%"]
+                }
+            },
+            "core/columns": {
+                "appearanceTools": false,
+                "color": {
+                    "background": true
+                }
+            }
+        },
+        "border": {
+            "color": false,
+            "radius": false,
+            "style": false,
+            "width": false
+        },
+        "color": {
+            "background": true,
+            "custom": false,
+            "customDuotone": false,
+            "customGradient": false,
+            "defaultDuotone": false,
+            "defaultGradients": false,
+            "defaultPalette": false,
+            "duotone": [],
+            "gradients": [],
+            "link": false,
+            "palette": [],
+            "text": false
+        },
+        "layout": {
+            "contentSize": "765px",
+            "wideSize": "1400px"
+        },
+        "shadow": {
+            "defaultPresets": false,
+            "presets": []
+        },
+        "spacing": {
+            "blockGap": null,
+            "customSpacingSize": false,
+            "margin": false,
+            "padding": false,
+            "units": []
+        },
+        "typography": {
+            "customFontSize": false,
+            "lineHeight": false,
+            "dropCap": false,
+            "fontFamilies": [],
+            "fontSizes": [],
+            "fontStyle": false,
+            "fontWeight": false,
+            "letterSpacing": false,
+            "textDecoration": false,
+            "textTransform": false,
+            "fluid": false,
+            "textColumns": false
+        },
+        "useRootPaddingAwareAlignments": false
+    }
+}

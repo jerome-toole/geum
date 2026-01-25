@@ -1,0 +1,17 @@
+@utility content-width-* {
+    max-width: --value(--container-*);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@utility content-width-fluid-* {
+    max-width: min(--value(--container-*), var(--width-fluid-container));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@utility content-width-full {
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}

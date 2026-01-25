@@ -1,0 +1,81 @@
+// Standard element margins
+:is(h1, h2, h3, h4, h5, h6) {
+    text-wrap: balance;
+
+    // Make a tags that are children of headings inherit styling
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+h1 {
+    @apply type-h1;
+}
+
+h2 {
+    @apply type-h2;
+}
+
+h3 {
+    @apply type-h3;
+}
+
+h4 {
+    @apply type-h4;
+}
+
+h5 {
+    @apply type-h5;
+}
+
+h6 {
+    @apply type-h6;
+}
+
+a {
+    @apply link;
+}
+
+p {
+    text-wrap: pretty;
+}
+
+dd {
+    margin-left: 0;
+}
+
+dt {
+    font-weight: var(--font-base-bold);
+}
+
+small {
+    font-size: var(--type--size---1);
+}
+
+strong,
+b {
+    font-weight: var(--font-base-bold);
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+ol,
+ul {
+    padding-left: calc(1.1em + var(--list--indent));
+    list-style-position: outside;
+
+    li {
+        &::marker {
+            color: var(--list--marker-color, currentColor);
+        }
+    }
+}
+
+li {
+    :is(ol, ul) {
+        padding-left: var(--list--nested-indent);
+    }
+}

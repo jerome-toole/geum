@@ -1,0 +1,109 @@
+// Block Alignments
+.block-editor-block-list__layout > .wp-block {
+    // Gutenberg injects a rule that limits the max width of .wp-block to 580px
+    // This line overrides it to use the responsive spacing rules for default width content
+    max-width: var(--width--fluid--s);
+
+    &[data-type*='acf/'],
+    .block-editor-block-list__layout.is-root-container > &[data-type*='acf/'] {
+        @apply content-width-full;
+    }
+
+    &[data-align='center'],
+    .aligncenter {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    &[data-align='wide'],
+    &.alignwide {
+        @apply content-width-fluid-lg;
+    }
+
+    &[data-align='full'],
+    .alignfull {
+        @apply content-width-full;
+    }
+
+    .alignright {
+        @apply align-right;
+    }
+
+    .alignleft {
+        @apply align-left;
+    }
+
+    &:not(.rich-text) {
+        margin-top: var(--block--margin-top);
+        margin-bottom: var(--block--margin-bottom);
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.editor-post-title__block .editor-post-title__input {
+    @apply type-h2;
+
+    margin-top: 0;
+}
+
+.mce-container {
+    > iframe {
+        margin: 0;
+    }
+}
+
+.mce-content-body {
+    @apply margin-trim;
+
+    margin: 10px;
+}
+
+//
+// Reset ACF styles
+//
+.acf-block-preview {
+    @apply margin-trim;
+}
+
+.acf-icon {
+    background-color: #fff;
+    color: #555d66;
+    text-decoration: none;
+
+    &:hover {
+        color: #0071a1;
+        text-decoration: none;
+    }
+}
+
+.acf-table {
+    box-sizing: content-box;
+}
+
+//
+// Router slot placeholders
+//
+.router-slot-placeholder {
+    @apply p-8 text-center rounded-md;
+
+    background: var(--wp--preset--color--base-2, #f5f5f5);
+    border: 2px dashed var(--wp--preset--color--contrast-3, #ddd);
+
+    strong {
+        @apply block mb-2 text-lg;
+    }
+
+    span {
+        @apply text-sm;
+
+        color: var(--wp--preset--color--contrast-2, #666);
+    }
+}

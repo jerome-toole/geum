@@ -1,0 +1,49 @@
+.breadcrumbs {
+    @apply type-small;
+
+    width: 100%;
+
+    :where(.breadcrumbs__yoast-wrapper) {
+        display: inline-block;
+        overflow: hidden;
+        max-width: min(35ch, 100%);
+        flex-flow: row nowrap;
+        align-items: center;
+        text-overflow: ellipsis;
+        transition: transition(max-width);
+        white-space: nowrap;
+
+        &:hover,
+        &:focus {
+            overflow: auto;
+            max-width: 100%;
+            flex-wrap: wrap;
+            text-overflow: unset;
+        }
+    }
+
+    :where(.breadcrumbs__yoast-separator) {
+        padding-inline: 0.7ch;
+
+        &:nth-last-child(2) {
+            display: none;
+        }
+
+        &::after {
+            @apply mask-icon;
+
+            display: inline-block;
+            width: 1.1ch;
+            height: 1.1ch;
+            mask-image: url('/images/icons/chevron-right.svg');
+        }
+    }
+
+    .breadcrumb_last {
+        display: none;
+    }
+
+    a {
+        @apply link--2;
+    }
+}

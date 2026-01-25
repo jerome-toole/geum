@@ -1,0 +1,11 @@
+@layer base {
+    :root {
+        --width-fluid-container: calc(100% - (var(--space--container-padding) * 2));
+
+        --width-fluid-2xs: min(var(--container-2xs), var(--width-fluid-container));
+        --width-fluid-xs: min(var(--container-xs), var(--width-fluid-container));
+        --width-fluid-sm: min(var(--container-sm), var(--width-fluid-container));
+        --width-fluid-md: min(var(--container-md), var(--width-fluid-container));
+        --width-fluid-lg: min(var(--container-lg), var(--width-fluid-container));
+    }
+}

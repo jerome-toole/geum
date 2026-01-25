@@ -1,0 +1,41 @@
+label {
+    display: inline-block;
+    margin-bottom: var(--form--label-spacing);
+}
+
+[type='text'],
+[type='password'],
+[type='date'],
+[type='datetime'],
+[type='datetime-local'],
+[type='month'],
+[type='week'],
+[type='email'],
+[type='number'],
+[type='search'],
+[type='tel'],
+[type='time'],
+[type='url'],
+[type='color'],
+textarea {
+    @apply input;
+}
+
+select {
+    @apply input;
+    @apply select;
+}
+
+textarea,
+[multiple] {
+    height: var(--form--textarea-height);
+    resize: vertical;
+}
+
+[type='radio'],
+[type='checkbox'] {
+    width: 1em;
+    height: 1em;
+    accent-color: var(--input--border-color);
+    transform: translateY(0.15em);
+}

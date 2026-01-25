@@ -1,0 +1,206 @@
+@utility btn {
+    --focus--color: var(--btn--border-color);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--btn--padding-y) var(--btn--padding-x);
+    border-width: var(--btn--border-width);
+    border-style: solid;
+    border-color: var(--btn--border-color);
+    border-radius: var(--btn--border-radius);
+    background-color: var(--btn--background-color);
+    color: var(--btn--color);
+    cursor: pointer;
+    font-size: var(--btn--font-size, inherit);
+    gap: var(--btn--gap);
+    line-height: inherit;
+    text-align: center;
+    text-decoration: none; // [1]
+    transition: transition(color, background-color, border-color, box-shadow, transform);
+    user-select: none;
+
+    @media (hover: hover) {
+        &:hover {
+            border-color: var(--btn--border-color--hover);
+            background-color: var(--btn--background-color--hover);
+            color: var(--btn--color-hover);
+            text-decoration: none;
+        }
+    }
+    @media (hover: none) {
+        &:active {
+            border-color: var(--btn--border-color--hover);
+            background-color: var(--btn--background-color--hover);
+            color: var(--btn--color-hover);
+            text-decoration: none;
+        }
+    }
+
+    &:focus {
+        @apply focus--1;
+    }
+
+    :where(.btn__icon) {
+        flex: 0 0 auto;
+        width: var(--btn--icon-size, 1em);
+        height: var(--btn--icon-size, 1em);
+        background: currentColor;
+        content: '';
+        mask-position: center;
+        mask-repeat: no-repeat;
+        mask-size: contain;
+        mask-image: var(--btn--icon);
+    }
+
+    .has-brand-1-background-color &:not(.has-background) {
+        --btn--background-color--hover: var(--color-brand-1);
+        --btn--border-color--hover: var(--color-brand-2);
+    }
+
+    .has-brand-2-background-color &:not(.has-background) {
+        @apply btn--theme-2;
+    }
+}
+
+@utility btn--theme-2 {
+    --btn--background-color: var(--color-brand-3);
+    --btn--border-color: var(--color-brand-3);
+    --btn--color: var(--color-brand-1);
+
+    --btn--background-color--hover: var(--color-brand-1);
+    --btn--border-color--hover: var(--color-brand-1);
+    --btn--color-hover: var(--color-brand-3);
+}
+
+@utility btn--ghost {
+    --btn--color: var(--color-foreground);
+    --btn--background-color: transparent;
+    --btn--border-color: transparent;
+
+    --btn--background-color--hover: transparent;
+    --btn--border-color--hover: transparent;
+    --btn--color-hover: var(--color-foreground);
+}
+
+// @apply btn--theme-3 {
+//     --btn--background-color: var(--color-brand-1);
+//     --btn--border-color: var(--color-brand-1);
+//     --btn--color: var(--color-white);
+
+//     --btn--background-color--hover: hsl(
+//         var(--color-brand-1--h),
+//         calc(var(--color-brand-1--s) * 0.75),
+//         calc(var(--color-brand-1--l) * 0.75)
+//     );
+//     --btn--border-color--hover: hsl(
+//         var(--color-brand-1--h),
+//         calc(var(--color-brand-1--s) * 0.75),
+//         calc(var(--color-brand-1--l) * 0.75)
+//     );
+//     --btn--color-hover: var(--color-white);
+// }
+
+@utility btn--small {
+    --btn--padding-y: var(--btn--small--padding-y);
+    --btn--padding-x: var(--btn--small--padding-x);
+}
+
+@utility btn--label {
+    @apply btn--small;
+    @apply type-small;
+}
+
+// Used for square buttons containing a single number or icon
+@utility btn--square {
+    min-width: var(--btn--size, rem(44));
+    min-height: var(--btn--size, rem(44));
+    padding: 0 0.3em;
+    border-radius: var(--border-radius--s);
+}
+
+@utility btn--arrow {
+    --btn--icon-size: 0.9em;
+
+
+    @media (hover: hover) {
+        &:hover {
+            &::after {
+                transform: translateX(15%);
+            }
+        }
+    }
+    @media (hover: none) {
+        &:active {
+            &::after {
+                transform: translateX(15%);
+            }
+        }
+    }
+
+    &::after {
+        @apply mask-icon;
+
+        mask-image: url('/images/icons/chevron-right.svg');
+        transform: translateX(0);
+        transition: transition(transform);
+        width: var(--btn--icon-size, 1em);
+        height: var(--btn--icon-size, 1em);
+    }
+}
+
+@utility btn--icon {
+  position: relative;
+  overflow: hidden;
+  text-indent: -9999px;
+
+  &::after {
+    @apply mask-icon;
+    position: absolute;
+  }
+}
+
+@utility btn--icon-before {
+  position: relative;
+  overflow: hidden;
+  text-indent: -9999px;
+
+  &::before {
+    @apply mask-icon;
+
+    position: absolute;
+  }
+}
+
+@utility btn--unstyled {
+	padding: 0;
+	border: 0;
+	border-radius: 0;
+	background-color: transparent;
+	color: inherit;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	letter-spacing: inherit;
+	line-height: inherit;
+	text-transform: inherit;
+
+	@media (hover: hover) {
+		&:hover {
+			background-color: transparent;
+			color: inherit;
+		}
+	}
+	@media (hover: none) {
+		&:active {
+			background-color: transparent;
+			color: inherit;
+		}
+	}
+
+	&:focus {
+		box-shadow: unset;
+		outline-width: 5px;
+	}
+}

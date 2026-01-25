@@ -1,0 +1,109 @@
+.wp-block-gallery {
+    --gallery--grid-columns: 1;
+
+    @apply media-embed;
+
+    .blocks-gallery-grid {
+        --grid--columns: var(--gallery--grid-columns);
+
+        @apply flex-grid;
+
+        .blocks-gallery-item {
+            @apply flex-grid-item;
+
+            margin-right: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    &.columns-1 {
+        --gallery--grid-columns: 1;
+    }
+
+    &.columns-2 {
+        @media (min-width: theme('screens.sm')) {
+            --gallery--grid-columns: 2;
+        }
+    }
+
+    &.columns-3 {
+        @media (min-width: theme('screens.md')) {
+            --gallery--grid-columns: 3;
+        }
+    }
+
+    &.columns-4 {
+        @media (min-width: theme('screens.md')) {
+            --gallery--grid-columns: 2;
+        }
+
+        @media (min-width: theme('screens.lg')) {
+            --gallery--grid-columns: 4;
+        }
+    }
+
+    &.columns-5 {
+        @media (min-width: theme('screens.md')) {
+            --gallery--grid-columns: 2;
+        }
+
+        @media (min-width: theme('screens.lg')) {
+            --gallery--grid-columns: 5;
+        }
+    }
+
+    &.columns-6 {
+        @media (min-width: theme('screens.md')) {
+            --gallery--grid-columns: 3;
+        }
+
+        @media (min-width: theme('screens.lg')) {
+            --gallery--grid-columns: 6;
+        }
+    }
+
+    &.columns-7 {
+        @media (min-width: theme('screens.md')) {
+            --gallery--grid-columns: 3;
+        }
+
+        @media (min-width: theme('screens.lg')) {
+            --gallery--grid-columns: 7;
+        }
+    }
+
+    &.columns-8 {
+        @media (min-width: theme('screens.md')) {
+            --gallery--grid-columns: 4;
+        }
+
+        @media (min-width: theme('screens.lg')) {
+            --gallery--grid-columns: 8;
+        }
+    }
+
+    .blocks-gallery-item {
+        position: relative;
+
+        figcaption {
+            @apply type-small;
+        }
+    }
+
+    /* Addresses a height issue when using code that modifies the output from
+       WordPress to contain extra markup. Used in webp implementations mostly. */
+    picture {
+        width: 100%;
+        height: 100%;
+    }
+
+    img {
+        overflow: var(--rounded-overflow, visible);
+        border-radius: var(--rounded-border-radius);
+        box-shadow: var(--box-shadow--1);
+    }
+
+    figcaption {
+        max-width: unset;
+    }
+}

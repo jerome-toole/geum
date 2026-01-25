@@ -1,0 +1,24 @@
+@utility cross {
+    position: relative;
+    overflow: hidden;
+
+    &::before,
+    &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: var(--cross--size, 100%);
+        height: var(--cross--line-height, 2px);
+        background-color: var(--cross--color, var(--color-black));
+        content: '';
+        transition: transition(transform);
+    }
+
+    &::before {
+        transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    }
+
+    &::after {
+        transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+    }
+}

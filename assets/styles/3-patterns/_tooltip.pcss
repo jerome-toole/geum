@@ -1,0 +1,28 @@
+@utility tooltip {
+    --tooltip--arrow--inset: space(12);
+    --tooltip--arrow--size: rem(7);
+
+    @apply type-small;
+    @apply color-context-error;
+
+    position: relative;
+    display: inline-block;
+    max-width: var(--container-2xs);
+    padding: var(--tooltip--padding-y, 0.5em) var(--tooltip--padding-x, 1em);
+    border-radius: var(--border-radius--s);
+    margin-top: calc(var(--tooltip--arrow--size) + rem(3px));
+    margin-left: var(--tooltip--left, 0.5em);
+
+    // A little arrow at the top
+    &::before {
+        position: absolute;
+        bottom: 100%;
+        left: var(--tooltip--arrow--inset, var(--tooltip--padding));
+        width: 0;
+        height: 0;
+        border-right: calc(var(--tooltip--arrow--size) / 1.2) solid transparent;
+        border-bottom: calc(var(--tooltip--arrow--size)) solid var(--color-background);
+        border-left: calc(var(--tooltip--arrow--size) / 1.2) solid transparent;
+        content: '';
+    }
+}

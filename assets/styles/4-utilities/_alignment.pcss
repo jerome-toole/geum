@@ -1,0 +1,53 @@
+// ---------------------------------------------------
+// Non-.page-grid alignment utilities
+// ---------------------------------------------------
+@utility align-none {
+    max-width: none;
+}
+
+@utility align-wide {
+    width: 100%;
+    max-width: var(--width-fluid-lg);
+    margin-inline: auto;
+}
+
+@utility align-full {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: auto;
+}
+
+@utility align-center {
+    justify-self: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@utility align-right {
+    max-width: var(--width-fluid-sm);
+    margin: spaceFluid(8, 12) auto;
+
+    @media (width >= theme('screens.md')) {
+        max-width: calc(var(--container-sm) / 2);
+        margin-top: space(16);
+        margin-right: calc(50% - (var(--container-sm) / 2));
+        margin-bottom: space(16);
+        margin-left: space(16);
+        float: right;
+    }
+}
+
+@utility align-left {
+    max-width: var(--width-fluid-sm);
+    margin: spaceFluid(8, 12) auto;
+
+    @media (width >= theme('screens.md')) {
+        max-width: calc(var(--container-sm) / 2);
+        margin-top: space(16);
+        margin-right: space(16);
+        margin-bottom: space(16);
+        margin-left: calc(50% - (var(--container-sm) / 2));
+        float: left;
+    }
+}

@@ -1,0 +1,8 @@
+@layer utilities {
+    :where([aria-expanded='false']) :where([data-show-expanded]),
+    :where([aria-expanded='false']) :where([data-hide-collapsed]),
+    :where([aria-expanded='true']) :where([data-hide-expanded]),
+    :where([aria-expanded='true']) :where([data-show-collapsed]) {
+        display: none;
+    }
+}

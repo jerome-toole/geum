@@ -1,0 +1,12 @@
+/**
+ * Mask icon - creates a mask-based icon using currentColor
+ * @param {string} $pseudo - Pseudo-element to use (default: after)
+ * @param {string} $position - Position value (static or absolute)
+ */
+@utility mask-icon {
+  content: '';
+  background-color: currentColor;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: var(--mask-icon--size, contain);
+}

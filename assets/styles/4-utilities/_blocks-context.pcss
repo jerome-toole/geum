@@ -1,0 +1,41 @@
+@utility blocks-context {
+    @apply prose;
+
+    --blocks--margin-bottom: var(--space--layout);
+    --block--margin-top: var(--space--layout);
+
+    margin-bottom: var(--blocks--margin-bottom);
+
+    // Block spacing
+    > * + * {
+        margin-top: var(--block--margin-top);
+    }
+
+// Prose elements get max-width constraint
+    > :where(p, ul, ol, h1, h2, h3, h4, h5, h6) {
+        max-width: var(--prose--max-width, 65ch);
+    }
+
+    // WordPress block-specific spacing
+    > :where([class*='wp-block']) {
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        // Pull full-width blocks with backgrounds together
+        &:where([class*='has-background'].alignfull) {
+            + :where([class*='has-background'].alignfull) {
+                margin-top: calc(var(--space--layout) * -1);
+            }
+
+            // Pull footer up to last full-width block with background
+            &:last-child {
+                margin-bottom: calc(var(--blocks--margin-bottom) * -1);
+            }
+        }
+    }
+}

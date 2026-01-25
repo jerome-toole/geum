@@ -1,0 +1,25 @@
+@utility screen-reader {
+    position: absolute !important;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+
+    &:focus {
+        z-index: var(--z-index-screen-reader);
+        top: calc(space(16) / 2);
+        left: calc(space(16) / 2);
+        display: block;
+        width: auto;
+        height: auto;
+        clip: auto;
+    }
+}
+
+@utility screen-reader-text {
+    @apply screen-reader;
+}
+
+@utility sr-only {
+    @apply screen-reader;
+}

@@ -1,0 +1,281 @@
+/* The following styling is meant to replace gravity forms theme styling (removed in GravityForms.php)
+   It's meant to complement GF's basic.min.css stylesheet. */
+
+.gform_wrapper {
+    margin-top: var(--space--base);
+    margin-bottom: var(--space--base);
+
+    .gform_fields {
+        grid-row-gap: var(--input--gap);
+    }
+
+    [type='button'],
+    [type='submit'] {
+        --btn--background-color: var(--color-foreground);
+        --btn--border-color: var(--color-foreground);
+        --btn--color: var(--color-background);
+
+        @apply btn;
+    }
+
+    .gform_ajax_spinner {
+        margin-left: 1em;
+    }
+
+    .gf_invisible,
+    .gfield_visibility_hidden {
+        position: absolute;
+        left: -9999px;
+        visibility: hidden;
+    }
+
+    .gfield + .gfield {
+        margin-top: space(4);
+    }
+
+    /* Overrides */
+    /* stylelint-disable selector-no-qualifying-type */
+    .gfield input.small,
+    .gfield select.small,
+    .gfield input.medium,
+    .gfield select.medium {
+        min-width: min(100%, 10em);
+    }
+
+    &.gform_wrapper.gravity-theme {
+        .gform_fields {
+            grid-template-columns: repeat(12, minmax(0, 1fr)); /* Fix grid blowout */
+
+            @media only screen and (max-width: 641px) {
+                input:not([type='radio']):not([type='checkbox']):not([type='image']):not([type='file']) {
+                    line-height: inherit;
+                }
+            }
+        }
+    }
+    /* stylelint-enable selector-no-qualifying-type */
+}
+
+.gform_confirmation_message {
+    @apply type-h4;
+}
+
+.gform_heading {
+    margin-bottom: var(--space--base);
+}
+
+.gsection_title {
+    max-width: var(--heading--max-width);
+    margin: space(8) 0;
+}
+
+.gform_footer,
+.gform_page_footer {
+    margin-top: var(--space--base);
+}
+
+.gform_anchor[tabindex]:focus {
+    outline: none;
+}
+
+.gsection {
+    border-top: var(--border-width--s) dashed var(--color-foreground);
+}
+
+.gfield_label,
+.ginput_complex label {
+    display: block;
+    margin-bottom: space(4);
+}
+
+.gfield_description:not(.gfield_validation_message) {
+    @apply type-small;
+
+    margin: var(--space--xxxs) 0 var(--space--xxxs) 0;
+}
+
+.hidden_label {
+    .gfield_label {
+        @apply screen-reader;
+    }
+}
+
+/* Validation and Errors */
+
+/* Honeypot */
+.gform_validation_container {
+    @apply screen-reader;
+}
+
+/* The container that appears at the top of the form with a title and links to errors */
+.gform_validation_errors {
+    @apply margin-trim;
+    @apply color-context-error;
+
+    max-width: var(--container-2xs);
+    padding: spaceFluid(8, 12);
+    border-radius: var(--border-radius--s);
+    margin-top: space(16);
+    margin-bottom: space(16);
+}
+
+/* Heading inside .gform_validation_errors */
+.gform_submission_error {
+    @apply type-h5;
+
+    .gform-icon {
+        display: none;
+    }
+}
+
+/* Links that appear inside .gform_validation_errors */
+.gform_validation_error_link {
+    --link--color: var(--color-foreground);
+    --link--color-hover: var(--color-foreground);
+    --link--text-decoration: underline;
+}
+
+/* .gfield element when it has an error */
+.gfield_error {
+    &:not(:focus-within) {
+        --input--border-color: var(--color-error);
+    }
+}
+
+/* Message that appears for each field that has an error */
+.gfield_validation_message {
+    @apply tooltip;
+
+    &:empty {
+        display: none;
+    }
+}
+
+/* Fields */
+.ginput_container_fileupload {
+    .gform_drop_area {
+        padding: space(16);
+        border: var(--border-width--s) dashed var(--input--border-color);
+        border-radius: var(--input--border-radius);
+        background: transparent;
+
+        .button {
+            @apply btn;
+        }
+    }
+
+    .gform_fileupload_rules {
+        @apply type-small;
+
+        display: block;
+        margin-top: var(--space--xxxs);
+    }
+}
+
+.ginput_container_consent {
+    @apply checkbox-field;
+
+    .gfield_required {
+        @apply screen-reader;
+    }
+
+    label {
+        margin-bottom: 0;
+    }
+}
+
+.ginput_complex {
+    @apply flex-grid;
+
+    > * {
+        @apply flex-grid-item;
+    }
+
+    label {
+        @apply type-small;
+    }
+
+    .ginput_left,
+    .ginput_right {
+        @media (min-width: theme('screens.md')) {
+            flex: 1 0 calc(50% - var(--grid--row-gap));
+        }
+    }
+
+    .name_first,
+    .name_middle,
+    .name_last {
+        flex-grow: 1;
+    }
+
+    .name_prefix,
+    .name_suffix {
+        width: 6.6rem;
+    }
+
+    .gfield_date_day,
+    .gfield_date_month,
+    .gfield_date_year {
+        input {
+            text-align: center;
+        }
+    }
+
+    .gfield_date_day,
+    .gfield_date_month {
+        max-width: 5rem;
+    }
+
+    .gfield_date_year {
+        max-width: 6rem;
+    }
+}
+
+.ginput_address_zip {
+    max-width: 12rem;
+}
+
+/* e.g. added files within a multi-file upload */
+.ginput_preview {
+    display: flex;
+    gap: var(--form--label-spacing);
+
+    .gform_delete_file {
+        flex: 0 0 auto;
+        border-radius: var(--border-radius--s);
+        background: var(--color-error);
+        color: var(--color-white);
+
+        + * {
+            /* This should be the file name */
+            overflow: hidden;
+            flex: 1 1 auto;
+            text-overflow: ellipsis;
+        }
+    }
+
+    & + & {
+        margin-top: space(4);
+    }
+}
+
+.gchoice {
+    .gfield_checkbox & {
+        @apply checkbox-field;
+    }
+
+    .gfield_radio & {
+        @apply radio-field;
+
+        /* Without this, a <br> tag adds unnecessary spacing if/when the 'other' radio field is used */
+        br {
+            display: none;
+        }
+    }
+
+    &:last-child {
+        > label {
+            margin-bottom: 0;
+        }
+    }
+}

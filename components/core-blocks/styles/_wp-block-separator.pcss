@@ -1,0 +1,15 @@
+.wp-block-separator {
+    --block--spacing--top: spaceFluid(12, 16);
+    --block--spacing--bottom: spaceFluid(12, 16);
+
+    width: 100%;
+    height: var(--hr--thickness, 2px);
+    background-color: var(--hr--color);
+    clear: both;
+
+    .blocks > & {
+        + * {
+            margin-top: 0;
+        }
+    }
+}

@@ -1,0 +1,160 @@
+.cards {
+    --grid--column-gap: spaceFluid(12, 16);
+    --grid--row-gap: var(--grid--column-gap);
+    --cards--min-width: 14.375rem; /* 230px */
+
+    :where(.cards__header) {
+        @apply margin-trim;
+
+        margin-bottom: var(--block--header--margin-bottom);
+        text-align: center;
+    }
+
+    :where(.cards__heading) {
+        max-width: var(--heading--max-width);
+        margin-inline: auto;
+        text-align: center;
+    }
+
+    :where(.cards__subheading) {
+        @apply margin-trim;
+        @apply content-width-2xs;
+
+        margin: var(--space--base) auto;
+    }
+
+    :where(.cards__items) {
+        @apply flex-grid;
+
+        justify-content: center;
+    }
+
+    :where(.cards__footer) {
+        @apply margin-trim;
+
+        margin-top: var(--block--footer--margin-top);
+    }
+
+    :where(.cards__more-link) {
+        justify-self: center;
+        text-align: center;
+    }
+
+    &:not(.alignfull) {
+        overflow: var(--rounded-overflow, visible);
+        border-radius: var(--rounded-border-radius);
+    }
+
+    &.alignfull {
+        .cards__inner {
+            @apply content-width-fluid-lg;
+        }
+    }
+
+    &.has-background {
+        .cards__inner {
+            padding-top: var(--block--padding-y);
+            padding-bottom: var(--block--padding-y);
+        }
+
+        &:not(.alignfull) {
+            padding-right: var(--block--padding-x);
+            padding-left: var(--block--padding-x);
+        }
+    }
+
+    &[class*='cards--columns-'] {
+        .cards__items {
+            grid-template-columns: repeat(var(--grid--columns), minmax(0, 1fr));
+        }
+    }
+
+    &:where(.cards--columns-4) {
+        @media (min-width: theme('screens.md')) {
+            --grid--columns: 2;
+        }
+
+        @media (min-width: theme('screens.xl')) {
+            --grid--columns: 4;
+        }
+    }
+
+    &:where(.cards--columns-3) {
+        @media (min-width: theme('screens.md')) {
+            --grid--columns: 3;
+        }
+    }
+
+    &:where(.cards--columns-2) {
+        @media (min-width: theme('screens.md')) {
+            --grid--columns: 2;
+        }
+
+        .cards__inner {
+            @apply content-width-md;
+        }
+    }
+
+    &:where(.cards--columns-1) {
+        --grid--columns: 1;
+
+        .cards__inner {
+            @apply content-width-md;
+        }
+    }
+
+    &:where(.cards--slider-on-mobile) {
+        @media (width < theme('screens.lg')) {
+            --animate--translateY: 0;
+
+            .cards__items {
+                position: relative;
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                padding-bottom: space(8);
+                margin-right: calc(-1 * var(--space--container-padding));
+                margin-bottom: calc(space(8) * -1);
+                margin-left: calc(-1 * var(--space--container-padding));
+                column-gap: 0;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                will-change: transform;
+
+                &::before,
+                &::after {
+                    display: block;
+                    overflow: hidden;
+                    height: 1px;
+                    flex: 0 0 var(--space--container-padding);
+                    content: '';
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+
+            .g-card {
+                min-width: var(--cards--min-width);
+                min-height: 100%;
+                flex: 0 0 80%;
+                margin-top: 0;
+                margin-right: var(--grid--column-gap);
+                scroll-snap-align: center;
+
+                @media (min-width: theme('screens.sm')) {
+                    flex-basis: 37%;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+    }
+
+    &:where(.cards--type--icons) {
+        @media (min-width: theme('screens.lg')) {
+            --grid--column-gap: spaceFluid(16, 24);
+        }
+    }
+}

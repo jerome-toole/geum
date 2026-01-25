@@ -1,0 +1,170 @@
+.g-card {
+    --g-card--max-width: 25rem; /* 400px */
+    --g-card--media--ratio: 3 / 2;
+    /* --g-card--outer-padding-x: spaceFluid(8, 12); */
+    /* --g-card--outer-padding-y: spaceFluid(8, 12); */
+    --g-card--inner-padding-x: spaceFluid(8, 12);
+    --g-card--inner-padding-y: spaceFluid(8, 12);
+    --g-card--media--border-radius: 0;
+    --g-card--box-shadow: var(--box-shadow--1);
+    --g-card--box-shadow--hover: var(--box-shadow--1--hover);
+    --g-card--border-radius: var(--border-radius--s);
+    --g-card--transition-duration: 800ms;
+    --g-card--transition-ease: var(--transition--ease);
+
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    max-width: var(--g-card--max-width, none);
+    flex-direction: column;
+    padding: var(--g-card--outer-padding-y) var(--g-card--outer-padding-x);
+    isolation: isolate; /* Create local stacking context */
+    text-align: center;
+    transition: box-shadow var(--g-card--transition-duration) var(--g-card--transition-ease);
+
+    &[class*='has-background'] {
+        border-radius: var(--g-card--border-radius);
+        background-color: var(--color-background);
+        box-shadow: var(--g-card--box-shadow);
+    }
+
+    &.has-link {
+        &:hover,
+        &:focus-visible {
+            &[class*='has-background'] {
+                box-shadow: var(--g-card--box-shadow--hover);
+            }
+
+            &:not(.has-embed) {
+                .g-card__image-inner {
+                    > * {
+                        transform: scale(1.04);
+                    }
+                }
+            }
+        }
+    }
+
+    :where(.g-card__inner) {
+        display: flex;
+        height: 100%;
+        flex-flow: column nowrap;
+        padding: var(--g-card--inner-padding-y) var(--g-card--inner-padding-x);
+        padding-top: space(12);
+
+        > *:not(.g-card__header) {
+            z-index: 200; /* Above card link pseudo-element */
+        }
+    }
+
+    :where(.g-card__header) {
+        flex: 1;
+    }
+
+    :where(.g-card__heading) {
+        margin-top: 0;
+        margin-bottom: 0;
+
+        a {
+            /* Make the whole card a clickable link. Should sit below any other
+               interactive elements, e.g. meta, embed buttons, etc. */
+            &::before {
+                position: absolute;
+                z-index: 100; /* Below other interactive elements */
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                content: '';
+            }
+        }
+    }
+
+    :where(.g-card__content) {
+        @apply margin-trim;
+
+        flex: 1;
+        margin-top: space(4);
+    }
+
+    :where(.g-card__meta) {
+        @apply margin-trim;
+
+        margin-top: space(4);
+    }
+
+    :where(.g-card__image) {
+        width: 100%;
+        align-self: center;
+        order: -1;
+
+        :where(.g-card__image-inner) {
+            overflow: hidden;
+            border-radius: var(--g-card--media--border-radius);
+            aspect-ratio: var(--g-card--media--ratio);
+
+            > * {
+                object-fit: var(--g-card--image--object-fit, cover);
+                transition: transform var(--g-card--transition-duration) var(--g-card--transition-ease);
+            }
+        }
+    }
+
+    :where(.g-card__labels) {
+        margin-top: space(4);
+
+        :where(.g-card__labels__items) {
+            --grid--row-gap: space(4);
+            --grid--column-gap: space(4);
+
+            @apply flex-list;
+        }
+    }
+
+    :where(.g-card__read-more) {
+        align-self: center;
+        margin-top: space(8);
+    }
+
+    &.has-embed {
+        .g-card__image {
+            @apply responsive-embed;
+
+            z-index: 200; /* Above card link pseudo-element */
+        }
+    }
+
+    &:where(.g-card--type--article) {
+        --g-card--inner-padding-x: space(12);
+        --g-card--inner-padding-y: space(12);
+
+        text-align: left;
+
+        .g-card__read-more {
+            align-self: flex-start;
+        }
+    }
+
+    /* Alternate style with a rounded, inset image */
+    &:where(.g-card--type--icon) {
+        --g-card--max-width: 18.75rem; /* 300px */
+        --g-card--inner-padding-x: 0;
+        --g-card--inner-padding-y: 0;
+        --g-card--outer-padding-x: 0;
+        --g-card--outer-padding-y: 0;
+        --g-card--media--ratio: 1 / 1;
+        --g-card--media--border-radius: 0;
+        --g-card--box-shadow: 0;
+        --g-card--box-shadow--hover: 0;
+
+        text-align: center;
+
+        .g-card__heading {
+            @apply type-h5;
+        }
+
+        .g-card__image {
+            max-width: 9.375rem; /* 150px */
+        }
+    }
+}

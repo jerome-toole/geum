@@ -1,0 +1,45 @@
+@utility select {
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 6rem;
+    max-width: 100%;
+
+    &:hover:not(:focus) {
+        --input--background: var(--color-brand-2); // TODO: Change this to relate to --input--background-color when we've sorted the color system.
+    }
+
+    &:not([multiple]) {
+        padding-right: 1.2em;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 9'%3E%3Cdefs/%3E%3Cpath fill='color('foreground')' d='M.79 1.85L2.7 3.87l3.06 3.21.7.75c.3.3.84.3 1.13 0L9.51 5.8l3.06-3.22.7-.74c.29-.3.32-.83 0-1.12-.3-.29-.81-.32-1.12 0l-1.91 2.01-3.07 3.22-.7.75h1.12L5.67 4.69 2.61 1.47l-.7-.74a.8.8 0 00-1.12 0c-.3.32-.3.8 0 1.12z'/%3E%3C/svg%3E");
+        background-position: right var(--input--padding-x) top 50%;
+        background-repeat: no-repeat, repeat;
+        background-size: 0.875em auto;
+        cursor: pointer;
+
+        &:focus,
+        &:active {
+            background-color: transparent;
+            //background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 9'%3E%3Cdefs/%3E%3Cpath fill='color('foreground')' d='M.79 1.85L2.7 3.87l3.06 3.21.7.75c.3.3.84.3 1.13 0L9.51 5.8l3.06-3.22.7-.74c.29-.3.32-.83 0-1.12-.3-.29-.81-.32-1.12 0l-1.91 2.01-3.07 3.22-.7.75h1.12L5.67 4.69 2.61 1.47l-.7-.74a.8.8 0 00-1.12 0c-.3.32-.3.8 0 1.12z'/%3E%3C/svg%3E");
+        }
+    }
+
+    // IE specific styling to hide the default arrow
+    &::-ms-expand {
+        display: none;
+    }
+
+    option {
+        font-weight: normal;
+    }
+
+    // Support for rtl text, including explicit support for Arabic and Hebrew
+    *[dir='rtl'] &,
+    :root:lang(ar) &,
+    :root:lang(iw) & {
+        padding-right: var(--input--padding-x);
+        padding-left: 1.4em;
+        background-position: left 0.7em top 50%, 0 0;
+    }
+}

@@ -1,0 +1,98 @@
+@utility radio-field {
+    position: relative;
+
+    label {
+        --input--outline-width--focus: 0;
+
+        @apply input;
+
+        display: grid;
+        align-items: center;
+        border-color: transparent;
+        margin-bottom: var(--input--gap);
+        cursor: pointer;
+        grid-template-columns: calc(var(--radio--size) + var(--radio--padding) * 2) auto;
+        grid-template-rows: 1fr;
+
+        &::before,
+        &::after {
+            --input--outline-width--focus: 1px;
+
+            border-radius: 100%;
+            content: '';
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        &::before {
+            width: var(--radio--size);
+            height: var(--radio--size);
+            border: var(--radio--border-width) solid var(--color-foreground);
+            background: var(--color-background);
+            cursor: pointer;
+            transition: transition(background);
+        }
+
+        &::after {
+            width: 0;
+            height: 0;
+            margin: var(--radio--padding);
+        }
+    }
+
+    [type='radio'] {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: var(--input--padding-x);
+        width: calc(var(--radio--size) + var(--radio--padding));
+        height: calc(var(--radio--size) + var(--radio--padding));
+        margin-top: auto;
+        margin-bottom: auto;
+        content: '';
+        font-size: inherit;
+        opacity: 0;
+        outline: 0;
+        transform: unset;
+
+        &:hover:not(:focus) {
+            + label {
+                --input--background-color: var(--input--background-color--highlight);
+            }
+        }
+
+        &:checked {
+            + label {
+                --input--background-color: var(--input--background-color--highlight);
+
+                &::after {
+                    width: calc(var(--radio--size) - var(--radio--padding) * 2);
+                    height: calc(var(--radio--size) - var(--radio--padding) * 2);
+                    background-color: var(--color-foreground);
+                }
+            }
+        }
+
+        &:focus + label::before,
+        + label:focus::before {
+            box-shadow:
+                0 0 0 calc(var(--input--outline-width--focus) * 2) var(--color-background),
+                0 0 0 calc(var(--input--outline-width--focus) * 4) var(--input--color-focus);
+        }
+
+        &:focus:not(:focus-visible) + label::before,
+        + label:focus:not(:focus-visible)::before {
+            box-shadow: none;
+        }
+    }
+
+    [type='text'] {
+        width: calc(100% - (var(--radio--size) + var(--radio--padding) * 2));
+        margin-top: space(8);
+        margin-left: calc(var(--radio--size) + var(--radio--padding) * 2);
+
+        &[disabled] {
+            display: none;
+        }
+    }
+}

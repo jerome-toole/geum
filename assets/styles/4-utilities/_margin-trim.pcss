@@ -1,0 +1,16 @@
+@utility margin-trim-first {
+    & > *:first-child {
+        margin-top: 0;
+    }
+}
+
+@utility margin-trim-last {
+    & > *:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@utility margin-trim {
+    @apply margin-trim-first;
+    @apply margin-trim-last;
+}

@@ -1,0 +1,22 @@
+@utility focus--1 {
+    outline: var(--focus--1--width, 2px) dotted var(--focus--color);
+    outline-offset: var(--focus--1--offset, 0);
+
+    // Remove focus styles for mouse users.
+    &:not(:focus-visible) {
+        @apply no-focus-be-careful;
+    }
+}
+
+@utility focus--2 {
+    box-shadow: 0 0 0 2px var(--focus--color);
+    outline-style: none;
+    outline-width: 0;
+
+    // Remove focus styles for mouse users.
+    &:not(:focus-visible) {
+        @apply no-focus-be-careful;
+
+        box-shadow: none;
+    }
+}

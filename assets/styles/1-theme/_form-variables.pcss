@@ -1,0 +1,47 @@
+// ---------------------------------------------------
+// Form Variables
+// ---------------------------------------------------
+
+@layer base {
+    :root {
+        --input--background-color: hsl(
+            var(--color-brand-2--h),
+            var(--color-brand-2--s),
+            98%
+        );
+        --input--background-color--focus: var(--color-background);
+        --input--background-color--highlight: hsl(
+            var(--color-brand-2--h),
+            var(--color-brand-2--s),
+            90%
+        );
+        --input--border-width: 1px;
+        --input--border-color: var(--color-brand-1);
+        --input--border-radius: 1.6875em;
+        --input--color: var(--color-brand-1);
+        --input--color-focus: var(--color-brand-1);
+        --input--outline-color--focus: var(--input--border-color);
+        --input--outline-width--focus: 1px;
+        --input--gap: space(8);
+        --input--padding-y: 0.9em;
+        --input--padding-x: 1.4em;
+        --input--padding: var(--input--padding-y) var(--input--padding-x);
+        --input--placeholder-color: hsla(var(--color-brand-1--hsl), 0.8);
+
+        --form--label-spacing: space(8);
+
+        --form--textarea-height: 100px;
+
+        --checkbox--size: 1.25em;
+        --checkbox--padding: calc(var(--checkbox--size) / 4);
+        --checkbox--border-width: 2px;
+
+        --checkbox--check-size: calc(var(--checkbox--size) - (var(--checkbox--padding) * 2));
+        --checkbox--check-stroke: 0.15em;
+        --checkbox--border-radius: 0.125em;
+
+        --radio--size: 1.25em;
+        --radio--padding: calc(var(--radio--size) / 4);
+        --radio--border-width: 2px;
+    }
+}

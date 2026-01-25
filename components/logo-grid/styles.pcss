@@ -1,0 +1,83 @@
+.logo-grid {
+    --logo-grid--padding-y: var(--block--padding-y);
+    --logo-grid--box-shadow: var(--box-shadow--1);
+    --logo-grid--box-shadow--hover: var(--box-shadow--1--hover);
+    --logo-grid--spacing: var(--space--base);
+    --logo-grid--item--aspect-ratio: 28 / 13;
+
+    @media (min-width: theme('screens.md')) {
+        --logo-grid--item--aspect-ratio: 28 / 13;
+    }
+
+    &.has-background {
+        padding-top: var(--logo-grid--padding-y);
+        padding-bottom: var(--logo-grid--padding-y);
+
+        &:not(.alignfull) {
+            padding-right: var(--block--padding-x);
+            padding-left: var(--block--padding-x);
+        }
+    }
+
+    :where(.logo-grid__header) {
+        @apply margin-trim;
+
+        margin-bottom: var(--block--header--margin-bottom);
+    }
+
+    :where(.logo-grid__heading) {
+        max-width: var(--heading--max-width);
+        margin-inline: auto;
+        text-align: center;
+    }
+
+    :where(.logo-grid__subheading) {
+        @apply margin-trim;
+        @apply content-width-2xs;
+
+        margin-block: var(--space--base);
+        margin-inline: auto;
+        text-align: center;
+    }
+
+    :where(.logo-grid__container) {
+        position: relative;
+    }
+
+    :where(.logo-grid__items) {
+        --grid--columns: 2;
+
+        @apply flex-grid;
+
+        width: 100%;
+
+        @media (min-width: theme('screens.md')) {
+            --grid--columns: 3;
+            --grid--column-gap: spaceFluid(4, 8);
+            --grid--row-gap: spaceFluid(4, 8);
+
+            max-width: var(--width-fluid-lg);
+            justify-content: center;
+        }
+
+        @media (min-width: theme('screens.lg')) {
+            --grid--columns: 4;
+        }
+
+        @media (min-width: theme('screens.xl')) {
+            --grid--columns: 5;
+        }
+    }
+
+    :where(.logo-grid__item) {
+        aspect-ratio: var(--logo-grid--item--aspect-ratio);
+
+        > * {
+            object-fit: contain;
+        }
+    }
+
+    &.is-style-thin {
+        --logo-grid--padding--y: var(--space--base);
+    }
+}

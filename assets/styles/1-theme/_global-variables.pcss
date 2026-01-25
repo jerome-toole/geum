@@ -1,0 +1,76 @@
+// stylelint-disable order/order
+
+@layer base {
+    :root {
+        // ---------------------------------------------------
+        // Site
+        // ---------------------------------------------------
+        --site--scroll-padding-top: var(--site-header--bottom);
+
+        // ---------------------------------------------------
+        // Border
+        // ---------------------------------------------------
+        --border-radius--s: 3px;
+        --border-radius--m: 10px;
+
+        --border-width--s: 2px;
+        --border-width--m: 4px;
+
+        --border--1: var(--border-width--s) solid var(--color-brand-1);
+
+        // ---------------------------------------------------
+        // Focus
+        // ---------------------------------------------------
+        --focus--color: var(--color-brand-1);
+        --focus--1--offset: 5px;
+        --focus--1--width: 3px;
+
+        // ---------------------------------------------------
+        // Selection
+        // ---------------------------------------------------
+        --selection-color: var(--color-background);
+        --selection-background: var(--color-foreground);
+
+        // ---------------------------------------------------
+        // Box Shadow
+        // ---------------------------------------------------
+        --box-shadow--1: 0 3px 9px hsla(var(--color-brand-1--hsl), 0.15);
+        --box-shadow--1--hover: 0 3px 20px 3px hsla(var(--color-brand-1--hsl), 0.15);
+        --box-shadow--2: 0 2px 7px hsla(var(--color-black--hsl), 0.1);
+        // --box-shadow--2--hover: 0 2px 7px hsla(var(--color-black--hsl), 0.1);
+
+        // ---------------------------------------------------
+        // Transitions
+        // ---------------------------------------------------
+        --transition--duration: 200ms;
+        --transition--ease: var(--ease-out-quart);
+
+        // ---------------------------------------------------
+        // Grids
+        // ---------------------------------------------------
+        --col-gap: spaceFluid(8, 12);
+        --row-gap: var(--col-gap);
+        --cols: 1;
+        --col-min-width: rem(300);
+
+        @media (width >= theme('screens.md')) {
+            --cols: 2;
+        }
+
+        @media (width >= theme('screens.lg')) {
+            --cols: 4;
+        }
+
+        // ---------------------------------------------------
+        // Horizontal rule styling
+        // ---------------------------------------------------
+        --hr--color: var(--color-brand-1);
+        --hr--thickness: 2px;
+
+        // ---------------------------------------------------
+        // Rounded corners - default rounding on blocks
+        // ---------------------------------------------------
+        --rounded-border-radius: var(--border-radius--m);
+        --rounded-overflow: hidden;
+    }
+}

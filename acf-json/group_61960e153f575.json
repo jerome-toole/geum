@@ -1,0 +1,41 @@
+{
+    "key": "group_61960e153f575",
+    "title": "Google API Key",
+    "fields": [
+        {
+            "key": "field_61960e1d434a2",
+            "label": "Google API Key",
+            "name": "google_api_key",
+            "type": "password",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-general"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Options Page",
+    "modified": 1641492386
+}

@@ -1,0 +1,42 @@
+/// Mimics grid gap behaviour by creating negative margins on the top and left
+/// of the flex container and then adding top and left margins to child elements.
+///
+/// @example pcss
+///    @apply flex-grid-row;
+///
+/// @access public
+@utility flex-grid {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: var(--col-gap);
+    row-gap: var(--row-gap);
+
+    // Override child selectors used in mixins such as list-reset()
+    > *,
+    > :first-child,
+    > :last-child,
+    > * + * {
+        @apply flex-grid-item;
+    }
+}
+
+@utility flex-grid-auto {
+    > *,
+    > :first-child,
+    > :last-child,
+    > * + * {
+        width: auto;
+    }
+}
+
+/// Set items to fit a column width provided by --cols and add the
+/// grid--gap between them
+///
+/// @example pcss
+///    @apply flex-grid-item;
+///
+/// @access public
+
+@utility flex-grid-item {
+    width: calc((100% / var(--cols)) - var(--col-gap) + (var(--col-gap) / var(--cols)));
+}

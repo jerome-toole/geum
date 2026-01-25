@@ -1,0 +1,89 @@
+.pagination {
+    --block--margin-top: var(--space--base);
+    --block--margin-bottom: var(--space--base);
+}
+
+.nav-links {
+    --pagination--size: 2.1875rem; /* 35px */
+    --grid--column-gap: space(8);
+
+    @apply flex-grid;
+    @apply flex-grid-auto;
+
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width: theme('screens.md')) {
+        --pagination--size: 2.1875rem; /* 35px */
+    }
+
+    > a,
+    > .current {
+        --btn--background-color: var(--color-white);
+        --btn--border-color: var(--color-white);
+        --btn--color: var(--color-foreground);
+
+        --btn--background-color--hover: var(--color-brand-2);
+        --btn--border-color--hover: var(--color-brand-2);
+        --btn--color-hover: var(--color-foreground);
+
+        --btn--size: var(--pagination--size);
+
+        @apply btn;
+        @apply btn--square;
+        @apply type-h5;
+
+        box-shadow: var(--box-shadow--1);
+        font-size: 0.875rem; /* 14px */
+
+        &:hover,
+        &:focus-visible {
+            box-shadow: var(--box-shadow--1--hover);
+        }
+    }
+
+    .current {
+        --btn--background-color: var(--color-brand-2);
+        --btn--border-color: var(--color-brand-2);
+        --btn--color: var(--color-foreground);
+
+        --btn--background-color--hover: var(--color-brand-2);
+        --btn--border-color--hover: var(--color-brand-2);
+        --btn--color-hover: var(--color-foreground);
+    }
+
+    .dots {
+        display: inline-flex;
+        min-width: var(--pagination--size);
+        min-height: var(--pagination--size);
+        align-items: center;
+        justify-content: center;
+    }
+
+    .next,
+    .prev {
+        --btn--background-color: var(--color-background);
+        --btn--border-color: var(--color-brand-2);
+        --btn--color: var(--color-brand-1);
+
+        --btn--background-color--hover: var(--color-brand-2);
+        --btn--border-color--hover: var(--color-brand-2);
+        --btn--color-hover: var(--color-foreground);
+
+        @apply btn--icon;
+        @apply btn--square;
+
+        display: inline-block;
+
+        &::after {
+            mask-image: url('/images/icons/chevron-right.svg');
+            mask-size: 0.5625rem; /* 9px */
+        }
+    }
+
+    .prev {
+        &::after {
+            transform: rotate(180deg);
+        }
+    }
+}

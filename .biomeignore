@@ -1,0 +1,10 @@
+vendor/
+assets/
+public/
+node_modules/
+postcss.config.js
+*.min.js
+*.min.css
+build/
+dist/
+.vscode/

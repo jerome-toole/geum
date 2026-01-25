@@ -1,0 +1,27 @@
+// ---------------------------------------------------
+// Block context variables
+// ---------------------------------------------------
+
+@layer base {
+    :root {
+        --blocks--margin-bottom: spaceFluid(24, 32);
+        --block--margin-top: var(--space--layout);
+        --block--margin-bottom: var(--space--layout);
+        --block--padding-y: space(16);
+        --block--padding-x: var(--space--container-padding);
+        --block--max-width: var(--width-fluid-sm);
+
+        --block--inner--max-width: var(--width-fluid-sm);
+
+        --block--header--margin-bottom: var(--space--base);
+        --block--footer--margin-top: var(--space--base);
+
+        @media (min-width: theme('screens.sm')) {
+            --block--padding-y: spaceFluid(24, 32);
+        }
+
+        @media (min-width: theme('screens.md')) {
+            --block--padding-x: spaceFluid(16, 24);
+        }
+    }
+}

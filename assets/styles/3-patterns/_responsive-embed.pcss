@@ -1,0 +1,22 @@
+// TODO review object-fit and responsive-embed pseudo element usage
+
+@utility responsive-embed {
+    position: relative;
+
+    // By using a pseudo element to size the embed, we avoid the calculation
+    // issue that occurs if the parent container has an explicit width
+    &::before {
+        display: block;
+        content: '';
+    }
+
+    > * {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}

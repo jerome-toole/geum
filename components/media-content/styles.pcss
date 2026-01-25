@@ -1,0 +1,103 @@
+.media-content {
+    --media-content--aspect-ratio: 16 / 9;
+    --media-content--outer-padding-y: var(--block--padding-y);
+    --media-content--outer-padding-x: var(--block--padding-x);
+    --media-content--inner-padding-y: 0px;
+    --media-content--content--max-width: 28.125rem; /* 450px */
+    --media-content--gap: spaceFluid(16, 24);
+
+    @media (min-width: theme('screens.md')) {
+        --media-content--inner-padding-y: var(--block--padding-y);
+    }
+
+    :where(.media-content__inner) {
+        display: grid;
+        gap: var(--media-content--gap, 0);
+        place-items: center;
+
+        @media (min-width: theme('screens.md')) {
+            --media-content--aspect-ratio: 4 / 3;
+
+            gap: var(--media-content--gap, 0);
+            grid-template-areas: 'media content .';
+            grid-template-columns: 50% 1fr 0fr;
+        }
+    }
+
+    &:not(.alignfull) {
+        overflow: var(--rounded-overflow, visible);
+        border-radius: var(--rounded-border-radius);
+        overflow: visible;
+    }
+
+    &.has-background {
+        padding-top: var(--media-content--outer-padding-y, 0);
+        padding-bottom: var(--media-content--outer-padding-y, 0);
+    }
+
+    :where(.media-content__content) {
+        @apply margin-trim;
+
+        width: 100%;
+        max-width: var(--media-content--content--max-width);
+        padding-inline: var(--media-content--inner-padding-x, 0);
+        padding-block: var(--media-content--inner-padding-y, 0);
+
+        @media (min-width: theme('screens.md')) {
+            padding: var(--media-content--inner-padding-y, 0) var(--media-content--inner-padding-x, 0);
+            grid-area: content;
+        }
+    }
+
+    :where(.media-content__media) {
+        overflow: var(--rounded-overflow, visible);
+        border-radius: var(--rounded-border-radius);
+        position: relative;
+        width: 100%;
+        box-shadow: var(--box-shadow--1);
+
+        @media (min-width: theme('screens.md')) {
+            grid-area: media;
+        }
+
+        &::before {
+            display: block;
+            aspect-ratio: var(--media-content--aspect-ratio);
+            content: '';
+        }
+
+        .video-item {
+            position: absolute;
+        }
+    }
+
+    :where(.media-content__heading) {
+        max-width: var(--heading--max-width);
+
+        + .media-content__subheading {
+            margin-top: calc((var(--heading--margin-bottom) * -1) + var(--space--base));
+        }
+    }
+
+    :where(.media-content__subheading) {
+        @apply type-h4;
+
+        max-width: var(--heading--max-width);
+        margin-top: 0;
+    }
+
+    &:where(.media-content--right) {
+        .media-content__inner {
+            @media (min-width: theme('screens.md')) {
+                grid-template-areas: '. content media';
+                grid-template-columns: 0fr 1fr 50%;
+            }
+        }
+    }
+
+    &.has-embed {
+        .media-content__media {
+            @apply responsive-embed;
+        }
+    }
+}

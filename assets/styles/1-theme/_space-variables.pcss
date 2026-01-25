@@ -1,0 +1,24 @@
+// ---------------------------------------------------
+// Spacing
+// ---------------------------------------------------
+// Static and responsive space values are now handled by:
+// - space(px) → rem value, e.g., space(16) → 1rem
+// - space(px, 'px') → px value, e.g., space(16, 'px') → 16px
+// - spaceFluid(min, max) → responsive calc(), e.g., spaceFluid(12, 16)
+// ---------------------------------------------------
+
+@layer base {
+    :root {
+        --space--container-padding: 16px; // Default padding on the sides of the page
+
+        --space--base: rem(16); // Default vertical spacing between text elements
+
+        // Default vertical spacing between larger components and blocks
+        --space--layout: space(32);
+
+        @media (width >= theme('screens.sm')) {
+            --space--container-padding: rem(30);
+            --space--layout: space(64);
+        }
+    }
+}

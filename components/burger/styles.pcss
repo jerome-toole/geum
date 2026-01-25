@@ -1,0 +1,55 @@
+@layer components {
+    .burger {
+        --burger--size: 15px;
+        --burger--line-width: 15px; /* 25px */
+        --burger--line-height: 2px;
+
+        --burger--color: currentColor;
+
+        position: relative;
+        display: flex;
+        width: var(--burger--size);
+        height: var(--burger--size);
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-around;
+
+        &.is-open,
+        :where([aria-expanded='true']) & {
+            .burger__line {
+                &:where(.burger__line--1) {
+                    transform: rotate(45deg);
+                }
+
+                &:where(.burger__line--2) {
+                    opacity: 0;
+                }
+
+                &:where(.burger__line--3) {
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        :where(.burger__line) {
+            position: absolute;
+            display: block;
+            width: var(--burger--line-width);
+            height: var(--burger--line-height);
+            border-radius: var(--border-radius--s);
+            margin: 0;
+            background-color: var(--burger--color);
+            content: '';
+            transition: transition(opacity, transform);
+
+            &:where(.burger__line--1) {
+                transform: translateY(-5px);
+            }
+
+            &:where(.burger__line--3) {
+                transform: translateY(5px);
+            }
+        }
+
+    }
+}

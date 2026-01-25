@@ -1,0 +1,41 @@
+@utility page-grid {
+    --page-grid--gap: space(24);
+
+    display: grid;
+    grid-template-columns:
+        [full-start] minmax(calc(var(--space--container-padding) - var(--page-grid--gap)), 1fr)
+        [wide-start] repeat(12, minmax(0, calc(var(--container-lg) / 12)))
+        [wide-end] minmax(calc(var(--space--container-padding) - var(--page-grid--gap)), 1fr)
+        [full-end];
+    column-gap: var(--page-grid--gap);
+
+    // Default: all items span the wide (12-col) area
+    > * {
+        grid-column: wide;
+    }
+
+    > .alignprose {
+        max-width: var(--prose--max-width, 65ch);
+    }
+
+    > .alignwide {
+        grid-column: wide;
+        width: 100%;
+        margin-inline: auto;
+    }
+
+    > .alignfull {
+        grid-column: full;
+        width: 100%;
+        max-width: 100%;
+        margin-inline: auto;
+    }
+
+    > .alignright {
+        grid-column: 8 / 14;
+    }
+
+    > .alignleft {
+        grid-column: 2 / 8;
+    }
+}

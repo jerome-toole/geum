@@ -1,0 +1,46 @@
+.js .animate {
+    --animate--animation: animate--fade-in;
+    --animate--duration: 300ms;
+    --animate--delay: 50ms;
+    --animate--item--delay: 0ms;
+    --animate--easing: ease-out;
+
+    &:where(.animate--play) {
+        &.animate-element,
+        .animate-element {
+            @media screen and (prefers-reduced-motion: no-preference) {
+                animation: var(--animate--animation) var(--animate--duration) var(--animate--delay) forwards var(--animate--easing);
+                animation-delay: calc(var(--animate--delay, 0ms) + calc(var(--animate--item--delay, 0ms) * var(--animate--key, 0)));
+            }
+        }
+    }
+
+    &.animate-element,
+    .animate-element {
+        @media screen and (prefers-reduced-motion: no-preference) {
+            opacity: 0;
+        }
+    }
+}
+
+@keyframes animate--fade-in {
+    from {
+        opacity: var(--animate--opacity--from, 0);
+    }
+
+    to {
+        opacity: var(--animate--opacity--to, 1);
+    }
+}
+
+@keyframes animate--fade-in--translate {
+    from {
+        opacity: var(--animate--opacity--from, 0);
+        transform: translate(var(--animate--translateX, 0), var(--animate--translateY, 0));
+    }
+
+    to {
+        opacity: var(--animate--opacity--to, 1);
+        transform: translate(0);
+    }
+}

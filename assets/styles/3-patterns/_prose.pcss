@@ -1,0 +1,91 @@
+@utility prose {
+    // Margin trimming
+    > :first-child {
+        margin-top: 0;
+    }
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+
+    // Block element spacing
+    :where(p, ul, ol, table, iframe, embed, hr, address, pre, dl, fieldset) {
+        margin-top: var(--space--base);
+        margin-bottom: var(--space--base);
+    }
+
+    // Heading spacing
+    :where(h1, h2, h3, h4, h5, h6) {
+        margin-top: 0;
+        margin-bottom: var(--heading--margin-bottom);
+    }
+
+    :where(* + :is(h1, h2, h3, h4, h5, h6)) {
+        margin-top: var(--heading--margin-top);
+    }
+
+    // List item spacing
+    :where(li + li) {
+        margin-top: var(--list--item--spacing);
+    }
+
+    // Nested list spacing
+    :where(li > :is(ol, ul)) {
+        margin-top: var(--list--item--spacing);
+        margin-bottom: var(--list--item--spacing);
+    }
+
+    // Definition list spacing
+    :where(dd + dt) {
+        margin-top: var(--list--item--spacing);
+    }
+}
+
+@utility not-prose {
+    :where(p, ul, ol, table, iframe, embed, hr, address, pre, dl, fieldset) {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    :where(h1, h2, h3, h4, h5, h6) {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    :where(li + li),
+    :where(li > :is(ol, ul)),
+    :where(dd + dt) {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+}
+
+/* Re-enable prose inside not-prose */
+.not-prose .prose {
+    :where(p, ul, ol, table, iframe, embed, hr, address, pre, dl, fieldset) {
+        margin-top: var(--space--base);
+        margin-bottom: var(--space--base);
+    }
+
+    :where(h1, h2, h3, h4, h5, h6) {
+        margin-top: 0;
+        margin-bottom: var(--heading--margin-bottom);
+    }
+
+    :where(* + :is(h1, h2, h3, h4, h5, h6)) {
+        margin-top: var(--heading--margin-top);
+    }
+
+    :where(li + li) {
+        margin-top: var(--list--item--spacing);
+    }
+
+    :where(li > :is(ol, ul)) {
+        margin-top: var(--list--item--spacing);
+        margin-bottom: var(--list--item--spacing);
+    }
+
+    :where(dd + dt) {
+        margin-top: var(--list--item--spacing);
+    }
+}

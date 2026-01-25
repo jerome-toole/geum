@@ -1,0 +1,37 @@
+.taxonomy-filters {
+    --block--margin-bottom: calc(var(--block--margin-bottom) / 2);
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    gap: space(8);
+
+    @media (min-width: theme('screens.md')) {
+        grid-auto-flow: column;
+    }
+
+    + * {
+        margin-top: calc(var(--block--margin-top) / 2);
+    }
+
+    .blocks > & {
+        margin-top: space(24);
+        margin-bottom: space(24);
+    }
+
+    :where(.taxonomy-filters__label) {
+        text-align: center;
+    }
+
+    :where(.taxonomy-filters__list) {
+        --grid--column-gap: space(8);
+
+        justify-content: center;
+    }
+
+    :where(.taxonomy-filters__item) {
+        &:where(.taxonomy-filters__item--current) {
+            @apply btn--theme-2;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./vendor/bin/pint:*)",
+      "Bash(php -l:*)",
+      "Bash(php:*)",
+      "Bash(composer dump-autoload:*)",
+      "Bash(curl:*)",
+      "Bash(node dev-scripts/scaffold-component.js:*)",
+      "Bash(git mv:*)",
+      "Bash(npm run fix:php:*)",
+      "Bash(npm run build:*)",
+      "Bash(grep:*)",
+      "mcp__playwright__browser_navigate"
+    ]
+  }
+}

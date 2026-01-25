@@ -1,0 +1,17 @@
+@utility grid-simple {
+    display: grid;
+    column-gap: var(--col-gap, var(--gap));
+    row-gap: var(--row-gap, var(--gap));
+    grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
+
+@utility grid-columns-* {
+    --cols: --value(integer);
+}
+
+@utility grid-auto {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(var(--col-min-width, rem(250)), 100%), 1fr));
+    column-gap: var(--col-gap, var(--gap));
+    row-gap: var(--row-gap, var(--gap));
+}

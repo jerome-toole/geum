@@ -1,0 +1,143 @@
+/* Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* Remove default margin */
+*:not(dialog) {
+    margin: 0;
+}
+
+/* Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        interpolate-size: allow-keywords;
+    }
+}
+
+/* Inherit fonts for form controls */
+input, button, textarea, select {
+    font: inherit;
+}
+
+/* Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+}
+
+/* Focus styles */
+*:focus {
+    @apply focus--1;
+}
+
+[tabindex='-1']:focus {
+    @apply no-focus-be-careful;
+}
+
+html {
+    height: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--site--scroll-padding-top);
+
+    // Turn on ligatures
+    text-rendering: optimizeLegibility;
+    text-underline-offset: var(--underline-offset);
+}
+
+body {
+    --backdrop--background-color: hsla(var(--color-black--hsl), 0.4);
+    --backdrop--transition-duration: 500ms;
+    --backdrop--transition-ease: var(--submenu--transition-ease);
+
+    @apply type-base;
+
+    display: flex;
+    min-height: 100%;
+    flex-flow: column nowrap;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+
+    -webkit-font-smoothing: antialiased;
+
+    &::before {
+        // Backdrop overlay
+        position: fixed;
+        z-index: var(--z-index-backdrop);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: var(--backdrop--background-color);
+        content: '';
+        opacity: 0;
+        pointer-events: none;
+        transition: all var(--backdrop--transition-duration) var(--backdrop--transition-ease);
+        visibility: hidden;
+    }
+}
+
+dialog {
+    margin: auto;
+}
+
+blockquote {
+    @apply blockquote;
+}
+
+button,
+[type=submit],
+[type=reset],
+[type=button] {
+    @apply button-reset;
+}
+
+/* Improve media defaults */
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    // Basic responsive images
+    width: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+}
+
+// Responsive SVGs by default
+svg {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+
+hr {
+    height: var(--hr--thickness);
+    border: 0;
+    background-color: var(--hr--color);
+}
+
+::selection {
+    background: var(--color-foreground);
+    color: var(--color-background);
+    text-shadow: none;
+}
+
+::placeholder {
+    color: var(--input--placeholder-color);
+    opacity: 1;
+}
+
+fieldset {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    margin-right: 0;
+    margin-left: 0;
+}

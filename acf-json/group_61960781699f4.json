@@ -1,0 +1,61 @@
+{
+    "key": "group_61960781699f4",
+    "title": "Emails",
+    "fields": [
+        {
+            "key": "field_6196078756ed4",
+            "label": "Site Email Sender Name",
+            "name": "site_email_sender_name",
+            "type": "text",
+            "instructions": "The sender name to use for any emails that come from this site (e.g. password reset emails, etc). Leave blank to default to the site name.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_619608b056ed5",
+            "label": "Site Email Address",
+            "name": "site_email_address",
+            "type": "email",
+            "instructions": "The email address to use for any emails that come from this site (e.g. password reset emails, etc). Leave blank to default to noreply@[...]\r\n\r\nThe email address that is used should be able to receive emails even if it will not be used to reply to any emails it receives. If it isn't able to receive emails then the site's emails are less likely to be trusted by receiving servers and may end up in junk mail.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-general"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Options Page",
+    "modified": 1641492357
+}

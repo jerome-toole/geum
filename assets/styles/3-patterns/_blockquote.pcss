@@ -1,0 +1,29 @@
+@utility blockquote {
+    --blockquote--border-width: var(--border-width--s);
+    --blockquote--padding-left: space(12);
+    --blockquote--border-offset: 0.5em;
+    --block--margin-top: spaceFluid(12, 16);
+    --block--margin-bottom: spaceFluid(12, 16);
+    --block--max-width: var(--width-fluid-xs);
+
+    @apply margin-trim;
+
+    position: relative;
+    padding: 0;
+    padding-left: var(--blockquote--padding-left);
+    border: 0;
+
+    > :not(cite):not(.wp-block-quote__citation) {
+        @apply type-h3;
+    }
+
+    &::before {
+        position: absolute;
+        top: var(--blockquote--border-offset);
+        bottom: var(--blockquote--border-offset);
+        left: calc(var(--blockquote--border-width) * -1);
+        width: var(--blockquote--border-width);
+        background-color: var(--color-foreground);
+        content: '';
+    }
+}

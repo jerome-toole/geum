@@ -1,0 +1,89 @@
+.cookie-notice {
+    position: fixed;
+    z-index: var(--z-index-cookie-notice);
+    bottom: spaceFluid(4, 8);
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+
+    @media (min-width: theme('screens.md')) {
+        bottom: space(16);
+    }
+
+    &[aria-hidden='true'] {
+        visibility: hidden;
+    }
+
+    :where(.cookie-notice__banner) {
+        display: flex;
+        width: auto;
+        max-width: min(
+            var(--container-md),
+            calc(100vw - (var(--space--container-padding)))
+        ); /* Intentionally a bit wider than standard content-width-fluid-lg */
+        flex-direction: column;
+        align-items: center;
+        padding: space(8);
+        box-shadow: var(--box-shadow--1);
+        opacity: 1;
+        pointer-events: initial;
+        overflow: var(--rounded-overflow, visible);
+        border-radius: var(--rounded-border-radius);
+        text-align: center;
+        transform: translateY(0);
+        transition: transition(opacity, transform, visibility);
+
+        @media (min-width: theme('screens.md')) {
+            flex-direction: row;
+            justify-content: space-between;
+            padding-right: space(16);
+            padding-left: space(16);
+            text-align: left;
+        }
+
+        [aria-hidden='true'] & {
+            opacity: 0;
+            transform: translateY(100%);
+            visibility: hidden;
+        }
+
+        &:focus {
+            outline: none; /* Fret not, this doesn't need any additional visible styles, the element is assigned tabindex -1 in JS */
+        }
+    }
+
+    :where(.cookie-notice__message) {
+        @apply margin-trim;
+
+        flex: 0 1 auto;
+        margin-bottom: space(8);
+
+        @media (min-width: theme('screens.md')) {
+            margin-right: var(--space--container-padding);
+            margin-bottom: 0;
+        }
+
+        a {
+            @apply link;
+        }
+    }
+
+    :where(.cookie-notice__actions) {
+        flex: 0 0 auto;
+
+        :where(.cookie-notice__actions__list) {
+            --grid--column-gap: space(4);
+            --grid--row-gap: space(8);
+
+            @apply list-reset-hard;
+
+            justify-content: center;
+
+            @media (min-width: theme('screens.md')) {
+                justify-content: flex-end;
+            }
+        }
+    }
+}

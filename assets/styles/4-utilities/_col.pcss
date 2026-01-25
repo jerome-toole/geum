@@ -1,0 +1,16 @@
+// ---------------------------------------------------
+// Column placement utilities for page-grid.
+// ---------------------------------------------------
+
+@utility col-full {
+    grid-column: full;
+    width: 100%;
+}
+
+@utility col-wide {
+    grid-column: wide;
+}
+
+@utility col-span-* {
+    grid-column: wide-start / span --value(integer);
+}

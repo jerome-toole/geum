@@ -1,0 +1,64 @@
+// ---------------------------------------------------
+// Type Variables
+// ---------------------------------------------------
+
+@layer base {
+    :root {
+        /* Typography */
+        --type--font-size--base: 16px;
+        --type--font-size--small: rfs(14, 14.5);
+
+        --type--1--font-family: system-ui, sans-serif;
+        --type--1--font-weight: 400;
+        --type--1--font-weight--bold: 700;
+        --type--1--line-height: 1.5;
+
+        --type--2--font-family: 'Georgia', serif;
+        --type--2--color: inherit;
+        --type--2--font-weight: 400;
+        --type--2--line-height: 1.3;
+
+        --heading--max-width: 17em;
+        --heading--margin-top: calc(var(--type--2--line-height) * 1em);
+        --heading--margin-bottom: var(--space--base);
+
+        /* Fluid typography breakpoints */
+        --fluid-min-width: strip-unit(theme('screens.fluid-min'));
+        --fluid-max-width: strip-unit(theme('screens.fluid-max'));
+        --fluid-screen: 100vw;
+        --fluid-bp: calc(
+            (var(--fluid-screen) - var(--fluid-min-width) / 16 * 1rem) /
+                (var(--fluid-max-width) - var(--fluid-min-width))
+        );
+
+        @media (min-width: theme('screens.fluid-max')) {
+            --fluid-screen: calc(var(--fluid-max-width) * 1px);
+        }
+
+        // ---------------------------------------------------
+        // General
+        // ---------------------------------------------------
+        --underline-offset: 10%;
+
+        // ---------------------------------------------------
+        // Links
+        // ---------------------------------------------------
+        --link--color: var(--color-brand-1);
+        --link--color-hover: var(--color-brand-1);
+        --link--text-decoration: underline;
+        --link--text-decoration--hover: underline;
+
+        // ---------------------------------------------------
+        // Lists
+        // ---------------------------------------------------
+        --list--item--spacing: calc(var(--space--base) / 2);
+        --list--indent: 0px;
+        --list--nested-indent: 1.5em;
+        // --list--marker-color: var(--color-brand-2); // defaults to currentColor
+
+        @media (min-width: theme('screens.sm')) {
+            --list--indent: 1.5em;
+            --list--nested-indent: 2em;
+        }
+    }
+}

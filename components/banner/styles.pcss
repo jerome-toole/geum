@@ -1,0 +1,50 @@
+.banner {
+    --banner--image--height: 30px;
+    /* --banner--message--margin-top: calc((var(--banner--image--height) / 2) - 0.7em); */
+    --banner--padding-y: var(--space--base);
+    --banner--padding-x: var(--block--padding-x);
+
+    /* Firefox doesn't support the lh unit yet
+       https://caniuse.com/mdn-css_types_length_lh
+       currently creates an error from cssnano as it doesn't recognise the lh unit
+       @supports (margin-top: 0.5lh) {
+           --banner--message--margin-top: calc((var(--banner--image--height) / 2) - 0.5lh);
+       } */
+
+    :where(.banner__inner) {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        justify-content: center;
+        padding: var(--banner--padding-y) var(--banner--padding-x);
+        gap: 1em;
+
+        @media (min-width: theme('screens.sm')) {
+            flex-flow: row nowrap;
+            align-items: center;
+        }
+    }
+
+    :where(.banner__image) {
+        display: flex;
+        flex: 0 0 auto;
+        align-items: center;
+        justify-content: center;
+
+        > * {
+            display: block;
+            width: auto;
+            height: var(--banner--image--height);
+        }
+    }
+
+    :where(.banner__message) {
+        flex: 0 1 auto;
+        align-items: center;
+        margin-top: var(--banner--message--margin-top);
+    }
+
+    &.is-style-thin {
+        --group--padding-y: var(--space--base);
+    }
+}

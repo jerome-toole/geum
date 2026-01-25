@@ -1,0 +1,40 @@
+.social-icons {
+    --social-icons--icon-size: 1.75rem; /* 28px */
+    --grid--columns: 0;
+
+    :where(.social-icons__icons) {
+        @apply list-reset-hard;
+        @apply flex-grid;
+        @apply flex-grid-auto;
+
+        align-items: center;
+    }
+
+    :where(.social-icons__icon) {
+        a {
+            position: relative;
+            display: flex;
+            width: 1em;
+            height: 1em;
+            align-items: center;
+            justify-content: center;
+            color: inherit;
+            font-size: var(--social-icons--icon-size);
+            transition: background-color var(--transition--duration) var(--transition--ease);
+
+            &:hover,
+            &:focus-visible {
+                background-color: transparent;
+            }
+        }
+
+        svg {
+            display: block;
+        }
+    }
+
+    svg,
+    path {
+        fill: currentColor;
+    }
+}

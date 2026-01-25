@@ -1,0 +1,24 @@
+{
+    "settings": {
+        "deactivate_comments": true,
+        "deactivate_posts_post_type": true,
+
+        "remove_wp_global_styles": true,
+        "remove_wp_block_library_styles": true,
+
+        "ajax_required": false,
+
+        "jquery_required": false,
+        "jquery_in_footer": true,
+        "remove_jquery_migrate": true,
+
+        "enable_webmanifest": false,
+
+        "image_sizes": {
+            "geum_super": [2500, 2500, false],
+            "1536x1536": false
+        },
+        "jpeg_upload_quality": 90,
+        "max_image_size": 3000
+    }
+}

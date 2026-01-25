@@ -1,0 +1,15 @@
+.wp-block-image {
+    @apply media-embed;
+
+    > img {
+        margin: 0 auto;
+    }
+
+    &:not(.alignfull) {
+        > img {
+            overflow: var(--rounded-overflow, visible);
+            border-radius: var(--rounded-border-radius);
+            box-shadow: var(--box-shadow--1);
+        }
+    }
+}

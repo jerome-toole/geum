@@ -1,0 +1,27 @@
+# WP Sync Configuration
+# WP CLI Sync is a WP-CLI package designed for single-command CLI migrations between WordPress environments. It provides a straightforward way to synchronize the database, themes, plugins etc. between different environments.
+# See: https://github.com/jerome-toole/wp-sync
+
+pull:
+    db: false
+    themes: true
+    plugins: true
+    uploads: false
+    db_backup: true
+
+push:
+    db: true
+    themes: true
+    plugins: true
+    uploads: true
+    db_backup: false
+
+environments:
+    # staging:
+    # host: user@host
+    # port: 722
+    # path: /home/.../public_html
+
+    production:
+        host: user@host
+        path: /home/.../public_html

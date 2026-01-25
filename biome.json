@@ -1,0 +1,70 @@
+{
+    "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+    "vcs": {
+        "enabled": true,
+        "clientKind": "git",
+        "useIgnoreFile": true
+    },
+    "files": {
+        "ignoreUnknown": true,
+        "includes": [
+            "assets/**",
+            "*.js",
+            "*.css",
+            "*.pcss",
+            "!!**/.vscode",
+            "!!**/node_modules",
+            "!!**/vendor",
+            "!!**/public",
+            "!!**/acf-json"
+        ]
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 120
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "correctness": {
+                "noUnusedVariables": "error",
+                "noUnusedImports": "error"
+            },
+            "style": {
+                "noParameterAssign": "error",
+                "useConst": "error",
+                "useSingleVarDeclarator": "error"
+            },
+            "complexity": {
+                "noExtraBooleanCast": "error",
+                "useSimplifiedLogicExpression": "error"
+            },
+            "suspicious": {
+                "noDoubleEquals": "error",
+                "noAssignInExpressions": "off"
+            },
+            "nursery": {
+                "useSortedClasses": "off"
+            }
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "semicolons": "always",
+            "quoteStyle": "single",
+            "trailingCommas": "es5"
+        },
+        "globals": ["lodash", "wp", "$", "jQuery"]
+    },
+    "css": {
+        "parser": {
+            "cssModules": false,
+            "tailwindDirectives": true
+        },
+        "formatter": { "enabled": true },
+        "linter": { "enabled": true }
+    }
+}

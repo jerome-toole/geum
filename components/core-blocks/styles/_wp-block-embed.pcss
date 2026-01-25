@@ -1,0 +1,29 @@
+.wp-block-embed {
+    @apply media-embed;
+
+    :where(.wp-block-embed__wrapper) {
+        > * {
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        > iframe {
+            margin: 0 auto;
+        }
+    }
+
+    &:not(.alignfull) {
+        iframe {
+            overflow: var(--rounded-overflow, visible);
+            border-radius: var(--rounded-border-radius);
+            box-shadow: var(--box-shadow--1);
+        }
+    }
+
+    &.wp-block-embed-twitter {
+        iframe {
+            border-radius: 0;
+            box-shadow: none;
+        }
+    }
+}

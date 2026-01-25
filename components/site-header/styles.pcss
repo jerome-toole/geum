@@ -1,0 +1,253 @@
+@import './styles/_menu.pcss';
+
+@layer base {
+    :root {
+        --site-header--height: space(70);
+        --site-header--top: 0px; /* Set by JS: includes admin bar + announcement banner + other [data-header-offset] elements */
+        --site-header--menu--duration: 250ms;
+        --site-header--menu--ease: ease-in-out;
+
+        @media (width >= theme('screens.site-header')) {
+            --site-header--height: space(74);
+        }
+    }
+}
+
+.site-header {
+    --site-header--spacing: space(12);
+    --site-header--icon-size: 18px;
+    --site-header--logo-width: space(120);
+
+    --link--color: var(--color-foreground);
+    --link--color-hover: var(--color-foreground);
+    --link--text-decoration: none;
+    --link--text-decoration-hover: underline;
+
+    --menu-item--gap: space(24);
+    --menu-item--arrow-size: 0.8125rem;
+
+    top: var(--site-header--top);
+    z-index: var(--z-index-site-header);
+    display: grid;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    grid-template-rows: min-content auto;
+    pointer-events: none;
+
+    @media (width >= theme('screens.site-header')) {
+        --site-header--spacing: space(16);
+        --site-header--logo-width: space(170);
+        --menu-item--arrow-size: 0.625rem;
+        --menu-item--gap: space(32);
+    }
+
+    @media (width < theme('screens.site-header')) {
+        &.site-header--positioned {
+            position: absolute;
+
+            & ~ .site-main {
+                margin-top: var(--site-header--height);
+            }
+        }
+
+        &:has(.site-header__panel:not([inert])) {
+            position: fixed;
+            height: calc(100% - var(--site-header--top));
+            transition: height var(--site-header--menu--duration) 0s;
+        }
+    }
+
+    .btn {
+        padding: 0;
+        border: 0;
+    }
+}
+
+.site-header__bar {
+    display: flex;
+    width: 100%;
+    height: var(--site-header--height);
+    align-items: center;
+    padding-right: var(--space--container-padding);
+    padding-left: var(--space--container-padding);
+    background-color: var(--color-background);
+    gap: var(--site-header--spacing);
+    justify-content: space-between;
+    pointer-events: auto;
+    z-index: 10;
+
+    @media (width >= theme('screens.site-header')) {
+        @apply content-width-fluid-lg;
+
+        padding-right: 0;
+        padding-left: 0;
+        background-color: transparent;
+    }
+}
+
+.site-header__nav {
+    display: none;
+
+    @media (width >= theme('screens.site-header')) {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: var(--site-header--spacing);
+        pointer-events: auto;
+    }
+}
+
+.site-header__buttons {
+    display: flex;
+    align-items: center;
+    gap: space(20);
+
+    @media (width >= theme('screens.site-header')) {
+        display: none;
+    }
+
+    .btn {
+        line-height: 1.25;
+    }
+}
+
+.site-header__burger {
+    flex: 0 0 auto;
+    margin-right: calc(var(--burger--padding) * -0.5);
+}
+
+.site-header__search-toggler {
+    --btn--icon-size: rem(18px);
+
+    position: relative;
+    flex: 0 0 auto;
+
+    .site-header__close-icon {
+        .burger__line--1 {
+            transform: rotate(45deg);
+        }
+
+        .burger__line--2 {
+            opacity: 0;
+        }
+
+        .burger__line--3 {
+            transform: rotate(-45deg);
+        }
+    }
+}
+
+.site-header__logo {
+    display: flex;
+    width: 100%;
+    max-width: var(--site-header--logo-width);
+    height: 100%;
+    max-height: calc(100% - space(8));
+    margin-right: auto;
+
+    > * {
+        object-fit: contain;
+        object-position: left center;
+    }
+}
+
+.site-header__panel {
+    --panel--content-offset: 10px;
+    --panel--content-opacity: 0;
+    --panel--content-duration: calc(var(--site-header--menu--duration) + 100ms);
+
+    position: absolute;
+    top: var(--site-header--top);
+    right: 0;
+    left: 0;
+    display: grid;
+    height: calc(100% - var(--site-header--top));
+    padding-top: var(--site-header--height);
+    background-color: var(--color-background);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    grid-template-rows: 1fr;
+    opacity: 0;
+    pointer-events: none;
+    transition: clip-path var(--site-header--menu--duration) var(--site-header--menu--ease),
+        opacity var(--site-header--menu--duration) var(--site-header--menu--ease);
+    z-index: 1;
+
+    @media (width >= theme('screens.site-header')) {
+        display: none;
+    }
+
+    &:not([inert]) {
+        --panel--content-offset: 0;
+        --panel--content-opacity: 1;
+
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+.site-header__panel-content {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+    opacity: var(--panel--content-opacity);
+    transform: translateY(var(--panel--content-offset));
+    transition: opacity var(--panel--content-duration) var(--site-header--menu--ease),
+        transform var(--panel--content-duration) var(--site-header--menu--ease);
+}
+
+.site-header__menu-panel {
+    .site-header__panel-content {
+        gap: var(--menu-item--gap);
+        padding: space(40) var(--space--container-padding) var(--space--container-padding);
+    }
+}
+
+.site-header__search-panel {
+    .site-header__panel-content {
+        align-items: center;
+        justify-content: center;
+        padding: var(--space--container-padding);
+    }
+}
+
+.site-header__search-desktop-wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.site-header__search-desktop {
+    position: absolute;
+    right: var(--site-header--icon-size);
+    display: flex;
+    align-items: center;
+    padding-inline: space(28);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity var(--site-header--menu--duration) var(--site-header--menu--ease),
+        visibility var(--site-header--menu--duration);
+    visibility: hidden;
+    background-color: var(--color-neutral);
+    width: 450px;
+
+    .header-search {
+        max-width: unset;
+    }
+
+    &:not([hidden]) {
+        display: flex;
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+}
+
+.site-header__search-close {
+    --btn--icon-size: space(18);
+
+    padding: 0;
+    border: 0;
+}

@@ -1,0 +1,8 @@
+.wp-block-quote {
+    &,
+    &.is-large {
+        /* WordPress Gutenberg styling butchers the blockquote css before it so
+           we need to overwrite it, unfortunately specificity is the answer. */
+        @apply blockquote;
+    }
+}

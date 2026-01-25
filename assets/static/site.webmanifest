@@ -1,0 +1,17 @@
+{
+    "short_name": "Geum",
+    "name": "Geum",
+    "icons": [
+        {
+            "src": "../images/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#1e4545",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#1e4545"
+}

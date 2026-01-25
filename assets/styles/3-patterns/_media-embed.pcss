@@ -1,0 +1,16 @@
+@utility media-embed {
+  display: grid;
+  gap: space(4);
+  text-align: center;
+
+  .blocks > & {
+    margin-top: spaceFluid(12, 16);
+    margin-bottom: spaceFluid(12, 16);
+  }
+
+  figcaption {
+    @apply type-small content-width-2xs;
+
+    margin: 0 auto;
+  }
+}
