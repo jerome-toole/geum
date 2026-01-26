@@ -19,3 +19,4 @@ From HB build
 - [x] Migrate to classes() from buildClasses() (<header class="<?= classes($this->classes) ?>" <?= attributes($this->attributes) ?>>)
 - [ ] rename all acf-json field groups
 - [ ] Sort out mask-icon
+- [ ] Fix generate-pot
