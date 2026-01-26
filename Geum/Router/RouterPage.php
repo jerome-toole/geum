@@ -125,6 +125,12 @@ class RouterPage
 
     public static function filterPageLink(string $link, int $postId): string
     {
+        static $resolving = [];
+
+        if (isset($resolving[$postId])) {
+            return $link;
+        }
+
         if (! static::isRouterPage($postId)) {
             return $link;
         }
@@ -136,7 +142,11 @@ class RouterPage
 
         $route = Router::getRouteByRole($role);
         if ($route) {
-            return $route->getUrl();
+            $resolving[$postId] = true;
+            $url = $route->getUrl();
+            unset($resolving[$postId]);
+
+            return $url;
         }
 
         return $link;

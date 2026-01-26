@@ -135,7 +135,7 @@ class SVG
      */
     public static function path(string $name): string
     {
-        return \Geum\Asset::path('svgs/'.$name);
+        return \Geum\Asset::path('build/images/'.$name);
     }
 
     /**
