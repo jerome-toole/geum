@@ -11,9 +11,9 @@ Workflows for the Geum WordPress theme framework.
 
 | Workflow | Use Case |
 |----------|----------|
-| [Scaffold](scaffold.md) | Create component from spec (scaffold → fields → template → styles) |
+| [Components](components.md) | Scaffold, build, and use components |
+| [Patterns](patterns.md) | CSS architecture, colors, spacing, layout |
 | [Testing](testing.md) | Test PHP and frontend changes |
-| [Components](components.md) | Component patterns and usage |
 | [Setup](setup.md) | Build from website spec (post types, taxonomies, routes) |
 
 ## Quick Reference
@@ -42,9 +42,9 @@ Check the local WordPress URL in .env
 ## Workflow Selection
 
 When the user asks to:
-- **Scaffold component** or **build component from spec** → Use [scaffold.md](scaffold.md)
+- **Scaffold component** or **build component from spec** → Use [components.md](components.md)
+- **CSS patterns** or **colors/spacing/layout** → Use [patterns.md](patterns.md)
 - **Test changes** or **check for errors** → Use [testing.md](testing.md)
-- **Component patterns** or **how to use components** → Use [components.md](components.md)
 - **Create post type/taxonomy/route** → Use [setup.md](setup.md)
 
 ## Website Spec
