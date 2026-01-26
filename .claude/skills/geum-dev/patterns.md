@@ -5,7 +5,7 @@ CSS architecture, design tokens, and layout patterns.
 ## CSS Approach
 
 Use both **Tailwind** and **BEM**:
-- **Tailwind** - Inline classes for layout and type (`flex`, `gap-4`, `type-h2`)
+- **Tailwind** - Inline classes for layout and type (`flex`, `gap-4`, `type-h2`, our custom utilities)
 - **BEM** - Component styles for custom/complex work (`.card__title`, `.hero--large`)
 
 ```php
@@ -21,31 +21,10 @@ Colors defined in `assets/theme-config.json`. Use CSS custom properties:
 
 ```pcss
 .component {
-    color: var(--color-darkgreen);
-    background: var(--color-lightgreen);
+    color: var(--color-neutral);
+    background: var(--color-neutral);
 }
 ```
-
-**Available colors:**
-| Color | Hex | Use |
-|-------|-----|-----|
-| `darkgreen` | #1e4545 | Primary brand, foreground |
-| `lightgreen` | #9db9b9 | Secondary brand |
-| `blue` | #1d324e | Accent |
-| `peach` | #ebca98 | Tertiary brand |
-| `lightblue` | #87d1d5 | |
-| `red` | #ad474b | Errors |
-| `white` | #fff | Backgrounds |
-| `black` | #222 | |
-| `grey` | #444 | |
-
-**Semantic aliases:**
-- `var(--color-brand-1)` → darkgreen
-- `var(--color-brand-2)` → lightgreen
-- `var(--color-brand-3)` → peach
-- `var(--color-foreground)` → darkgreen
-- `var(--color-background)` → white
-- `var(--color-error)` → red
 
 **Generated per color:**
 - `--color-{name}` - hex
@@ -57,8 +36,8 @@ Colors defined in `assets/theme-config.json`. Use CSS custom properties:
 Set background + foreground + link colors:
 
 ```php
-<section class="color-context-darkgreen">
-    <!-- Background: darkgreen, text: white, links: white -->
+<section class="color-context-neutral">
+    <!-- Background: neutral, text: white, links: white -->
 </section>
 ```
 
