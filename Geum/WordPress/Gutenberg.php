@@ -8,6 +8,7 @@ class Gutenberg
     {
         \add_action('after_setup_theme', [__CLASS__, 'gutenbergSupport']);
         \add_filter('block_categories_all', [__CLASS__, 'gutenbergBlockCategory']);
+        \add_filter('allowed_block_types_all', [__CLASS__, 'allowedBlockTypes'], 10, 2);
     }
 
     public static function gutenbergSupport(): void
@@ -60,5 +61,20 @@ class Gutenberg
         array_unshift($categories, $blockCategory);
 
         return $categories;
+    }
+
+    /**
+     * @param  bool|string[]  $allowedBlocks
+     * @param  \WP_Block_Editor_Context  $context
+     */
+    public static function allowedBlockTypes($allowedBlocks, $context): array
+    {
+        $allowed = \apply_filters('geum/editor/allowed_blocks', []);
+
+        if (function_exists('acf_get_block_types')) {
+            $allowed = array_merge($allowed, array_keys(\acf_get_block_types()));
+        }
+
+        return $allowed;
     }
 }
