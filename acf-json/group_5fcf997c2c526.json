@@ -40,7 +40,8 @@
                         "twitter": "Twitter",
                         "youtube": "Youtube",
                         "instagram": "Instagram",
-                        "linkedin": "LinkedIn"
+                        "linkedin": "LinkedIn",
+                        "tiktok": "TikTok"
                     },
                     "default_value": false,
                     "allow_null": 0,
