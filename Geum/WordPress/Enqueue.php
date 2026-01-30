@@ -27,43 +27,33 @@ class Enqueue
         \add_filter('geum/scripts/dependencies', [__CLASS__, 'addjQueryDependency']);
         \add_filter('geum/scripts/localization', [__CLASS__, 'addAjaxLocalization']);
 
-        // Output Vite assets in head
-        \add_action('wp_head', [__CLASS__, 'outputViteAssets'], 1);
+        // Enqueue Vite assets
+        \add_action('wp_enqueue_scripts', [__CLASS__, 'outputViteAssets']);
     }
 
     /**
-     * Output Vite assets (CSS and JS) in the head.
+     * Enqueue Vite assets for frontend.
      */
     public static function outputViteAssets(): void
     {
-        // Main frontend assets
-        echo \Geum\Vite::assets([
-            'assets/main.pcss',
-            'assets/main.js',
-        ]);
+        \Geum\Vite::enqueueStyle('geum-main', 'assets/main.pcss');
+        \Geum\Vite::enqueueScript('geum-main', 'assets/main.js');
     }
 
     /**
-     * Enqueue framework block editor assets.
+     * Enqueue block editor assets (JS only; CSS via add_editor_style in Gutenberg.php).
      */
     public static function enqueueEditorAssets(): void
     {
-        // Output Vite assets for block editor
-        echo \Geum\Vite::assets([
-            'assets/editor-styles.pcss',
-            'assets/editor-scripts.js',
-        ]);
+        \Geum\Vite::enqueueScript('geum-editor', 'assets/editor-scripts.js');
     }
 
     /**
-     * Enqueue framework admin assets.
+     * Enqueue admin assets.
      */
     public static function enqueueAdminAssets(): void
     {
-        // Output Vite assets for admin
-        echo \Geum\Vite::assets([
-            'assets/admin-scripts.js',
-        ]);
+        \Geum\Vite::enqueueScript('geum-admin', 'assets/admin-scripts.js');
     }
 
     /**

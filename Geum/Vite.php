@@ -236,4 +236,110 @@ class Vite
 
         return null;
     }
+
+    /**
+     * Enqueue a stylesheet from Vite.
+     *
+     * @param  string  $handle  WP style handle
+     * @param  string  $entry  Entry point path (e.g., 'assets/main.pcss')
+     * @param  array  $deps  Dependencies
+     */
+    public static function enqueueStyle(string $handle, string $entry, array $deps = []): void
+    {
+        if (self::isRunning()) {
+            self::enqueueViteClient();
+            $url = self::getDevServerUrl().'/'.$entry;
+            \wp_enqueue_style($handle, $url, $deps, null);
+        } else {
+            $manifest = self::getManifest();
+            if (! $manifest || ! isset($manifest[$entry])) {
+                return;
+            }
+
+            $manifestEntry = $manifest[$entry];
+            $url = \Geum\Paths::assetURL('build/'.$manifestEntry['file']);
+            \wp_enqueue_style($handle, $url, $deps, null);
+        }
+    }
+
+    /**
+     * Enqueue a script from Vite.
+     *
+     * @param  string  $handle  WP script handle
+     * @param  string  $entry  Entry point path (e.g., 'assets/main.js')
+     * @param  array  $deps  Dependencies
+     */
+    public static function enqueueScript(string $handle, string $entry, array $deps = []): void
+    {
+        if (self::isRunning()) {
+            self::enqueueViteClient();
+            $url = self::getDevServerUrl().'/'.$entry;
+            \wp_enqueue_script($handle, $url, $deps, null, ['in_footer' => true, 'strategy' => 'defer']);
+            \add_filter('script_loader_tag', function ($tag, $tagHandle) use ($handle) {
+                if ($tagHandle === $handle) {
+                    return str_replace(' src=', ' type="module" src=', $tag);
+                }
+
+                return $tag;
+            }, 10, 2);
+        } else {
+            $manifest = self::getManifest();
+            if (! $manifest || ! isset($manifest[$entry])) {
+                return;
+            }
+
+            $manifestEntry = $manifest[$entry];
+            $url = \Geum\Paths::assetURL('build/'.$manifestEntry['file']);
+            \wp_enqueue_script($handle, $url, $deps, null, ['in_footer' => true, 'strategy' => 'defer']);
+            \add_filter('script_loader_tag', function ($tag, $tagHandle) use ($handle) {
+                if ($tagHandle === $handle) {
+                    return str_replace(' src=', ' type="module" src=', $tag);
+                }
+
+                return $tag;
+            }, 10, 2);
+
+            // Preload imports
+            if (isset($manifestEntry['imports'])) {
+                foreach ($manifestEntry['imports'] as $import) {
+                    if (isset($manifest[$import])) {
+                        $importUrl = \Geum\Paths::assetURL('build/'.$manifest[$import]['file']);
+                        \add_action('wp_head', function () use ($importUrl) {
+                            printf('<link rel="modulepreload" href="%s" />'."\n", esc_url($importUrl));
+                        }, 2);
+                    }
+                }
+            }
+
+            // Enqueue CSS bundled with JS entry
+            if (isset($manifestEntry['css'])) {
+                foreach ($manifestEntry['css'] as $index => $css) {
+                    $cssUrl = \Geum\Paths::assetURL('build/'.$css);
+                    \wp_enqueue_style($handle.'-css-'.$index, $cssUrl, [], null);
+                }
+            }
+        }
+    }
+
+    /**
+     * Enqueue Vite client for HMR (only once).
+     */
+    private static function enqueueViteClient(): void
+    {
+        static $enqueued = false;
+        if ($enqueued) {
+            return;
+        }
+        $enqueued = true;
+
+        $devServerUrl = self::getDevServerUrl();
+        \wp_enqueue_script('vite-client', $devServerUrl.'/@vite/client', [], null, false);
+        \add_filter('script_loader_tag', function ($tag, $handle) {
+            if ($handle === 'vite-client') {
+                return str_replace(' src=', ' type="module" src=', $tag);
+            }
+
+            return $tag;
+        }, 10, 2);
+    }
 }

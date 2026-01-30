@@ -1,0 +1,31 @@
+@utility blocks-context {
+    @apply prose;
+
+    margin-bottom: var(--blocks--margin-bottom);
+
+    // Prose elements get max-width constraint
+    > :where(p, ul, ol, h1, h2, h3, h4, h5, h6) {
+        max-width: var(--prose--max-width, 65ch);
+
+        @media (width >= theme('screens.md')) {
+            grid-column: 2 / 8;
+        }
+    }
+
+    // WordPress block-specific spacing (top-margin only)
+    > :where([class*='wp-block']) {
+        margin-top: var(--block--margin-top);
+
+        // Pull full-width blocks with backgrounds together
+        &:where([class*='has-background'].alignfull) {
+            + :where([class*='has-background'].alignfull) {
+                margin-top: calc(var(--space--layout) * -1);
+            }
+
+            // Pull footer up to last full-width block with background
+            &:last-child {
+                margin-bottom: calc(var(--blocks--margin-bottom) * -1);
+            }
+        }
+    }
+}

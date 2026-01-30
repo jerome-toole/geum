@@ -17,11 +17,11 @@ class Gutenberg
         // Not to be confused with custom CSS support for TinyMCE (editor-style).
         \add_theme_support('editor-styles');
 
-        // Add the CSS file path to be enqueued by WordPress.
-        // The path to the asset must be relative to the theme root.
+        // Add editor styles from build (no HMR, always uses built CSS)
         $file = \Geum\Asset::extract('editor-styles.css');
+
         if (! empty($file)) {
-            \add_editor_style(\Geum\Paths::assetPath($file, true));
+            \add_editor_style(\Geum\Paths::assetPath('build/'.$file, true));
         }
 
         // Add support for embeds to responsively keep their aspect ratio.
@@ -64,13 +64,39 @@ class Gutenberg
     }
 
     /**
-     * @param  bool|string[]  $allowedBlocks
-     * @param  \WP_Block_Editor_Context  $context
+     * Filter allowed block types.
+     *
+     * @param  bool|string[]  $allowedBlocks  Array of allowed block types or true for all.
+     * @param  \WP_Block_Editor_Context  $context  Editor context.
+     * @return string[]
      */
     public static function allowedBlockTypes($allowedBlocks, $context): array
     {
-        $allowed = \apply_filters('geum/editor/allowed_blocks', []);
+        $allowed = [
+            'core/paragraph',
+            'core/image',
+            'core/heading',
+            'core/gallery',
+            'core/list',
+            'core/list-item',
+            'core/quote',
+            'core/shortcode',
+            'core/button',
+            'core/buttons',
+            'core/columns',
+            'core/column',
+            // 'core/cover',
+            'core/group',
+            'core/embed',
+            'core/freeform',
+            'core/html',
+            'core/missing',
+            'core/separator',
+            'core/block',
+            'core/table',
+        ];
 
+        // Add all ACF blocks
         if (function_exists('acf_get_block_types')) {
             $allowed = array_merge($allowed, array_keys(\acf_get_block_types()));
         }

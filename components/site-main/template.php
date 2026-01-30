@@ -8,7 +8,7 @@ if (! empty($this->blocks_context)) {
     <<?= esc_html($this->inner_el); ?> class="<?= classes($inner_classes) ?>">
 
         <?php if (! empty($this->header) || ! empty($this->content)) { ?>
-            <div class="site-main__content page-grid">
+            <div class="site-main__content page-grid blocks-context">
                 <?php if (! empty($this->header)) { ?>
                     <?= $this->header; ?>
                 <?php } ?>

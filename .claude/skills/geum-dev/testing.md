@@ -62,59 +62,84 @@ grep -B2 -A5 "Fatal error" ../../debug.log
 
 ## Frontend Testing
 
-Use Playwright MCP for browser-based testing.
+Use Chrome DevTools MCP for browser-based testing.
 
 ### 1. Load the Page
 
 ```
-mcp__playwright__browser_navigate to http://geum.test
+mcp__chrome-devtools__navigate_page with url: "http://geum.test"
+```
+
+Or navigate to a specific page:
+```
+mcp__chrome-devtools__navigate_page with url: "http://geum.test/some-page/"
 ```
 
 ### 2. Check Console for Errors
 
 ```
-mcp__playwright__browser_console_messages with level: "error"
+mcp__chrome-devtools__list_console_messages
 ```
 
-Or include warnings:
+Filter by error type:
 ```
-mcp__playwright__browser_console_messages with level: "warning"
+mcp__chrome-devtools__list_console_messages with types: ["error", "warn"]
+```
+
+Get details on a specific message:
+```
+mcp__chrome-devtools__get_console_message with msgid: <id>
 ```
 
 ### 3. Inspect the DOM
 
-Take a snapshot to see the page structure:
+Take a snapshot to see the page structure (a11y tree):
 ```
-mcp__playwright__browser_snapshot
+mcp__chrome-devtools__take_snapshot
 ```
 
 ### 4. Test Interactions
 
-Click elements:
+Click elements (use uid from snapshot):
 ```
-mcp__playwright__browser_click on element with ref from snapshot
+mcp__chrome-devtools__click with uid: "<uid>"
+```
+
+Fill form fields:
+```
+mcp__chrome-devtools__fill with uid: "<uid>", value: "text"
 ```
 
 ### 5. Take Screenshots
 
 ```
-mcp__playwright__browser_take_screenshot
+mcp__chrome-devtools__take_screenshot
 ```
 
-### 6. Clean Up
+Screenshot a specific element:
+```
+mcp__chrome-devtools__take_screenshot with uid: "<uid>"
+```
+
+### 6. Check Network Requests
 
 ```
-mcp__playwright__browser_close
+mcp__chrome-devtools__list_network_requests
+```
+
+Get request details:
+```
+mcp__chrome-devtools__get_network_request with reqid: <id>
 ```
 
 ## Full Test Workflow
 
 When asked to "test" after making changes:
 
-1. **Clear debug log**: `> ../../debug.log`
-2. **Navigate with Playwright**: `mcp__playwright__browser_navigate` to the site
-3. **Take snapshot**: Check DOM rendered correctly
-4. **Check console**: `mcp__playwright__browser_console_messages` for JS errors
+1. **Clear debug log**: `: > ../../debug.log`
+2. **Navigate**: `mcp__chrome-devtools__navigate_page` to the site
+3. **Take snapshot**: `mcp__chrome-devtools__take_snapshot` to check DOM
+4. **Check console**: `mcp__chrome-devtools__list_console_messages` for JS errors
 5. **Check PHP log**: `cat ../../debug.log` for backend errors
 6. **Report results**: Summarize any issues found
 
@@ -122,16 +147,21 @@ When asked to "test" after making changes:
 
 If testing a specific component:
 
-1. Find a page that uses the component
-2. Load that page with Playwright
-3. Use `mcp__playwright__browser_snapshot` to verify the component renders
+1. Find a page that uses the component (or use `/_dev/` testing suite)
+2. Load that page: `mcp__chrome-devtools__navigate_page`
+3. Take snapshot: `mcp__chrome-devtools__take_snapshot` to verify component renders
 4. Check console and debug.log for errors
 
-## Network Requests
+## Performance Testing
 
-Check what requests were made:
+Start a performance trace:
 ```
-mcp__playwright__browser_network_requests
+mcp__chrome-devtools__performance_start_trace with reload: true, autoStop: true
+```
+
+Analyze insights:
+```
+mcp__chrome-devtools__performance_analyze_insight
 ```
 
 ## Common Issues
@@ -145,6 +175,11 @@ Check debug.log immediately - usually a PHP fatal error.
 3. Look for "Class not found" in debug.log
 
 ### JavaScript not working
-1. Check `mcp__playwright__browser_console_messages` for errors
+1. Check `mcp__chrome-devtools__list_console_messages` for errors
 2. Verify Vite dev server is running (`npm run dev`)
-3. Check network tab for failed script loads
+3. Check `mcp__chrome-devtools__list_network_requests` for failed script loads
+
+### Styles not applying
+1. Run `npm run build` to rebuild assets
+2. Check `mcp__chrome-devtools__list_network_requests` for CSS 404s
+3. Take snapshot to verify classes are on elements

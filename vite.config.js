@@ -1,4 +1,4 @@
-import { basename, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import fg from 'fast-glob';
 import laravel from 'laravel-vite-plugin';
 import { defineConfig } from 'vite';
@@ -11,7 +11,7 @@ import globImportPlugin from './dev-scripts/vite-plugin-glob-import.js';
 // Files starting with underscore are partials and should not be treated as standalone assets
 const standaloneScripts = fg.sync('components/*/*.js').filter((file) => {
     const fileName = file.split('/').pop();
-    return !(file.endsWith('/scripts.js') || fileName.startsWith('_'));
+    return !(file.endsWith('/scripts.js') || file.endsWith('/editor-scripts.js') || fileName.startsWith('_'));
 });
 
 const standaloneStyles = fg.sync('components/*/*.pcss').filter((file) => {
