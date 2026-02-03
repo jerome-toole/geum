@@ -33,6 +33,9 @@ class Module
         // https://docs.gravityforms.com/gform_disable_auto_update/
         \add_filter('gform_disable_auto_update', '__return_true');
         \add_filter('option_gform_enable_background_updates', '__return_false');
+
+        /* Change Gravity Forms' Ajax Spinner into a transparent image */
+        add_filter('gform_ajax_spinner_url', [__CLASS__, 'spinnerUrl'], 10);
     }
 
     public static function moveScriptsToFooter(): void
@@ -51,5 +54,10 @@ class Module
         $initial_values['enableAnimation'] = false;
 
         return $initial_values;
+    }
+
+    public static function spinnerUrl()
+    {
+        return 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
     }
 }

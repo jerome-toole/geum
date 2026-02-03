@@ -18,8 +18,16 @@
         @apply btn;
     }
 
+    /* Spinner - positioned to avoid layout shift */
     .gform_ajax_spinner {
-        margin-left: 1em;
+        margin-left: 0.5em;
+        width: var(--loading-spinner--size, 1em);
+        height: var(--loading-spinner--size, 1em);
+        border-width: 0.2em;
+        border-style: solid;
+        border-color: currentColor var(--color-beige) var(--color-beige);
+        border-radius: 50%;
+        animation: 1s linear infinite rotate;
     }
 
     .gf_invisible,
@@ -71,6 +79,9 @@
 
 .gform_footer,
 .gform_page_footer {
+    position: relative;
+    display: flex;
+    align-items: center;
     margin-top: var(--space--base);
 }
 
