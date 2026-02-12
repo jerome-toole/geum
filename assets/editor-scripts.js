@@ -1,2 +1,5 @@
 // Editor scripts
-console.log('Editor scripts loaded');
+
+import './scripts/editor/embed-variations.js';
+import './scripts/editor/group-variations.js';
+import './scripts/editor/rich-text-formats.js';
