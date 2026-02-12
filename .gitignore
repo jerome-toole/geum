@@ -38,6 +38,8 @@ auth.json
 .Trashes
 ehthumbs.db
 Thumbs.db
+.omc
+.omc/
 
 # Other #
 .docs/FRAMEWORK_TODOS.md
