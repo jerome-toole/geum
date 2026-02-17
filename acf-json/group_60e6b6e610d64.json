@@ -7,7 +7,7 @@
             "label": "GTM Code",
             "name": "gtm_code",
             "type": "text",
-            "instructions": "",
+            "instructions": "Enter your GTM container ID (e.g. GTM-XXXXXXX). GTM loads on every page and includes Google Consent Mode v2 support — on a visitor's first session, analytics and ad storage are blocked by default. When the visitor accepts cookies, consent is updated immediately via gtag() so GA4 and other GTM tags fire in the same session. On return visits, consent is read from the cookie server-side and set correctly before GTM initialises.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -20,6 +20,118 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_head_scripts_repeater",
+            "label": "Head Scripts",
+            "name": "head_scripts",
+            "type": "repeater",
+            "instructions": "Scripts to inject into the <head>. Each row can optionally require cookie consent before being executed.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Add Head Script",
+            "sub_fields": [
+                {
+                    "key": "field_head_script_html",
+                    "label": "Script HTML",
+                    "name": "head_script_html",
+                    "type": "textarea",
+                    "instructions": "Paste the full <script> tag or inline HTML",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 6,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_head_script_requires_consent",
+                    "label": "Block until cookies accepted",
+                    "name": "head_script_requires_consent",
+                    "type": "true_false",
+                    "instructions": "If enabled, this script will not execute until the user accepts cookies.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                }
+            ]
+        },
+        {
+            "key": "field_body_scripts_repeater",
+            "label": "Body Scripts",
+            "name": "body_scripts",
+            "type": "repeater",
+            "instructions": "Scripts to inject after the opening <body> tag. Each row can optionally require cookie consent before being executed.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "button_label": "Add Body Script",
+            "sub_fields": [
+                {
+                    "key": "field_body_script_html",
+                    "label": "Script HTML",
+                    "name": "body_script_html",
+                    "type": "textarea",
+                    "instructions": "Paste the full <script> tag or inline HTML",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 6,
+                    "new_lines": ""
+                },
+                {
+                    "key": "field_body_script_requires_consent",
+                    "label": "Block until cookies accepted",
+                    "name": "body_script_requires_consent",
+                    "type": "true_false",
+                    "instructions": "If enabled, this script will not execute until the user accepts cookies.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 1,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                }
+            ]
         }
     ],
     "location": [

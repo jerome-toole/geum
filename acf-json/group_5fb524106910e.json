@@ -1,6 +1,6 @@
 {
     "key": "group_5fb524106910e",
-    "title": "Cookies",
+    "title": "Cookie Notice",
     "fields": [
         {
             "key": "field_5fb5243b58c0d",
@@ -40,5 +40,5 @@
     "active": true,
     "description": "Options Page",
     "show_in_rest": 0,
-    "modified": 1658263535
+    "modified": 1771346461
 }

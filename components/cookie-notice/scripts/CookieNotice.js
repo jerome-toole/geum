@@ -30,6 +30,20 @@ export default class CookieNotice {
 
         this.acceptButton.addEventListener('click', () => {
             this.setCookieChoice('accept');
+
+            // Google Consent Mode v2 — update immediately for the current session
+            if (typeof gtag === 'function') {
+                gtag('consent', 'update', {
+                    analytics_storage:  'granted',
+                    ad_storage:         'granted',
+                    ad_user_data:       'granted',
+                    ad_personalization: 'granted',
+                });
+            }
+
+            // Activate any consent-gated scripts already in the page
+            this.activateConsentScripts();
+
             this.setActive(false);
         });
 
@@ -93,6 +107,24 @@ export default class CookieNotice {
      */
     setCookieChoice(choice) {
         setCookie(this.cookieName, choice, this.cookieLifetime);
+    }
+
+    /**
+     * Activate any inert consent-gated scripts in the page.
+     * Scripts are output as <script type="text/plain" data-cookie-consent> by PHP
+     * when the user hasn't yet consented. This method clones them as real scripts
+     * so they execute immediately after the user accepts.
+     */
+    activateConsentScripts() {
+        document.querySelectorAll('script[type="text/plain"][data-cookie-consent]').forEach((inert) => {
+            const script = document.createElement('script');
+            [...inert.attributes].forEach(({ name, value }) => {
+                if (name !== 'type') script.setAttribute(name, value);
+            });
+            script.textContent = inert.textContent;
+            document.head.appendChild(script);
+            inert.remove();
+        });
     }
 
     /**
