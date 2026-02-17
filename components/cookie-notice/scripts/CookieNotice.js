@@ -57,6 +57,14 @@ export default class CookieNotice {
             element.setAttribute('aria-controls', this.el.id);
             element.addEventListener('click', this.handleTogglerClick.bind(this));
         });
+
+        document.addEventListener('click', (e) => {
+            const trigger = e.target.closest('.reset-cookie-preferences');
+            if (!trigger) return;
+            e.preventDefault();
+            setCookie(this.cookieName, '', -1);
+            window.location.reload();
+        });
     }
 
     /**

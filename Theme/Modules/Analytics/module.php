@@ -27,6 +27,8 @@ class Module
             ? 'granted'
             : 'denied';
 
+        $privacy_first = (bool) \get_field('analytics_privacy_first', 'option');
+
         ?>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -37,6 +39,10 @@ class Module
                 ad_user_data:       '<?= $consent ?>',
                 ad_personalization: '<?= $consent ?>',
             });
+            <?php if ($privacy_first): ?>
+            gtag('set', 'allow_google_signals', false);
+            gtag('set', 'allow_ad_personalization_signals', false);
+            <?php endif; ?>
         </script>
         <?php
     }

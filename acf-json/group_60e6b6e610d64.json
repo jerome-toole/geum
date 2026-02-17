@@ -22,6 +22,25 @@
             "maxlength": ""
         },
         {
+            "key": "field_analytics_privacy_first",
+            "label": "Privacy-first mode",
+            "name": "analytics_privacy_first",
+            "type": "true_false",
+            "instructions": "Disables Google Signals (cross-device tracking, demographics, remarketing) and ad personalisation. GA4 will still record page views, sessions, and traffic sources. Recommended if you only need basic analytics.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_head_scripts_repeater",
             "label": "Head Scripts",
             "name": "head_scripts",
