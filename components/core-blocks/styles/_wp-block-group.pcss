@@ -1,0 +1,20 @@
+// wp-block-group
+//
+// When a group contains blocks, apply the same child spacing as blocks-context.
+// For grid layout groups, switch to CSS grid above md.
+
+.wp-block-group {
+    @apply blocks-context;
+}
+
+.wp-block-group.is-layout-grid {
+    @media (width >= theme('screens.md')) {
+        display: grid;
+        grid-template-columns: repeat(var(--cols, 2), 1fr);
+        gap: var(--block--margin-top);
+
+        > * {
+            margin-top: 0;
+        }
+    }
+}

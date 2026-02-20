@@ -118,6 +118,12 @@ class DevRoutes
             'index.php?dev_route=utilities',
             'top'
         );
+
+        \add_rewrite_rule(
+            '^_dev/blocks-context/?$',
+            'index.php?dev_route=blocks-context',
+            'top'
+        );
     }
 
     public static function addQueryVars(array $vars): array
@@ -172,6 +178,10 @@ class DevRoutes
 
             case 'utilities':
                 static::renderUtilities();
+                break;
+
+            case 'blocks-context':
+                static::renderBlocksContext();
                 break;
         }
 
@@ -237,6 +247,7 @@ class DevRoutes
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/globals/')).'">Globals</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/utilities/')).'">Utilities</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/components/')).'">Components</a></li>';
+        $content .= '<li><a href="'.\esc_url(\home_url('/_dev/blocks-context/')).'">Blocks Context</a></li>';
         $content .= '</ul>';
         $content .= '</div>';
 
@@ -287,6 +298,23 @@ class DevRoutes
 
         echo '<h2>HTML Elements</h2>';
         $template_path = static::getTemplatePath('html-elements.php');
+        if ($template_path) {
+            include $template_path;
+        }
+
+        \site_main_close();
+        \get_footer();
+    }
+
+    protected static function renderBlocksContext(): void
+    {
+        \get_header();
+        \site_main_open();
+
+        echo '<a href="'.\esc_url(\home_url('/_dev/')).'" class="dev-component-list__back">&larr; Dev Index</a>';
+        echo '<h1>Blocks Context</h1>';
+
+        $template_path = static::getTemplatePath('blocks-context.php');
         if ($template_path) {
             include $template_path;
         }

@@ -91,6 +91,20 @@ class Component
      */
     public static function init(): void
     {
+        // Fallback autoloader: catches unresolved Geum\Components\* classes and hints to run composer dump-autoload.
+        spl_autoload_register(function (string $class): void {
+            if (! str_starts_with($class, 'Geum\\Components\\')) {
+                return;
+            }
+            $shortName = substr($class, strlen('Geum\\Components\\'));
+            $kebab = strtolower(preg_replace('/([A-Z])/', '-$1', lcfirst($shortName)));
+            throw new \RuntimeException(
+                "Component class \"{$class}\" not found. " .
+                "Run `composer dump-autoload` to regenerate the classmap. " .
+                "Expected: components/{$kebab}/{$shortName}.php"
+            );
+        });
+
         // Set class args for components.
         \add_filter('geum/component/after_filters', [__CLASS__, 'buildComponentClasses'], 10);
 
