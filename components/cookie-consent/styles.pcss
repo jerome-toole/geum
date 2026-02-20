@@ -1,6 +1,6 @@
-.cookie-notice {
+.cookie-consent {
     position: fixed;
-    z-index: var(--z-index-cookie-notice);
+    z-index: var(--z-index-cookie-consent);
     bottom: spaceFluid(4, 8);
     display: flex;
     width: 100%;
@@ -16,7 +16,7 @@
         visibility: hidden;
     }
 
-    :where(.cookie-notice__banner) {
+    :where(.cookie-consent__banner) {
         display: flex;
         width: auto;
         max-width: min(
@@ -54,7 +54,7 @@
         }
     }
 
-    :where(.cookie-notice__message) {
+    :where(.cookie-consent__message) {
         @apply margin-trim;
 
         flex: 0 1 auto;
@@ -70,10 +70,10 @@
         }
     }
 
-    :where(.cookie-notice__actions) {
+    :where(.cookie-consent__actions) {
         flex: 0 0 auto;
 
-        :where(.cookie-notice__actions__list) {
+        :where(.cookie-consent__actions__list) {
             --grid--column-gap: space(4);
             --grid--row-gap: space(8);
 

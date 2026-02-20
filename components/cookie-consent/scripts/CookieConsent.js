@@ -1,15 +1,15 @@
 import { getCookie, setCookie } from '../../../assets/scripts/helpers/cookies.js';
 
-export default class CookieNotice {
+export default class CookieConsent {
     constructor(element) {
         this.el = element;
 
-        this.bannerEl = this.el.querySelector('.cookie-notice__banner');
+        this.bannerEl = this.el.querySelector('.cookie-consent__banner');
         this.bannerEl.setAttribute('tabindex', -1);
 
-        this.acceptButton = this.el.querySelector('.js-cookie-notice-accept');
-        this.rejectButton = this.el.querySelector('.js-cookie-notice-reject');
-        this.togglers = document.querySelectorAll('.js-cookie-notice-toggler');
+        this.acceptButton = this.el.querySelector('.js-cookie-consent-accept');
+        this.rejectButton = this.el.querySelector('.js-cookie-consent-reject');
+        this.togglers = document.querySelectorAll('.js-cookie-consent-toggler');
 
         this.prevActiveElement = null;
 
@@ -120,17 +120,15 @@ export default class CookieNotice {
     /**
      * Activate any inert consent-gated scripts in the page.
      * Scripts are output as <script type="text/plain" data-cookie-consent> by PHP
-     * when the user hasn't yet consented. This method clones them as real scripts
-     * so they execute immediately after the user accepts.
+     * when the user hasn't yet consented. The inner content is raw HTML (full <script>
+     * tags), so we parse it via createContextualFragment to execute correctly.
      */
     activateConsentScripts() {
         document.querySelectorAll('script[type="text/plain"][data-cookie-consent]').forEach((inert) => {
-            const script = document.createElement('script');
-            [...inert.attributes].forEach(({ name, value }) => {
-                if (name !== 'type') script.setAttribute(name, value);
-            });
-            script.textContent = inert.textContent;
-            document.head.appendChild(script);
+            const target = inert.dataset.consentLocation === 'body' ? document.body : document.head;
+            const range = document.createRange();
+            range.selectNodeContents(target);
+            target.appendChild(range.createContextualFragment(inert.textContent));
             inert.remove();
         });
     }

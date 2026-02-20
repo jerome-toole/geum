@@ -1,14 +1,14 @@
 <?php if (! empty($this->content)) { ?>
-    <div class="<?= classes('cookie-notice', $this->classes) ?>" <?= attributes($this->attributes) ?>>
-        <div class="cookie-notice__banner has-brand-1-background-color">
-            <div class="cookie-notice__message">
+    <div class="<?= classes('cookie-consent', $this->classes) ?>" <?= attributes($this->attributes) ?>>
+        <div class="cookie-consent__banner has-brand-1-background-color">
+            <div class="cookie-consent__message">
                 <?= wp_kses_post($this->content); ?>
             </div>
 
-            <div class="cookie-notice__actions">
-                <ul class="cookie-notice__actions-list flex-list">
-                    <li class="cookie-notice__action">
-                        <button type="button" class="btn cookie-notice__accept js-cookie-notice-accept">
+            <div class="cookie-consent__actions">
+                <ul class="cookie-consent__actions-list flex-list">
+                    <li class="cookie-consent__action">
+                        <button type="button" class="btn cookie-consent__accept js-cookie-consent-accept">
                             <?= wp_kses_post($this->accept_button_text); ?>
                             <span class="screen-reader-text">
                                 <?= wp_kses_post($this->accept_button_text_additional_context); ?>
@@ -16,8 +16,8 @@
                         </button>
                     </li>
 
-                    <li class="cookie-notice__action">
-                        <button type="button" class="btn cookie-notice__reject js-cookie-notice-reject">
+                    <li class="cookie-consent__action">
+                        <button type="button" class="btn cookie-consent__reject js-cookie-consent-reject">
                             <?= wp_kses_post($this->reject_button_text); ?>
                             <span class="screen-reader-text">
                                 <?= wp_kses_post($this->reject_button_text_additional_context); ?>

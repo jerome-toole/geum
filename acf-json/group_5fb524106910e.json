@@ -1,15 +1,42 @@
 {
     "key": "group_5fb524106910e",
-    "title": "Cookie Notice",
+    "title": "Cookie Consent",
     "fields": [
         {
+            "key": "field_cookie_consent_enabled",
+            "label": "Enable Cookie Consent",
+            "name": "cookie_consent_enabled",
+            "type": "true_false",
+            "instructions": "Show the cookie consent banner on the site.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
             "key": "field_5fb5243b58c0d",
-            "label": "Cookie Notice Text",
-            "name": "cookie_notice_text",
+            "label": "Cookie Consent Text",
+            "name": "cookie_consent_text",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_cookie_consent_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
