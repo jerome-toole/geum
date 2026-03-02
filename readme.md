@@ -62,15 +62,16 @@ Integrates with WordPress' template hierarchy, query handling, and admin. No cus
 ```php
 use Geum\Router;
 
-// Blog archive with editable content around the post listing
-Router::decorate('archive:post', ArchiveController::class)
-    ->withContent('blog')
-    ->withSlot('listing', fn() => ArchiveController::renderLoop());
+// Cross-cutting routes live in Theme/Routes/routes.php
+Router::decorateSearch(SearchController::class)
+    ->withPage('search')
+    ->withSlot('template-content', fn() => SearchController::renderResults());
 
-// Search results with editable "no results" messaging
-Router::decorate('search', SearchController::class)
-    ->withContent('search')
-    ->withSlot('listing', fn() => SearchController::renderResults());
+// Post type modules self-register their own routes in module.php
+// Theme/Modules/Events/module.php
+Router::decoratePostType('event', static::class)
+    ->withPage('events')
+    ->withSlot('template-content', [static::class, 'renderArchive']);
 
 // Custom URLs when you need them
 Router::route('/tools/demo', fn() => DemoController::index())
@@ -78,7 +79,7 @@ Router::route('/tools/demo', fn() => DemoController::index())
 ```
 
 - **Router Pages** - Auto-created WordPress pages, protected from deletion
-- **Slots** - Injection points for dynamic content (`listing`, `template-content`)
+- **Slots** - Named injection points for dynamic content (e.g. `template-content`)
 - **Controllers** - Class-based or closure handlers
 - **Template Resolution** - Follows WordPress hierarchy (`archive-{type}.php`, etc.)
 

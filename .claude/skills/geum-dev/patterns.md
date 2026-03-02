@@ -67,9 +67,9 @@ Use `space()` function (converts px to rem):
 ```
 
 **Layout variables:**
-- `var(--space--layout)` - Block spacing (32px → 64px responsive)
-- `var(--space--container-padding)` - Side padding (16px → 30px responsive)
-- `var(--space--base)` - Text element spacing (16px)
+- `var(--space-layout)` - Block spacing (32px → 64px responsive)
+- `var(--space-container-padding)` - Side padding (16px → 30px responsive)
+- `var(--space-base)` - Text element spacing (16px)
 
 ## Content Flow
 
@@ -86,16 +86,16 @@ The `.content-flow` utility manages spacing between direct children using the [E
 
 | Context | Value |
 |---------|-------|
-| Default (`:root`) | `var(--space--layout)` — layout-level spacing for WP blocks |
-| Type elements (`p, ul, ol, h1–h6`) | `var(--space--base)` — prose-level spacing |
+| Default (`:root`) | `var(--space-layout)` — layout-level spacing for WP blocks |
+| Type elements (`p, ul, ol, h1–h6`) | `var(--space-base)` — prose-level spacing |
 | Headings (`.wp-block-heading`) | `var(--heading--margin-top)` |
 | Blockquotes | `spaceFluid(12, 16)` |
-| Pagination | `var(--space--base)` |
+| Pagination | `var(--space-base)` |
 
 **Override per element:**
 ```pcss
 .my-component {
-    --flow-space: var(--space--base); // smaller spacing above this element
+    --flow-space: var(--space-base); // smaller spacing above this element
 }
 ```
 
@@ -140,29 +140,12 @@ Grid: `[full-start] gutter [wide-start] 12-cols [wide-end] gutter [full-end]`
 }
 ```
 
-| Utility | Size |
-|---------|------|
-| `type-hero` | 36px → 85px |
-| `type-h1` | 28px → 55px |
-| `type-h2` | 26px → 44px |
-| `type-h3` | 23px → 35px |
-| `type-h4` | 20px → 28px |
-| `type-h5` | 18px → 22px |
-| `type-h6` | base size |
-| `type-base` | body text |
-| `type-small` | 14px |
-| `type-meta` | base size, tight line-height |
-
 **Responsive font with `rfs()`:**
 ```pcss
-.custom-heading {
+@utility type-h3 {
     font-size: rfs(24, 36);  /* 24px at min, 36px at max viewport */
 }
 ```
-
-**Font families:**
-- `var(--type--1--font-family)` - Body (system-ui)
-- `var(--type--2--font-family)` - Headings (Georgia)
 
 ## Other Functions
 

@@ -62,7 +62,7 @@ $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse c
 </ol>
 
 <!-- ============================================================
-     Standard WP block — --flow-space spacing (var(--space--layout))
+     Standard WP block — --flow-space spacing (var(--space-layout))
      ============================================================ -->
 
 <span class="bc-label">wp-block (standard, no alignment)</span>
@@ -99,13 +99,13 @@ $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse c
 
 <span class="bc-label">Two consecutive alignfull.has-background — should touch (pull-together)</span>
 <div class="wp-block-group alignfull has-background has-brand-1-background-color color-context-brand-1">
-    <div style="padding: var(--space--layout, 3rem); text-align: center;">
+    <div style="padding: var(--space-layout, 3rem); text-align: center;">
         <strong>First alignfull with background</strong>
         <p><?= $lorem_short ?></p>
     </div>
 </div>
 <div class="wp-block-group alignfull has-background has-brand-2-background-color color-context-brand-2">
-    <div style="padding: var(--space--layout, 3rem); text-align: center;">
+    <div style="padding: var(--space-layout, 3rem); text-align: center;">
         <strong>Second alignfull with background — pulled up</strong>
         <p><?= $lorem_short ?></p>
     </div>
@@ -156,7 +156,7 @@ $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse c
 
 <span class="bc-label">section.alignfull.has-background (last-child footer pull)</span>
 <section class="section alignfull has-background has-brand-3-background-color color-context-brand-3">
-    <div style="padding: var(--space--layout, 3rem); text-align: center;">
+    <div style="padding: var(--space-layout, 3rem); text-align: center;">
         <strong>Last alignfull.has-background — pulls footer up</strong>
         <p><?= $lorem_short ?></p>
     </div>

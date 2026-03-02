@@ -43,15 +43,16 @@ class Matcher
      */
     protected static function matchPattern(string $pattern, string $path): bool
     {
-        // Exact match
         if ($pattern === $path) {
             return true;
         }
 
-        // Convert pattern to regex
-        $regex = preg_replace('/\{[^}]+\}/', '([^/]+)', $pattern);
-        $regex = '#^'.preg_quote($regex, '#').'$#';
-        $regex = str_replace('\\(\\[\\^/\\]\\+\\)', '([^/]+)', $regex);
+        $parts = preg_split('/(\{[^}]+\})/', $pattern, -1, PREG_SPLIT_DELIM_CAPTURE);
+        $regex = '#^';
+        foreach ($parts as $part) {
+            $regex .= preg_match('/^\{[^}]+\}$/', $part) ? '([^/]+)' : preg_quote($part, '#');
+        }
+        $regex .= '$#';
 
         return (bool) preg_match($regex, $path);
     }

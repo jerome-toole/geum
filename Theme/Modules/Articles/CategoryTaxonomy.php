@@ -1,6 +1,6 @@
 <?php
 
-namespace Theme\Modules\Blog;
+namespace Theme\Modules\Articles;
 
 class CategoryTaxonomy
 {

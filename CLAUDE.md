@@ -172,29 +172,46 @@ node dev-scripts/generate-component-class.js --list       # List
 ### Router System
 Application-level routing for owned routes and WordPress archive decoration.
 
-**Define in `Theme/Routes/routes.php`:**
+**Cross-cutting routes in `Theme/Routes/routes.php`:**
 ```php
 use Geum\Router;
 use Theme\Controllers\ArchiveController;
 
-// Decorate WordPress archives
-Router::decorate('archive:post', ArchiveController::class)
-    ->withContent('blog')
-    ->withSlot('listing', fn() => ArchiveController::renderLoop());
+// Article archive
+Router::decoratePostType('article', ArchiveController::class)
+    ->withPage('article-listing')
+    ->withSlot('template-content', fn() => ArchiveController::renderLoop());
 
 // 404 page
-Router::decorate('404', NotFoundController::class)
-    ->withContent('404')
+Router::decorate404(NotFoundController::class)
+    ->withPage('404')
     ->withSlot('template-content', fn() => NotFoundController::renderContent());
+```
 
-// Custom post type archive
-Router::decorate('post_type:event', ArchiveController::class)
-    ->withContent('events')
-    ->withSlot('listing', fn() => ArchiveController::renderLoop());
+**Post type modules self-register their own routes in `module.php`:**
+```php
+// Theme/Modules/Events/module.php
+use Geum\Router;
+
+public static function init(): void
+{
+    PostType::init();
+
+    Router::decoratePostType('event', static::class)
+        ->withPage('events')
+        ->withSlot('template-content', [static::class, 'renderArchive']);
+}
+
+public static function renderArchive(): string
+{
+    ob_start();
+    // render loop...
+    return ob_get_clean();
+}
 ```
 
 **Route Types:**
-- `archive:post` - Blog archive
+- `archive:{pt}` - Post type archive
 - `post_type:{name}` - CPT archive
 - `taxonomy:{name}` - Taxonomy archive
 - `search` - Search results
@@ -283,8 +300,7 @@ Organized in `assets/styles/` following ITCSS:
 
 - ACF Pro for custom fields (`acf-json/`)
 - Extended CPTs for post type registration
-- Block editor customization via `Geum\WordPress\Gutenberg`
-- Plugin deps: Query Monitor, Safe SVG, Yoast SEO (via Composer)
+- Plugin deps: ACF Pro, Query Monitor, Safe SVG, Yoast SEO (via Composer)
 
 
 ## Testing & Quality

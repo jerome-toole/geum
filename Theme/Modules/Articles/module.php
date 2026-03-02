@@ -1,6 +1,6 @@
 <?php
 
-namespace Theme\Modules\Blog;
+namespace Theme\Modules\Articles;
 
 class Module
 {
@@ -8,6 +8,7 @@ class Module
     {
         PostType::init();
         CategoryTaxonomy::init();
+        TagTaxonomy::init();
 
         \add_filter('acf/settings/load_json', [__CLASS__, 'loadACFJson']);
     }

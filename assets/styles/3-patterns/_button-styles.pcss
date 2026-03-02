@@ -1,3 +1,27 @@
+/* Button Variables */
+
+@layer base {
+    :root {
+        /* --btn--font-size: rfs(18, 22); */
+
+        --btn--padding-y: 0.2em;
+        --btn--padding-x: 1em;
+
+        --btn--border-width: 2px;
+        --btn--border-radius: 999px;
+
+        --btn--background-color: var(--color-brand-2);
+        --btn--border-color: var(--color-brand-2);
+        --btn--color: var(--color-brand-1);
+
+        --btn--background-color--hover: var(--color-brand-1);
+        --btn--border-color--hover: var(--color-brand-1);
+        --btn--color-hover: foreground-color("brand-1");
+
+        --btn--gap: 0.5em;
+    }
+}
+
 @utility btn {
     --focus--color: var(--btn--border-color);
 
@@ -38,7 +62,7 @@
     }
 
     &:focus {
-        @apply focus--1;
+        @apply focus-base;
     }
 
     :where(.btn__icon) {
@@ -46,7 +70,7 @@
         width: var(--btn--icon-size, 1em);
         height: var(--btn--icon-size, 1em);
         background: currentColor;
-        content: '';
+        content: "";
         mask-position: center;
         mask-repeat: no-repeat;
         mask-size: contain;
@@ -102,13 +126,13 @@
 /* } */
 
 @utility btn--small {
-    --btn--padding-y: var(--btn--small--padding-y);
-    --btn--padding-x: var(--btn--small--padding-x);
+    --btn--padding-y: 0;
+    --btn--padding-x: 0.7em;
 }
 
 @utility btn--label {
     @apply btn--small;
-    @apply type-small;
+    @apply type-meta;
 }
 
 /* Used for square buttons containing a single number or icon */
@@ -116,12 +140,11 @@
     min-width: var(--btn--size, rem(44));
     min-height: var(--btn--size, rem(44));
     padding: 0 0.3em;
-    border-radius: var(--border-radius--s);
+    border-radius: var(--radius-sm);
 }
 
 @utility btn--arrow {
     --btn--icon-size: 0.9em;
-
 
     @media (hover: hover) {
         &:hover {
@@ -141,7 +164,7 @@
     &::after {
         @apply mask-icon;
 
-        mask-image: url('/images/icons/chevron-right.svg');
+        mask-image: url("/images/icons/chevron-right.svg");
         transform: translateX(0);
         transition: transition(transform);
         width: var(--btn--icon-size, 1em);
@@ -150,57 +173,57 @@
 }
 
 @utility btn--icon {
-  position: relative;
-  overflow: hidden;
-  text-indent: -9999px;
+    position: relative;
+    overflow: hidden;
+    text-indent: -9999px;
 
-  &::after {
-    @apply mask-icon;
-    position: absolute;
-  }
+    &::after {
+        @apply mask-icon;
+        position: absolute;
+    }
 }
 
 @utility btn--icon-before {
-  position: relative;
-  overflow: hidden;
-  text-indent: -9999px;
+    position: relative;
+    overflow: hidden;
+    text-indent: -9999px;
 
-  &::before {
-    @apply mask-icon;
+    &::before {
+        @apply mask-icon;
 
-    position: absolute;
-  }
+        position: absolute;
+    }
 }
 
 @utility btn--unstyled {
-	padding: 0;
-	border: 0;
-	border-radius: 0;
-	background-color: transparent;
-	color: inherit;
-	cursor: pointer;
-	font-family: inherit;
-	font-size: inherit;
-	font-weight: inherit;
-	letter-spacing: inherit;
-	line-height: inherit;
-	text-transform: inherit;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    line-height: inherit;
+    text-transform: inherit;
 
-	@media (hover: hover) {
-		&:hover {
-			background-color: transparent;
-			color: inherit;
-		}
-	}
-	@media (hover: none) {
-		&:active {
-			background-color: transparent;
-			color: inherit;
-		}
-	}
+    @media (hover: hover) {
+        &:hover {
+            background-color: transparent;
+            color: inherit;
+        }
+    }
+    @media (hover: none) {
+        &:active {
+            background-color: transparent;
+            color: inherit;
+        }
+    }
 
-	&:focus {
-		box-shadow: unset;
-		outline-width: 5px;
-	}
+    &:focus {
+        box-shadow: unset;
+        outline-width: 5px;
+    }
 }

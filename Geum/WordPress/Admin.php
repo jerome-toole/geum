@@ -2,6 +2,8 @@
 
 namespace Geum\WordPress;
 
+use Geum\Router;
+
 class Admin
 {
     public static function init(): void
@@ -16,6 +18,9 @@ class Admin
 
         // Post archive page link to all posts admin screen.
         \add_action('admin_bar_menu', [__CLASS__, 'addViewAllPostsToArchivePages'], 80);
+
+        // Router page edit link for decorated routes.
+        \add_action('admin_bar_menu', [__CLASS__, 'addEditRouterPageLink'], 81);
     }
 
     /**
@@ -147,6 +152,49 @@ class Admin
                     $queried_object->label,
                 ),
                 'class' => 'geum-ab-item geum-edit-template',
+            ],
+        ]);
+    }
+
+    /**
+     * Add an 'Edit Page Content' link to the WP admin bar when viewing a decorated route
+     * that has an associated RouterPage. Allows editors to quickly open the linked page
+     * in the block editor to manage surrounding content.
+     *
+     * @link https://developer.wordpress.org/reference/hooks/admin_bar_menu/
+     *
+     * @param  \WP_Admin_Bar  $adminBar  The WP_Admin_Bar instance, passed by reference.
+     */
+    public static function addEditRouterPageLink(\WP_Admin_Bar $adminBar): void
+    {
+        if (\is_admin() || ! \current_user_can('edit_pages')) {
+            return;
+        }
+
+        $route = Router::current();
+        if (! $route) {
+            return;
+        }
+
+        $page = Router::getPage();
+        if (! $page) {
+            return;
+        }
+
+        if (! \current_user_can('edit_post', $page->ID)) {
+            return;
+        }
+
+        $adminBar->add_menu([
+            'id' => 'geum-edit-router-page',
+            'title' => sprintf(
+                '%sEdit Page Content%s',
+                '<span class="ab-icon" aria-hidden="true"></span><span class="ab-label">',
+                '</span>'
+            ),
+            'href' => \admin_url("post.php?post={$page->ID}&action=edit"),
+            'meta' => [
+                'class' => 'geum-ab-item geum-edit-router-page',
             ],
         ]);
     }

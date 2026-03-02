@@ -3,8 +3,8 @@
     --page-header--text-align: center;
     --page-header--gap: spaceFluid(12, 16);
     --page-header--grid-template-areas: 'content';
-    --page-header--padding-top: var(--space--layout);
-    --page-header--padding-block: var(--space--layout);
+    --page-header--padding-top: var(--space-layout);
+    --page-header--padding-block: var(--space-layout);
 
     --page-header--content--spacing: space(12);
     --page-header--mini-image--size: 6.25rem; /* 100px */
@@ -95,18 +95,18 @@
         @apply margin-trim;
 
         max-width: var(--page-header--subheading--max-width);
-        margin-top: var(--page-header--content--spacing, var(--space--base));
+        margin-top: var(--page-header--content--spacing, var(--space-base));
     }
 
     :where(.page-header__meta) {
-        margin-top: var(--page-header--content--spacing, var(--space--base));
+        margin-top: var(--page-header--content--spacing, var(--space-base));
     }
 
     :where(.page-header__labels) {
         --grid--row-gap: space(4);
         --grid--column-gap: space(4);
 
-        margin-top: var(--page-header--content--spacing, var(--space--base));
+        margin-top: var(--page-header--content--spacing, var(--space-base));
 
         .flex-list {
             justify-content: center;
@@ -117,7 +117,7 @@
         --grid--row-gap: space(4);
         --grid--column-gap: space(4);
 
-        margin-top: var(--page-header--content--spacing, var(--space--base));
+        margin-top: var(--page-header--content--spacing, var(--space-base));
 
         .flex-list {
             justify-content: var(--page-header--grid-alignment-x);
@@ -132,7 +132,7 @@
             border-radius: 999px;
             margin-right: auto;
             margin-left: auto;
-            box-shadow: var(--box-shadow--1);
+            box-shadow: var(--base--shadow);
         }
     }
 

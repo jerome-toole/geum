@@ -99,8 +99,8 @@ class Component
             $shortName = substr($class, strlen('Geum\\Components\\'));
             $kebab = strtolower(preg_replace('/([A-Z])/', '-$1', lcfirst($shortName)));
             throw new \RuntimeException(
-                "Component class \"{$class}\" not found. " .
-                "Run `composer dump-autoload` to regenerate the classmap. " .
+                "Component class \"{$class}\" not found. ".
+                'Run `composer dump-autoload` to regenerate the classmap. '.
                 "Expected: components/{$kebab}/{$shortName}.php"
             );
         });

@@ -78,13 +78,30 @@
     --color-stone: initial;
 
     /* Animations */
-    --animate-fade-in: fade-in var(--animate-duration, 300ms) var(--animate-delay, 50ms) forwards var(--animate-easing, ease-out);
-    --animate-fade-in-translate: fade-in-translate var(--animate-duration, 300ms) var(--animate-delay, 50ms) forwards var(--animate-easing, ease-out);
+    --animate-fade-in: fade-in var(--animate-duration, 300ms) var(--animate-delay, 50ms) forwards
+        var(--animate-easing, ease-out);
+    --animate-fade-in-translate: fade-in-translate var(--animate-duration, 300ms) var(--animate-delay, 50ms) forwards
+        var(--animate-easing, ease-out);
+
+    /* Z-index */
+    --z-index-backdrop: 100;
+    --z-index-cookie-consent: 200;
+    --z-index-site-header: 300;
+    --z-index-modal: 800;
+    --z-index-screen-reader: 1000;
+
+    /* Typography */
+    --font-serif: Georgia, serif;
+    --font-sans: system-ui, sans-serif;
 }
 
 @keyframes fade-in {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes fade-in-translate {

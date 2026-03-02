@@ -21,7 +21,6 @@
  *   animate-fade-in           — standalone fade-in animation
  *   animate-fade-in-translate — standalone fade + slide animation
  */
-
 ?>
 
 <section class="component-example-section">
@@ -58,14 +57,14 @@
     </p>
     <div class="component-example-section__preview" style="display: flex; gap: 1rem;">
         <div class="animate" style="--animate-animation: fade-in-translate; --animate-translateY: 20px; --animate-item-delay: 80ms; display: contents;">
-            <?php foreach (['First', 'Second', 'Third', 'Fourth'] as $i => $label) : ?>
+            <?php foreach (['First', 'Second', 'Third', 'Fourth'] as $i => $label) { ?>
                 <div
                     class="animate-element p-16 bg-slate-100 rounded flex-1 text-center"
                     style="--animate-key: <?= $i ?>;"
                 >
                     <?= $label ?>
                 </div>
-            <?php endforeach; ?>
+            <?php } ?>
         </div>
     </div>
 </section>

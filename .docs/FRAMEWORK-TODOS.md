@@ -1,13 +1,8 @@
-From HB build
-- [ ] Simplify type styles and type variables. Remove unnecessary ones.
-- [ ] Move <a> styling out of type-styles
-@theme {
-    --font-pt-serif: "PT Serif", Georgia, serif;
-    --font-national: "National", system-ui, sans-serif;
-}
-        --font-base-weight: 400;
-        --font-base-bold: 700;
 
+- [ ] Sort out mask-icon
+- [ ] Fix generate-pot
+- [x] Simplify type styles and type variables. Remove unnecessary ones.
+- [x] Move <a> styling out of type-styles
 
 - [x] test all blocks in editor
 - [x] updated site-header from cog
@@ -17,6 +12,4 @@ From HB build
 - [x] rename .grid to grid-simple, --grid--columns to --cols
 - [x] add text-underline-offset globally and as a global variable
 - [x] Migrate to classes() from buildClasses() (<header class="<?= classes($this->classes) ?>" <?= attributes($this->attributes) ?>>)
-- [ ] rename all acf-json field groups
-- [ ] Sort out mask-icon
-- [ ] Fix generate-pot
+- [x] rename all acf-json field groups

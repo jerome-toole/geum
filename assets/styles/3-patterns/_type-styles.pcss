@@ -2,32 +2,22 @@
 /* Type Style Mixins */
 /* --------------------------------------------------- */
 
-@utility type-base {
-    font-family: var(--type--1--font-family);
-    font-size: var(--type--font-size--base);
-    font-weight: var(--type--1--font-weight);
-    line-height: var(--type--1--line-height);
+@utility heading-attributes {
+    font-family: var(--font-serif);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.3;
 }
 
-@utility type-small {
-    font-size: var(--type--font-size--small);
+@utility type-base {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--leading-normal);
 }
 
 @utility type-meta {
-    font-size: var(--type--font-size--base);
+    font-size: var(--text-base);
     line-height: 1.2;
-}
-
-@utility heading-attributes {
-    font-family: var(--type--2--font-family);
-    font-weight: var(--type--2--font-weight);
-    line-height: var(--type--2--line-height);
-
-    /* Make a tags that are children of headings inherit styling */
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
 }
 
 @utility type-hero {
@@ -70,7 +60,7 @@
 @utility type-h6 {
     @apply heading-attributes;
 
-    font-size: var(--type--font-size--base);
+    font-size: var(--text-base);
 }
 
 /* WordPress Block Style Classes */
@@ -100,10 +90,6 @@
 
 .is-style-type-h6 {
     @apply type-h6;
-}
-
-.is-style-type-small {
-    @apply type-small;
 }
 
 .is-style-type-meta {

@@ -61,7 +61,7 @@ When the user asks to:
 Defined in `assets/styles/3-patterns/_type-styles.pcss`. Predefined typography utilities bundle font-family, size, weight, line-height, and letter-spacing. **Always use these instead of raw Tailwind typography utilities.**
 
 - Available as `@apply type-{name}` in CSS or class names
-- Semantic names: `type-hero`, `type-h1`-`type-h6`, `type-base`, `type-small`, `type-meta`, `type-caption`
+- Semantic names: `type-hero`, `type-h1`-`type-h6`, `type-base`, `type-meta`
 - WordPress block styles also available: `.is-style-type-{name}`
 - Uses `rfs()` for responsive font sizing
 

@@ -16,7 +16,6 @@ class RouterPage
         \add_filter('page_link', [static::class, 'filterPageLink'], 10, 2);
         \add_filter('display_post_states', [static::class, 'addRoleBadge'], 10, 2);
         \add_filter('page_row_actions', [static::class, 'removeTrashAction'], 10, 2);
-        \add_filter('bulk_actions-edit-page', [static::class, 'removeBulkTrash']);
     }
 
     public static function ensure(string $role, array $attributes = []): void
@@ -173,14 +172,6 @@ class RouterPage
             unset($actions['trash']);
         }
 
-        return $actions;
-    }
-
-    public static function removeBulkTrash(array $actions): array
-    {
-        // Only remove trash for router pages
-        // This is a simplified approach; a more sophisticated version
-        // would check which pages are selected
         return $actions;
     }
 }

@@ -6,7 +6,7 @@
 <style>
     .style-guide__section {
         max-width: 100%;
-        padding: var(--space--base) 0;
+        padding: var(--space-base) 0;
 
         & > * {
             max-width: min(var(--container-sm), var(--width-fluid-container));
@@ -44,7 +44,7 @@
     .style-guide__demo {
         padding: 1rem;
         border: 1px dashed var(--color-border);
-        border-radius: var(--border-radius--s);
+        border-radius: var(--radius-sm);
         margin-top: 0.75rem;
         background: var(--color-background);
     }
@@ -127,7 +127,6 @@
                 <div><a href="#" class="link">.link (default)</a></div>
                 <div><a href="#" class="link link--2">.link--2 (underline on hover)</a></div>
                 <div><a href="#" class="link link--foreground">.link--foreground</a></div>
-                <div><a href="#" class="link--multiline-background">.link--multiline-background (animated background fill)</a></div>
             </div>
         </div>
     </div>
@@ -145,7 +144,6 @@
             <div class="type-h5">.type-h5</div>
             <div class="type-h6">.type-h6</div>
             <div class="type-base">.type-base</div>
-            <div class="type-small">.type-small</div>
             <div class="type-meta">.type-meta</div>
         </div>
     </div>
@@ -302,11 +300,10 @@
     <!-- Focus Styles -->
     <div class="style-guide__subsection">
         <h3>Focus Styles</h3>
-        <small><code class="style-guide__code">.focus--1</code> <code class="style-guide__code">.focus--2</code></small>
+        <small><code class="style-guide__code">.focus-base</code>
         <div class="style-guide__demo">
             <div class="flex-list">
-                <button class="btn" style="outline: 2px dotted var(--color-foreground);">.focus--1 (dotted outline)</button>
-                <button class="btn" style="box-shadow: 0 0 0 2px var(--color-foreground);">.focus--2 (box-shadow)</button>
+                <button class="btn" style="outline: 2px dotted var(--color-foreground);">.focus-base (dotted outline)</button>
             </div>
         </div>
     </div>
@@ -350,7 +347,7 @@
         <div class="style-guide__demo">
             <figure class="media-embed" style="max-width: 400px;">
                 <div class="style-guide__placeholder" style="aspect-ratio: 4/3;"></div>
-                <figcaption>This is a centered figcaption with .type-small styling</figcaption>
+                <figcaption>This is a figcaption</figcaption>
             </figure>
         </div>
     </div>
@@ -368,7 +365,7 @@
         <h3>Color Context</h3>
         <small><code class="style-guide__code">.color-context-{color}</code> <code class="style-guide__code">.has-{color}-background-color</code></small>
         <p style="margin: 0.5rem 0;">Sets background color, foreground color, focus color, and link colors based on the color's configuration.</p>
-        <div class="style-guide__demo" style="padding: 0; overflow: hidden; border-radius: var(--border-radius--m);">
+        <div class="style-guide__demo" style="padding: 0; overflow: hidden; border-radius: var(--radius--lg);">
             <div class="color-context-brand-1" style="padding: 1.5rem;">
                 <strong>.color-context-brand-1</strong>
                 <p style="margin: 0.5rem 0 0;">Text with <a href="#">a link</a> inherits correct colors.</p>

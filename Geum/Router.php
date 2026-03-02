@@ -52,6 +52,36 @@ class Router
         return $route;
     }
 
+    /** @param string|callable $handler */
+    public static function decoratePostType(string $postType, mixed $handler): Route
+    {
+        return static::decorate("post_type:{$postType}", $handler);
+    }
+
+    /** @param string|callable $handler */
+    public static function decorateTaxonomy(string $taxonomy, mixed $handler): Route
+    {
+        return static::decorate("taxonomy:{$taxonomy}", $handler);
+    }
+
+    /** @param string|callable $handler */
+    public static function decorateSearch(mixed $handler): Route
+    {
+        return static::decorate('search', $handler);
+    }
+
+    /** @param string|callable $handler */
+    public static function decorate404(mixed $handler): Route
+    {
+        return static::decorate('404', $handler);
+    }
+
+    /** Decorate the blog home (posts archive). @param string|callable $handler */
+    public static function decorateArchive(mixed $handler): Route
+    {
+        return static::decorate('archive:post', $handler);
+    }
+
     public static function ensurePage(string $role, array $attributes = []): void
     {
         RouterPage::ensure($role, $attributes);

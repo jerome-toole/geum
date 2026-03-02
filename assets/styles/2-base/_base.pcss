@@ -1,5 +1,7 @@
 /* Use a more-intuitive box-sizing model */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -16,21 +18,30 @@
 }
 
 /* Inherit fonts for form controls */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
     font: inherit;
 }
 
 /* Avoid text overflows */
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     overflow-wrap: break-word;
 }
 
 /* Focus styles */
 *:focus {
-    @apply focus--1;
+    @apply focus-base;
 }
 
-[tabindex='-1']:focus {
+[tabindex="-1"]:focus {
     @apply no-focus-be-careful;
 }
 
@@ -68,7 +79,7 @@ body {
         bottom: 0;
         left: 0;
         background: var(--backdrop--background-color);
-        content: '';
+        content: "";
         opacity: 0;
         pointer-events: none;
         transition: all var(--backdrop--transition-duration) var(--backdrop--transition-ease);
@@ -85,14 +96,18 @@ blockquote {
 }
 
 button,
-[type=submit],
-[type=reset],
-[type=button] {
+[type="submit"],
+[type="reset"],
+[type="button"] {
     @apply button-reset;
 }
 
 /* Improve media defaults */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
     display: block;
     max-width: 100%;
 }

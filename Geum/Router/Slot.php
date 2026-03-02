@@ -56,22 +56,6 @@ class Slot
             ],
             'render_callback' => [static::class, 'renderTemplateContent'],
         ]);
-
-        // Listing block
-        \acf_register_block_type([
-            'name' => 'listing',
-            'title' => \__('Listing', 'geum'),
-            'description' => \__('Displays the post listing.', 'geum'),
-            'category' => 'theme',
-            'icon' => 'list-view',
-            'mode' => 'preview',
-            'supports' => [
-                'mode' => false,
-                'multiple' => false,
-                'jsx' => false,
-            ],
-            'render_callback' => [static::class, 'renderListing'],
-        ]);
     }
 
     public static function renderTemplateContent(array $block): void
@@ -83,17 +67,6 @@ class Slot
         }
 
         echo Router::renderSlot('template-content');
-    }
-
-    public static function renderListing(array $block): void
-    {
-        if (\is_admin() || static::isRestRequest()) {
-            echo static::placeholder(\__('Listing', 'geum'));
-
-            return;
-        }
-
-        echo Router::renderSlot('listing');
     }
 
     protected static function isRestRequest(): bool
@@ -125,7 +98,7 @@ class Slot
             return $allowed;
         }
 
-        $routerBlocks = ['acf/template-content', 'acf/listing'];
+        $routerBlocks = ['acf/template-content'];
 
         // If not a router page, remove router blocks
         if (! RouterPage::isRouterPage($post->ID)) {

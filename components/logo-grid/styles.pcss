@@ -1,8 +1,8 @@
 .logo-grid {
     --logo-grid--padding-y: var(--block--padding-y);
-    --logo-grid--box-shadow: var(--box-shadow--1);
-    --logo-grid--box-shadow--hover: var(--box-shadow--1--hover);
-    --logo-grid--spacing: var(--space--base);
+    --logo-grid--box-shadow: var(--base--shadow);
+    --logo-grid--box-shadow--hover: var(--base--shadow--hover);
+    --logo-grid--spacing: var(--space-base);
     --logo-grid--item--aspect-ratio: 28 / 13;
 
     @media (min-width: theme('screens.md')) {
@@ -35,7 +35,7 @@
         @apply margin-trim;
         @apply content-width-2xs;
 
-        margin-block: var(--space--base);
+        margin-block: var(--space-base);
         margin-inline: auto;
         text-align: center;
     }
@@ -78,6 +78,6 @@
     }
 
     &.is-style-thin {
-        --logo-grid--padding--y: var(--space--base);
+        --logo-grid--padding--y: var(--space-base);
     }
 }

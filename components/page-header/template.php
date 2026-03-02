@@ -1,4 +1,4 @@
-<header class="<?= classes('page-header', 'wp-block', 'alignfull', $this->classes) ?>" <?= attributes($this->attributes) ?>>
+<header class="<?= classes('page-header', 'wp-block', 'alignfull', 'not-prose', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <?php if ($this->show_breadcrumbs) { ?>
         <?= \Geum\Components\Breadcrumbs::make(); ?>
     <?php } ?>

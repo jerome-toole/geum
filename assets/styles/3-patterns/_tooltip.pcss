@@ -2,14 +2,14 @@
     --tooltip--arrow--inset: space(12);
     --tooltip--arrow--size: rem(7);
 
-    @apply type-small;
+    @apply type-meta;
     @apply color-context-error;
 
     position: relative;
     display: inline-block;
     max-width: var(--container-2xs);
     padding: var(--tooltip--padding-y, 0.5em) var(--tooltip--padding-x, 1em);
-    border-radius: var(--border-radius--s);
+    border-radius: var(--radius-sm);
     margin-top: calc(var(--tooltip--arrow--size) + rem(3px));
     margin-left: var(--tooltip--left, 0.5em);
 
@@ -23,6 +23,6 @@
         border-right: calc(var(--tooltip--arrow--size) / 1.2) solid transparent;
         border-bottom: calc(var(--tooltip--arrow--size)) solid var(--color-background);
         border-left: calc(var(--tooltip--arrow--size) / 1.2) solid transparent;
-        content: '';
+        content: "";
     }
 }

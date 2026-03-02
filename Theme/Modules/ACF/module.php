@@ -32,7 +32,6 @@ class Module
             _x('General', 'ACF options page name', 'geum'),
             _x('Header', 'ACF options page name', 'geum'),
             _x('Footer', 'ACF options page name', 'geum'),
-            _x('Banner', 'ACF options page name', 'geum'),
         ];
 
         if (empty($options_pages)) {

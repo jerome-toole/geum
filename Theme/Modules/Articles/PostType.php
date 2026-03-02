@@ -1,10 +1,10 @@
 <?php
 
-namespace Theme\Modules\Events;
+namespace Theme\Modules\Articles;
 
 class PostType
 {
-    protected const SLUG = 'event';
+    protected const SLUG = 'article';
 
     public static function init(): void
     {
@@ -23,9 +23,9 @@ class PostType
             'has_archive' => true,
             'hierarchical' => false,
             'show_in_rest' => true,
-            'menu_position' => 25,
-            'menu_icon' => 'dashicons-calendar',
-            'enter_title_here' => 'Event Name',
+            'menu_position' => 5,
+            'menu_icon' => 'dashicons-media-document',
+            'enter_title_here' => 'Article Title',
             'supports' => [
                 'title',
                 'editor',
@@ -36,19 +36,18 @@ class PostType
                 'custom-fields',
             ],
             'taxonomies' => [
-                'location',
+                'category',
+                'post_tag',
             ],
             'template' => [
                 [
                     'core/paragraph',
-                    [
-                        'placeholder' => 'Add content...',
-                    ],
+                    ['placeholder' => 'Add content...'],
                 ],
             ],
             'admin_filters' => [
-                'location' => [
-                    'taxonomy' => 'location',
+                'category' => [
+                    'taxonomy' => 'category',
                 ],
             ],
             'admin_cols' => [
@@ -64,8 +63,8 @@ class PostType
                 'author' => [
                     'title' => 'Author',
                 ],
-                'location' => [
-                    'taxonomy' => 'location',
+                'category' => [
+                    'taxonomy' => 'category',
                 ],
                 'updated' => [
                     'title' => 'Updated',
@@ -74,9 +73,9 @@ class PostType
                 ],
             ],
         ], [
-            'singular' => __('Event', 'geum'),
-            'plural' => __('Events', 'geum'),
-            'slug' => self::SLUG,
+            'singular' => __('Article', 'geum'),
+            'plural' => __('Articles', 'geum'),
+            'slug' => 'articles',
         ]);
     }
 

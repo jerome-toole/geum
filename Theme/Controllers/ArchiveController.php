@@ -2,6 +2,8 @@
 
 namespace Theme\Controllers;
 
+use Geum\Components\Card;
+
 class ArchiveController
 {
     /**
@@ -28,7 +30,7 @@ class ArchiveController
             echo '<div class="archive-grid">';
             while (\have_posts()) {
                 \the_post();
-                \get_template_part('template-parts/card');
+                echo Card::make(object: \get_post());
             }
             echo '</div>';
 

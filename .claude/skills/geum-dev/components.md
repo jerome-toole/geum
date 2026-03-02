@@ -467,8 +467,6 @@ Use predefined type utilities instead of raw font properties:
 }
 ```
 
-Available: `type-hero`, `type-h1`-`type-h6`, `type-base`, `type-small`, `type-meta`, `type-caption`
-
 See `assets/styles/3-patterns/_type-styles.pcss` for definitions.
 
 ### Color Context

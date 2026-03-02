@@ -28,5 +28,4 @@ class Animate extends ComponentBase
     ): ?static {
         return static::createFromArgs(static::mergeArgs(get_defined_vars()));
     }
-
 }

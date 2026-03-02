@@ -17,7 +17,7 @@ class ThemeSetup
 
         // Add default posts and comments RSS feed links to head.
         // @link https://codex.wordpress.org/Automatic_Feed_Links
-        //add_theme_support( 'automatic-feed-links' );
+        // add_theme_support( 'automatic-feed-links' );
 
         // Let WordPress manage the document title.
         // @link http://codex.wordpress.org/Function_Reference/add_theme_support#Title_Tag

@@ -31,7 +31,7 @@ class Route
         $this->handler = $handler;
     }
 
-    public function withContent(string $role): static
+    public function withPage(string $role): static
     {
         $this->role = $role;
         Router::ensurePage($role);
@@ -39,6 +39,17 @@ class Route
         return $this;
     }
 
+    /** @deprecated Use withPage() instead */
+    public function withContent(string $role): static
+    {
+        return $this->withPage($role);
+    }
+
+    /**
+     * Remove the backing page association for this route.
+     * Only needed after calling withPage() to undo it — e.g. when a route
+     * conditionally needs no page wrapper.
+     */
     public function noContent(): static
     {
         $this->role = null;

@@ -39,10 +39,10 @@ class Module
                 ad_user_data:       '<?= $consent ?>',
                 ad_personalization: '<?= $consent ?>',
             });
-            <?php if ($privacy_first): ?>
+            <?php if ($privacy_first) { ?>
             gtag('set', 'allow_google_signals', false);
             gtag('set', 'allow_ad_personalization_signals', false);
-            <?php endif; ?>
+            <?php } ?>
         </script>
         <?php
     }
@@ -99,12 +99,12 @@ class Module
                 continue;
             }
 
-            if (!empty($row['head_script_requires_consent']) && !$consented) {
-                echo '<script type="text/plain" data-cookie-consent data-consent-location="head">' . "\n";
-                echo $html . "\n";
-                echo '</script>' . "\n";
+            if (! empty($row['head_script_requires_consent']) && ! $consented) {
+                echo '<script type="text/plain" data-cookie-consent data-consent-location="head">'."\n";
+                echo $html."\n";
+                echo '</script>'."\n";
             } else {
-                echo $html . "\n";
+                echo $html."\n";
             }
         }
     }
@@ -126,12 +126,12 @@ class Module
                 continue;
             }
 
-            if (!empty($row['body_script_requires_consent']) && !$consented) {
-                echo '<script type="text/plain" data-cookie-consent data-consent-location="body">' . "\n";
-                echo $html . "\n";
-                echo '</script>' . "\n";
+            if (! empty($row['body_script_requires_consent']) && ! $consented) {
+                echo '<script type="text/plain" data-cookie-consent data-consent-location="body">'."\n";
+                echo $html."\n";
+                echo '</script>'."\n";
             } else {
-                echo $html . "\n";
+                echo $html."\n";
             }
         }
     }

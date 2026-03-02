@@ -39,7 +39,6 @@ class ResourceType
     public static function init(): void
     {
         \add_action('init', [__CLASS__, 'registerPostType']);
-        // Optional: \add_action('acf/init', [__CLASS__, 'addSettingsPage']);
     }
 
     public static function registerPostType(): void
@@ -142,18 +141,63 @@ Quick reference for spec-defined components:
 
 ## Creating Routes
 
-Location: `Theme/Routes/routes.php`
+There are two patterns depending on ownership:
+
+### Post type archives → self-register in the module
+
+Add route registration directly to the module's `init()` and a `renderArchive()` method:
+
+```php
+// Theme/Modules/Resources/module.php
+use Geum\Router;
+
+public static function init(): void
+{
+    PostType::init();
+
+    Router::decoratePostType('resource', static::class)
+        ->withPage('resources-listing')
+        ->withSlot('template-content', [static::class, 'renderArchive']);
+}
+
+public static function renderArchive(): string
+{
+    ob_start();
+    if (have_posts()) {
+        echo '<div class="archive-grid">';
+        while (have_posts()) {
+            the_post();
+            // echo ResourceCard::make(object: get_post());
+        }
+        echo '</div>';
+        the_posts_pagination();
+    } else {
+        echo '<p>' . __('No items found.', 'theme') . '</p>';
+    }
+    return ob_get_clean();
+}
+```
+
+This keeps everything about the post type in one place. Disabling the module also removes its route.
+
+### Cross-cutting routes → `Theme/Routes/routes.php`
+
+Use `routes.php` for routes with no natural module owner (search, 404, shared archives):
 
 ```php
 use Geum\Router;
-use Theme\Controllers\ResourcesController;
+use Theme\Controllers\SearchController;
+use Theme\Controllers\NotFoundController;
 
-// Decorate WordPress archive
-Router::decorate('post_type:resources', ResourcesController::class)
-    ->withContent('resources-listing')
-    ->withSlot('listing', fn() => ResourcesController::renderLoop());
+Router::decorateSearch(SearchController::class)
+    ->withPage('search')
+    ->withSlot('template-content', fn() => SearchController::renderResults());
 
-// Custom owned route
+Router::decorate404(NotFoundController::class)
+    ->withPage('404')
+    ->withSlot('template-content', fn() => NotFoundController::renderContent());
+
+// Custom owned route (no module needed)
 Router::route('/tools/calculator', fn() => CalculatorController::index())
     ->noContent()
     ->template('tools/calculator');
@@ -184,7 +228,8 @@ When reading the spec, check for:
 | Components [Block] | `components/{name}/` with `acf.php` |
 | Components [Partial] | `components/{name}/` without `acf.php` |
 | Theme Options | ACF Options page fields |
-| Routes/Archives | `Theme/Routes/routes.php` entries |
+| Post Type Archives | Route registered in `Theme/Modules/{Name}/module.php` |
+| Search / 404 / Shared Archives | `Theme/Routes/routes.php` entries |
 
 ## Naming Conventions
 

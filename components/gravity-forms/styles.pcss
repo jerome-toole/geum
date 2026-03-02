@@ -2,8 +2,8 @@
    It's meant to complement GF's basic.min.css stylesheet. */
 
 .gform_wrapper {
-    margin-top: var(--space--base);
-    margin-bottom: var(--space--base);
+    margin-top: var(--space-base);
+    margin-bottom: var(--space-base);
 
     .gform_fields {
         grid-row-gap: var(--input--gap);
@@ -69,7 +69,7 @@
 }
 
 .gform_heading {
-    margin-bottom: var(--space--base);
+    margin-bottom: var(--space-base);
 }
 
 .gsection_title {
@@ -82,7 +82,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    margin-top: var(--space--base);
+    margin-top: var(--space-base);
 }
 
 .gform_anchor[tabindex]:focus {
@@ -90,7 +90,7 @@
 }
 
 .gsection {
-    border-top: var(--border-width--s) dashed var(--color-foreground);
+    border-top: 2px dashed var(--color-foreground);
 }
 
 .gfield_label,
@@ -100,7 +100,7 @@
 }
 
 .gfield_description:not(.gfield_validation_message) {
-    @apply type-small;
+    @apply type-meta;
 
     margin: var(--space--xxxs) 0 var(--space--xxxs) 0;
 }
@@ -125,7 +125,7 @@
 
     max-width: var(--container-2xs);
     padding: spaceFluid(8, 12);
-    border-radius: var(--border-radius--s);
+    border-radius: var(--radius-sm);
     margin-top: space(16);
     margin-bottom: space(16);
 }
@@ -166,7 +166,7 @@
 .ginput_container_fileupload {
     .gform_drop_area {
         padding: space(16);
-        border: var(--border-width--s) dashed var(--input--border-color);
+        border: 2px dashed var(--input--border-color);
         border-radius: var(--input--border-radius);
         background: transparent;
 
@@ -176,7 +176,7 @@
     }
 
     .gform_fileupload_rules {
-        @apply type-small;
+        @apply type-meta;
 
         display: block;
         margin-top: var(--space--xxxs);
@@ -203,7 +203,7 @@
     }
 
     label {
-        @apply type-small;
+        @apply type-meta;
     }
 
     .ginput_left,
@@ -253,7 +253,7 @@
 
     .gform_delete_file {
         flex: 0 0 auto;
-        border-radius: var(--border-radius--s);
+        border-radius: var(--radius-sm);
         background: var(--color-error);
         color: var(--color-white);
 

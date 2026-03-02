@@ -54,7 +54,7 @@
         border-radius: var(--rounded-border-radius);
         position: relative;
         width: 100%;
-        box-shadow: var(--box-shadow--1);
+        box-shadow: var(--base--shadow);
 
         @media (min-width: theme('screens.md')) {
             grid-area: media;
@@ -75,7 +75,7 @@
         max-width: var(--heading--max-width);
 
         + .media-content__subheading {
-            margin-top: calc((var(--heading--margin-bottom) * -1) + var(--space--base));
+            margin-top: calc((var(--heading--margin-bottom) * -1) + var(--space-base));
         }
     }
 

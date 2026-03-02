@@ -15,7 +15,6 @@
         </hgroup>
         <div class="style-guide__type-styles">
             <h2 class="is-style-type-hero">Typestyle: hero</h2>
-            <p class="is-style-type-small">Typestyle: small-text</p>
             <p class="is-style-type-meta">Typestyle: meta</p>
         </div>
     </section>
