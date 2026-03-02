@@ -8,12 +8,14 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const CONFIG_PATH = resolve(__dirname, '../assets/theme-config.json');
 
-// Load colors from central config
-const themeConfig = JSON.parse(
-	readFileSync(resolve(__dirname, '../assets/theme-config.json'), 'utf-8')
-);
-const colors = themeConfig.colors;
+function loadColors() {
+	return JSON.parse(readFileSync(CONFIG_PATH, 'utf-8')).colors;
+}
+
+// Refreshed on every PostCSS run so changes to theme-config.json are picked up in dev
+let colors = loadColors();
 
 /**
  * Convert hex to HSL
@@ -118,6 +120,9 @@ export default function postcssColorSystem() {
 	return {
 		postcssPlugin: 'postcss-color-system',
 		Once(root, { Rule, Declaration, AtRule }) {
+			// Re-read config on every run so changes in dev are picked up immediately
+			colors = loadColors();
+
 			// Generate @source inline for Tailwind v4 JIT to include dynamic classes
 			const colorNames = Object.keys(colors.base);
 			const dynamicClasses = colorNames.flatMap((name) => [
@@ -212,11 +217,11 @@ export default function postcssColorSystem() {
 					}
 
 					// Add additional properties if specified
-					if (colorMap.properties) {
-						Object.entries(colorMap.properties).forEach(([prop, value]) => {
-							targetRule.append(new Declaration({ prop, value }));
-						});
-					}
+					// if (colorMap.properties) {
+					// 	Object.entries(colorMap.properties).forEach(([prop, value]) => {
+					// 		targetRule.append(new Declaration({ prop, value }));
+					// 	});
+					// }
 				});
 
 				// Append the rule if it was newly created

@@ -214,7 +214,7 @@ Modules in `Theme/Modules/*/module.php` auto-load via `Geum\Module::init()`. Eac
 ### Theme Configuration
 `assets/theme-config.json` defines design tokens used across:
 - CSS variables (`--color-darkgreen`)
-- Tailwind classes (`text-darkgreen`, `bg-lightgreen`)
+- Tailwind classes (`text-darkgreen`)
 - Block editor color palette
 
 ### Color System

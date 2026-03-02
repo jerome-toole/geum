@@ -15,11 +15,6 @@ use Theme\Controllers\ArchiveController;
 use Theme\Controllers\NotFoundController;
 use Theme\Controllers\SearchController;
 
-// Article archive
-Router::decoratePostType('article', ArchiveController::class)
-    ->withPage('article-listing')
-    ->withSlot('template-content', fn () => ArchiveController::renderLoop());
-
 // Search results
 Router::decorateSearch(SearchController::class)
     ->withPage('search')

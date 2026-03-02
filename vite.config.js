@@ -40,9 +40,30 @@ standaloneStyles.forEach((file) => {
     input[name] = resolve(__dirname, file);
 });
 
+// Watches theme-config.json and forces CSS re-processing when it changes
+function themeConfigWatcherPlugin() {
+    const configPath = resolve(__dirname, 'assets/theme-config.json');
+    return {
+        name: 'theme-config-watcher',
+        configureServer(server) {
+            server.watcher.add(configPath);
+            server.watcher.on('change', (file) => {
+                if (file !== configPath) return;
+                for (const mod of server.moduleGraph.idToModuleMap.values()) {
+                    if (mod.id?.endsWith('.pcss') || mod.id?.endsWith('.css')) {
+                        server.moduleGraph.invalidateModule(mod);
+                    }
+                }
+                server.ws.send({ type: 'full-reload' });
+            });
+        },
+    };
+}
+
 export default defineConfig({
     base: './',
     plugins: [
+        themeConfigWatcherPlugin(),
         generateComponentImportsPlugin(),
         laravel({
             input: Object.values(input),

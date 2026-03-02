@@ -2,41 +2,6 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-**Modern WordPress development framework** with typed PHP components, application-level routing, Tailwind v4, and ACF block integration. Vite-powered build system.
-
-
-## Development Commands
-
-### Setup
-```bash
-npm run setup        # npm install && composer install && npm run build
-```
-
-### Development
-```bash
-npm run dev         # Vite dev server with HMR
-npm run build       # Production build
-npm run preview     # Preview production build
-npm run deploy      # npm install && composer install --no-dev && npm run build && npm run pot
-npm run pot         # Generate translation files
-npm run scaffold    # Scaffold new component
-```
-
-### Code Quality
-```bash
-npm run lint        # Check with Biome
-npm run lint:fix    # Fix with Biome
-npm run format      # Format with Biome
-npm run fix         # Fix everything (Biome + PHP Pint)
-npm run fix:php     # Fix PHP with Laravel Pint
-```
-
-### Environment
-- Node v20+ (see `.nvmrc`)
-- PHP 8.0+
-
 ### Dev Workflow
 1. `npm run dev`
 2. Access WP at normal URL (e.g., `http://geum.test`)
@@ -48,38 +13,17 @@ npm run fix:php     # Fix PHP with Laravel Pint
 ### Directory Structure
 ```
 Geum/                  # Core framework
-  WordPress/           # WP integrations (Admin, Cleanup, Enqueue, Gutenberg, etc.)
-  Router/              # Routing system classes
-  Component.php        # Component discovery & ACF blocks
-  ComponentBase.php    # Base class for typed components
-  Config.php           # Framework config loader
-  Helpers.php          # Global helper functions
-  Image.php            # Image handling
-  Module.php           # Module loader
-  SVG.php              # SVG utilities
-  Vite.php             # Dev server integration
 
 Theme/                 # Custom theme functionality
-  Controllers/         # Route controllers (Archive, NotFound, Search)
-  Modules/             # Feature modules (auto-loaded)
-    ACF/               # ACF Pro integration
-    Analytics/         # Analytics setup
-    Blog/              # Blog post type & category taxonomy
-    Core/              # Core theme features (Menus, Sidebars, Preloads)
-    Events/            # Events post type & location taxonomy
-    GravityForms/      # Gravity Forms integration
-    Pages/             # Pages post type
-    Yoast/             # Yoast SEO integration
-  Routes/              # Application routes (routes.php)
-  Utils/               # Utilities (YearShortcode, ObjectMeta)
 
 components/            # UI components (PHP + assets)
+
 assets/                # Build source files
   styles/              # CSS architecture (1-theme, 2-base, 3-patterns, 4-utilities)
   scripts/             # JS helpers
   static/              # Static assets (copied to public/)
 public/                # Built assets (build/manifest.json)
-acf-json/              # ACF field groups
+acf-json/              # General ACF field groups
 ```
 
 ### Module System
