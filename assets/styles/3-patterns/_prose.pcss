@@ -1,5 +1,5 @@
 @utility prose {
-    // Margin trimming
+    /* Margin trimming */
     > :first-child {
         margin-top: 0;
     }
@@ -8,13 +8,13 @@
         margin-bottom: 0;
     }
 
-    // Block element spacing
+    /* Block element spacing */
     :where(p, ul, ol, table, iframe, embed, hr, address, pre, dl, fieldset) {
         margin-top: var(--space--base);
         margin-bottom: var(--space--base);
     }
 
-    // Heading spacing
+    /* Heading spacing */
     :where(h1, h2, h3, h4, h5, h6) {
         margin-top: 0;
         margin-bottom: var(--heading--margin-bottom);
@@ -24,7 +24,7 @@
         margin-top: var(--heading--margin-top);
     }
 
-    // List styling
+    /* List styling */
     :where(ul) {
         list-style-type: disc;
         padding-inline-start: var(--list--indent, 1.5em);
@@ -35,18 +35,18 @@
         padding-inline-start: var(--list--indent, 1.5em);
     }
 
-    // List item spacing
+    /* List item spacing */
     :where(li + li) {
         margin-top: var(--list--item--spacing);
     }
 
-    // Nested list spacing
+    /* Nested list spacing */
     :where(li > :is(ol, ul)) {
         margin-top: var(--list--item--spacing);
         margin-bottom: var(--list--item--spacing);
     }
 
-    // Definition list spacing
+    /* Definition list spacing */
     :where(dd + dt) {
         margin-top: var(--list--item--spacing);
     }

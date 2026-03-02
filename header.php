@@ -9,5 +9,4 @@
 
     <?= \Geum\Components\CookieConsent::make(); ?>
     <?= \Geum\Components\SkipLink::make(); ?>
-    <?= \Geum\Components\AnnouncementBanner::make(); ?>
     <?= \Geum\Components\SiteHeader::make(); ?>

@@ -20,7 +20,6 @@ acf_register_block_type([
 
     // Optional keywords to help users search for the block
     'keywords' => [
-        'announcement',
         'callout',
     ],
 

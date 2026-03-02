@@ -16,7 +16,7 @@
     gap: var(--btn--gap);
     line-height: inherit;
     text-align: center;
-    text-decoration: none; // [1]
+    text-decoration: none; /* [1] */
     transition: transition(color, background-color, border-color, box-shadow, transform);
     user-select: none;
 
@@ -83,23 +83,23 @@
     --btn--color-hover: var(--color-foreground);
 }
 
-// @apply btn--theme-3 {
-//     --btn--background-color: var(--color-brand-1);
-//     --btn--border-color: var(--color-brand-1);
-//     --btn--color: var(--color-white);
+/* @apply btn--theme-3 { */
+/*     --btn--background-color: var(--color-brand-1); */
+/*     --btn--border-color: var(--color-brand-1); */
+/*     --btn--color: var(--color-white); */
 
-//     --btn--background-color--hover: hsl(
-//         var(--color-brand-1--h),
-//         calc(var(--color-brand-1--s) * 0.75),
-//         calc(var(--color-brand-1--l) * 0.75)
-//     );
-//     --btn--border-color--hover: hsl(
-//         var(--color-brand-1--h),
-//         calc(var(--color-brand-1--s) * 0.75),
-//         calc(var(--color-brand-1--l) * 0.75)
-//     );
-//     --btn--color-hover: var(--color-white);
-// }
+/*     --btn--background-color--hover: hsl( */
+/*         var(--color-brand-1--h), */
+/*         calc(var(--color-brand-1--s) * 0.75), */
+/*         calc(var(--color-brand-1--l) * 0.75) */
+/*     ); */
+/*     --btn--border-color--hover: hsl( */
+/*         var(--color-brand-1--h), */
+/*         calc(var(--color-brand-1--s) * 0.75), */
+/*         calc(var(--color-brand-1--l) * 0.75) */
+/*     ); */
+/*     --btn--color-hover: var(--color-white); */
+/* } */
 
 @utility btn--small {
     --btn--padding-y: var(--btn--small--padding-y);
@@ -111,7 +111,7 @@
     @apply type-small;
 }
 
-// Used for square buttons containing a single number or icon
+/* Used for square buttons containing a single number or icon */
 @utility btn--square {
     min-width: var(--btn--size, rem(44));
     min-height: var(--btn--size, rem(44));

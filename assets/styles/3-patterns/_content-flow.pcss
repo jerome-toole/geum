@@ -3,26 +3,26 @@
 
     margin-bottom: var(--blocks--margin-bottom);
 
-    // Universal direct-child spacing
+    /* Universal direct-child spacing */
     > * + * {
         margin-block-start: var(--flow-space, 1em);
     }
 
-    // Type elements: prose-level spacing + width constraint
+    /* Type elements: prose-level spacing + width constraint */
     > :where(p, ul, ol, h1, h2, h3, h4, h5, h6) {
         --flow-space: var(--space--base);
         max-width: var(--prose--max-width, 65ch);
     }
 
-    // WP block special behaviors
+    /* WP block special behaviors */
     > :where([class*='wp-block'], [class*='section']) {
-        // Pull full-width blocks with backgrounds together
+        /* Pull full-width blocks with backgrounds together */
         &:where([class*='has-background'].alignfull) {
             + :where([class*='has-background'].alignfull) {
                 --flow-space: 0;
             }
 
-            // Pull footer up to last full-width block with background
+            /* Pull footer up to last full-width block with background */
             &:last-child {
                 margin-bottom: calc(var(--blocks--margin-bottom) * -1);
             }

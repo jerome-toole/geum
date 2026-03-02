@@ -55,7 +55,6 @@
         "laravel-vite-plugin": "^2.0.1",
         "mix-env-file": "^0.1.1",
         "postcss": "^8.5.6",
-        "postcss-comment": "^2.0.0",
         "postcss-functions": "^4.0.2",
         "postcss-import": "^16.1.1",
         "postcss-import-ext-glob": "^2.1.1",

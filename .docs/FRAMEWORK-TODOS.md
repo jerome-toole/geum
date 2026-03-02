@@ -15,7 +15,7 @@ From HB build
 - [x] Write documentation for how to use tailwind and @layers.
 - [x] clean up css patterns vs utilities
 - [x] rename .grid to grid-simple, --grid--columns to --cols
-- [ ] add text-underline-offset globally and as a global variable
+- [x] add text-underline-offset globally and as a global variable
 - [x] Migrate to classes() from buildClasses() (<header class="<?= classes($this->classes) ?>" <?= attributes($this->attributes) ?>>)
 - [ ] rename all acf-json field groups
 - [ ] Sort out mask-icon

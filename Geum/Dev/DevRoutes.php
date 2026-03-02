@@ -77,11 +77,12 @@ class DevRoutes
             }
             .dev-index__links a {
                 display: inline-block;
-                padding: 0.75rem 1.5rem;
-                background: #1a1a2e;
+                padding: 0.35rem 1.2rem;
+                background: #000;
                 color: #fff;
                 text-decoration: none;
                 border-radius: 0.25rem;
+                font-size: 19px;
             }
         </style>
         <?php
@@ -242,7 +243,7 @@ class DevRoutes
     protected static function getDevIndexContent(): string
     {
         $content = '<div class="dev-index">';
-        $content .= '<h1>Development Tools</h1>';
+        $content .= '<h1 class="type-h2">Development Tools</h1>';
         $content .= '<ul class="dev-index__links flex-list">';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/globals/')).'">Globals</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/utilities/')).'">Utilities</a></li>';
