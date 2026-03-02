@@ -3,13 +3,40 @@
     "title": "Analytics",
     "fields": [
         {
+            "key": "field_gtm_enabled",
+            "label": "Enable GTM",
+            "name": "gtm_enabled",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "Enabled",
+            "ui_off_text": "Disabled"
+        },
+        {
             "key": "field_60e6b6e616342",
             "label": "GTM Code",
             "name": "gtm_code",
             "type": "text",
             "instructions": "Enter your GTM container ID (e.g. GTM-XXXXXXX). GTM loads on every page and includes Google Consent Mode v2 support — on a visitor's first session, analytics and ad storage are blocked by default. When the visitor accepts cookies, consent is updated immediately via gtag() so GA4 and other GTM tags fire in the same session. On return visits, consent is read from the cookie server-side and set correctly before GTM initialises.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_gtm_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -28,7 +55,15 @@
             "type": "true_false",
             "instructions": "Disables Google Signals (cross-device tracking, demographics, remarketing) and ad personalisation. GA4 will still record page views, sessions, and traffic sources. Recommended if you only need basic analytics.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_gtm_enabled",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",

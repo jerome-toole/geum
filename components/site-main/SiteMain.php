@@ -24,7 +24,7 @@ class SiteMain extends ComponentBase
         return [
             'inner_el' => 'div',
             'attributes' => [],
-            'blocks_context' => true,
+            'content_flow' => true,
         ];
     }
 
@@ -36,9 +36,9 @@ class SiteMain extends ComponentBase
         ?object $object = null,
         ?string $inner_el = null,
         array $attributes = [],
-        bool $blocks_context = true,
+        bool $content_flow = true,
     ): string {
-        $args = compact('classes', 'object', 'inner_el', 'attributes', 'blocks_context');
+        $args = compact('classes', 'object', 'inner_el', 'attributes', 'content_flow');
         $args = array_merge(static::getDefaults(), array_filter($args, fn ($v) => $v !== null && $v !== []));
 
         // WP_Post → article wrapper
@@ -79,7 +79,7 @@ class SiteMain extends ComponentBase
     public static function make(
         array $classes = [],
         ?string $inner_el = null,
-        bool $blocks_context = true,
+        bool $content_flow = true,
         ...$others
     ): ?static {
         return static::createFromArgs(static::mergeArgs(get_defined_vars()));

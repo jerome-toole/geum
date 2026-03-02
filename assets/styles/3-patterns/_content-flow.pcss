@@ -1,25 +1,25 @@
-@utility blocks-context {
+@utility content-flow {
     @apply prose;
 
     margin-bottom: var(--blocks--margin-bottom);
 
-    // Prose elements get max-width constraint
-    > :where(p, ul, ol, h1, h2, h3, h4, h5, h6) {
-        max-width: var(--prose--max-width, 65ch);
-
-        @media (width >= theme('screens.md')) {
-            grid-column: 2 / 8;
-        }
+    // Universal direct-child spacing
+    > * + * {
+        margin-block-start: var(--flow-space, 1em);
     }
 
-    // WordPress block-specific spacing (top-margin only)
-    > :where([class*='wp-block'], [class*='section']) {
-        margin-top: var(--block--margin-top);
+    // Type elements: prose-level spacing + width constraint
+    > :where(p, ul, ol, h1, h2, h3, h4, h5, h6) {
+        --flow-space: var(--space--base);
+        max-width: var(--prose--max-width, 65ch);
+    }
 
+    // WP block special behaviors
+    > :where([class*='wp-block'], [class*='section']) {
         // Pull full-width blocks with backgrounds together
         &:where([class*='has-background'].alignfull) {
             + :where([class*='has-background'].alignfull) {
-                margin-top: calc(var(--space--layout) * -1);
+                --flow-space: 0;
             }
 
             // Pull footer up to last full-width block with background

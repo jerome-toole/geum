@@ -1,14 +1,14 @@
 <?php
 $inner_classes = ['site-main__inner'];
-if (! empty($this->blocks_context)) {
-    $inner_classes[] = 'blocks-context';
+if (! empty($this->content_flow)) {
+    $inner_classes[] = 'content-flow';
 }
 ?>
 <main class="<?= classes('site-main', $this->classes) ?>" <?= attributes($this->attributes) ?>>
     <<?= esc_html($this->inner_el); ?> class="<?= classes($inner_classes) ?>">
 
         <?php if (! empty($this->header) || ! empty($this->content)) { ?>
-            <div class="site-main__content page-grid blocks-context">
+            <div class="site-main__content page-grid content-flow">
                 <?php if (! empty($this->header)) { ?>
                     <?= $this->header; ?>
                 <?php } ?>

@@ -2,15 +2,19 @@
 
 **A modern WordPress development framework** with typed PHP components, application-level routing, Tailwind v4 with custom utilities, and ACF block integration. Vite-powered build system.
 
-*This is my personal development framework—not a polished product. Hopefully some parts are useful as reference or starting points.*
+*This is my personal development framework – not a polished product. Hopefully some parts are useful as reference or starting points.*
 
 - **Components** - Co-located template, logic, styles, and scripts in portable directories
-- **Router** - Editable content for archives, search, 404—deeply integrated with WordPress
-- **Tailwind v4 + Utilities** - Custom layout utilities (`page-grid`, `stack-*`, `grid-auto`)
+- **Modules** - Self-contained features that auto-load (e.g., ACF integration, post types)
+- **Router** - Editable content for archives, search, 404.
+- **CSS Framework** - BEM-style components, custom utilities and patterns (`page-grid`, `stack-*`, `grid-auto`).
+- **Color System** - A contextual color system with automatic foreground calculation and CSS variables.
+- **Tailwind v4** - Tailwind used for custom utilities and available globally, but used sparingly in templates.
 - **ACF Blocks** - Components become Gutenberg blocks with co-located field definitions
 - **Vite Build** - HMR, glob imports, manifest-based cache busting
 - **Dev Environment** - `/_dev` routes for component testing, style guide, and QA
 - **WordPress Optimizations** - Asset handling, color system, image helpers, SVG support, menu utilities
+- **AI Development** - Claude Code skills for AI-assisted development workflows (component scaffolding, testing, website spec generation)
 
 ## Key Features
 
@@ -21,7 +25,7 @@ Typed PHP component classes with IDE autocomplete, validation, and transformatio
 use Geum\Components\Accordion;
 use Geum\Components\Card;
 
-// Named arguments with full type support
+// Named arguments with type support
 echo Accordion::make(
     heading: 'FAQ',
     accordion_items: $items,
@@ -100,6 +104,11 @@ Tailwind v4 with theme-specific custom utilities for layout, spacing, and animat
 - `--gap`, `--col-gap`, `--row-gap` CSS properties
 - `--cols` for grid column control
 - Fluid spacing utilities
+
+**Color:**
+- `color-context-{name}` - Sets background, foreground, link, and focus colors based on theme config
+- `has-{name}-background-color` - WordPress block editor alias for color contexts
+- `foreground-from-{name}` - Sets just the foreground/text color
 
 Browse all utilities with live examples at `/_dev/utilities` (development only).
 

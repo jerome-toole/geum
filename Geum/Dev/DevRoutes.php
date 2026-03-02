@@ -120,8 +120,8 @@ class DevRoutes
         );
 
         \add_rewrite_rule(
-            '^_dev/blocks-context/?$',
-            'index.php?dev_route=blocks-context',
+            '^_dev/content-flow/?$',
+            'index.php?dev_route=content-flow',
             'top'
         );
     }
@@ -180,8 +180,8 @@ class DevRoutes
                 static::renderUtilities();
                 break;
 
-            case 'blocks-context':
-                static::renderBlocksContext();
+            case 'content-flow':
+                static::renderContentFlow();
                 break;
         }
 
@@ -247,7 +247,7 @@ class DevRoutes
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/globals/')).'">Globals</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/utilities/')).'">Utilities</a></li>';
         $content .= '<li><a href="'.\esc_url(\home_url('/_dev/components/')).'">Components</a></li>';
-        $content .= '<li><a href="'.\esc_url(\home_url('/_dev/blocks-context/')).'">Blocks Context</a></li>';
+        $content .= '<li><a href="'.\esc_url(\home_url('/_dev/content-flow/')).'">Content Flow</a></li>';
         $content .= '</ul>';
         $content .= '</div>';
 
@@ -306,15 +306,15 @@ class DevRoutes
         \get_footer();
     }
 
-    protected static function renderBlocksContext(): void
+    protected static function renderContentFlow(): void
     {
         \get_header();
         \site_main_open();
 
         echo '<a href="'.\esc_url(\home_url('/_dev/')).'" class="dev-component-list__back">&larr; Dev Index</a>';
-        echo '<h1>Blocks Context</h1>';
+        echo '<h1>Content Flow</h1>';
 
-        $template_path = static::getTemplatePath('blocks-context.php');
+        $template_path = static::getTemplatePath('content-flow.php');
         if ($template_path) {
             include $template_path;
         }

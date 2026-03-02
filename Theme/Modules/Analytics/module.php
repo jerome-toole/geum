@@ -19,7 +19,7 @@ class Module
 
     public static function outputConsentDefaults(): void
     {
-        if (empty(\get_field('gtm_code', 'option'))) {
+        if (! \get_field('gtm_enabled', 'option') || empty(\get_field('gtm_code', 'option'))) {
             return;
         }
 
@@ -51,7 +51,7 @@ class Module
     {
         $gtm_code = \get_field('gtm_code', 'option');
 
-        if (empty($gtm_code)) {
+        if (! \get_field('gtm_enabled', 'option') || empty($gtm_code)) {
             return;
         }
 
@@ -70,7 +70,7 @@ class Module
     {
         $gtm_code = \get_field('gtm_code', 'option');
 
-        if (empty($gtm_code)) {
+        if (! \get_field('gtm_enabled', 'option') || empty($gtm_code)) {
             return;
         }
 

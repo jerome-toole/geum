@@ -39,6 +39,7 @@ class SiteHeader extends ComponentBase
             $args['content']['call_to_action_1'] = $header_call_to_action_1;
             $args['content']['call_to_action_1']['classes'] = [
                 'site-header__call-to-action-1',
+                'btn',
             ];
         }
 

@@ -1,7 +1,7 @@
 <?php
 $inner_classes = ['site-main__inner'];
-if (! empty($args['blocks_context'])) {
-    $inner_classes[] = 'blocks-context';
+if (! empty($args['content_flow'])) {
+    $inner_classes[] = 'content-flow';
 }
 ?>
 <main class="<?= classes('site-main', $args['classes'] ?? []) ?>" <?= attributes($args['attributes'] ?? []) ?>>

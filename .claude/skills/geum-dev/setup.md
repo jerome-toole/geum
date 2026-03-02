@@ -48,6 +48,7 @@ class ResourceType
             return;
         }
 
+        /** @link https://github.com/johnbillion/extended-cpts/wiki/Registering-Post-Types */
         \register_extended_post_type(self::SLUG, [
             'public' => true,
             'has_archive' => true,
@@ -103,6 +104,7 @@ class Topic
             return;
         }
 
+        /** @link https://github.com/johnbillion/extended-cpts/wiki/Registering-taxonomies */
         \register_extended_taxonomy(
             self::SLUG,
             ['post', 'resource'],  // Post types

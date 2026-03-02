@@ -1,11 +1,10 @@
 <?php
 /**
- * Blocks Context Test Page
+ * Content Flow Test Page
  *
- * Tests the .blocks-context wrapper with realistic WP block content.
- * The site-main already wraps everything in .blocks-context (blocks_context: true by default).
+ * Tests the .content-flow wrapper with realistic WP block content.
+ * The site-main already wraps everything in .content-flow (content_flow: true by default).
  */
-
 $lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
 $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.';
 ?>
@@ -43,7 +42,7 @@ $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse c
 
 <span class="bc-label">prose: p, h1–h6, ul, ol</span>
 
-<h2>Heading 2 inside blocks-context</h2>
+<h2>Heading 2 inside content-flow</h2>
 <p><?= $lorem ?></p>
 <p><?= $lorem_short ?></p>
 
@@ -63,7 +62,7 @@ $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse c
 </ol>
 
 <!-- ============================================================
-     Standard WP block — margin-top spacing
+     Standard WP block — --flow-space spacing (var(--space--layout))
      ============================================================ -->
 
 <span class="bc-label">wp-block (standard, no alignment)</span>
@@ -115,11 +114,11 @@ $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse c
 <p><?= $lorem_short ?></p>
 
 <!-- ============================================================
-     wp-block-group — nested blocks-context
+     wp-block-group — nested content-flow
      Children get the same margin-top spacing as the outer context
      ============================================================ -->
 
-<span class="bc-label">wp-block-group (nested blocks-context — stacked children)</span>
+<span class="bc-label">wp-block-group (nested content-flow — stacked children)</span>
 <div class="wp-block-group">
     <div class="bc-block-placeholder">Child block 1</div>
     <div class="bc-block-placeholder">Child block 2</div>
@@ -131,7 +130,7 @@ $lorem_short = 'Duis aute irure dolor in reprehenderit in voluptate velit esse c
 
 <!-- ============================================================
      wp-block-group.is-layout-grid — columns above md, stacked below
-     Override: CSS grid with gap replaces margin-top spacing
+     Override: CSS grid with gap (var(--flow-space)) replaces flow spacing
      ============================================================ -->
 
 <span class="bc-label">wp-block-group.is-layout-grid (2 columns above md)</span>

@@ -71,6 +71,38 @@ Use `space()` function (converts px to rem):
 - `var(--space--container-padding)` - Side padding (16px → 30px responsive)
 - `var(--space--base)` - Text element spacing (16px)
 
+## Content Flow
+
+The `.content-flow` utility manages spacing between direct children using the [Every Layout flow pattern](https://every-layout.dev/layouts/stack/).
+
+```pcss
+// Universal direct-child spacing
+> * + * {
+    margin-block-start: var(--flow-space, 1em);
+}
+```
+
+**`--flow-space`** is the single spacing token. Set it on the container or any element to control its top spacing:
+
+| Context | Value |
+|---------|-------|
+| Default (`:root`) | `var(--space--layout)` — layout-level spacing for WP blocks |
+| Type elements (`p, ul, ol, h1–h6`) | `var(--space--base)` — prose-level spacing |
+| Headings (`.wp-block-heading`) | `var(--heading--margin-top)` |
+| Blockquotes | `spaceFluid(12, 16)` |
+| Pagination | `var(--space--base)` |
+
+**Override per element:**
+```pcss
+.my-component {
+    --flow-space: var(--space--base); // smaller spacing above this element
+}
+```
+
+`site-main` applies `.content-flow` to its inner wrapper by default (`content_flow: true`).
+
+Test at `/_dev/blocks-context/`.
+
 ## Page Grid
 
 WordPress block content layout:
