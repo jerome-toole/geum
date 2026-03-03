@@ -41,11 +41,11 @@ class Enqueue
     }
 
     /**
-     * Enqueue block editor assets (JS only; CSS via add_editor_style in Gutenberg.php).
+     * Enqueue block editor assets (JS only; CSS via add_editor_style in Editor.php).
      */
     public static function enqueueEditorAssets(): void
     {
-        \Geum\Vite::enqueueScript('geum-editor', 'assets/editor-scripts.js');
+        \Geum\Vite::enqueueScript('geum-editor', 'assets/editor-scripts.js', ['wp-blocks', 'wp-dom-ready', 'wp-edit-post']);
     }
 
     /**

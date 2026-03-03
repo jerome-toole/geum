@@ -27,7 +27,7 @@ require __DIR__.'/Geum/functions.php';
 \Geum\WordPress\Emails::init();
 \Geum\WordPress\Enqueue::init();
 \Geum\WordPress\Escaping::init();
-\Geum\WordPress\Gutenberg::init();
+\Geum\WordPress\Editor::init();
 \Geum\WordPress\Colors::init();
 \Geum\WordPress\Head::init();
 \Geum\WordPress\Images::init();

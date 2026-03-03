@@ -2,19 +2,18 @@
 
 namespace Geum\WordPress;
 
-class Gutenberg
+class Editor
 {
     public static function init(): void
     {
-        \add_action('after_setup_theme', [__CLASS__, 'gutenbergSupport']);
-        \add_filter('block_categories_all', [__CLASS__, 'gutenbergBlockCategory']);
+        \add_action('after_setup_theme', [__CLASS__, 'editorSupport']);
+        \add_filter('block_categories_all', [__CLASS__, 'blockCategory']);
         \add_filter('allowed_block_types_all', [__CLASS__, 'allowedBlockTypes'], 10, 2);
     }
 
-    public static function gutenbergSupport(): void
+    public static function editorSupport(): void
     {
-        // Add custom CSS support for Gutenberg.
-        // Not to be confused with custom CSS support for TinyMCE (editor-style).
+        // Add custom CSS support for the block editor.
         \add_theme_support('editor-styles');
 
         // Add editor styles from build (no HMR, always uses built CSS)
@@ -36,16 +35,15 @@ class Gutenberg
     }
 
     /**
-     * Filters the Gutenberg block categories array to add a custom category.
+     * Filters the block categories array to add a custom theme category.
      *
-     * @link https://developer.wordpress.org/reference/hooks/block_categories/
+     * @link https://developer.wordpress.org/reference/hooks/block_categories_all/
      *
      * @param  array[]  $categories  A list of registered block categories.
      * @return array[] The filtered list of registered block categories.
      */
-    public static function gutenbergBlockCategory($categories): array
+    public static function blockCategory(array $categories): array
     {
-        // Plugin’s block category title and slug.
         $blockCategory = [
             'title' => \esc_html__('Theme Blocks', 'geum'),
             'slug' => 'theme-blocks',
@@ -53,7 +51,6 @@ class Gutenberg
 
         $categorySlugs = \wp_list_pluck($categories, 'slug');
 
-        // Bail early - this category slug is already registered.
         if (in_array($blockCategory['slug'], $categorySlugs, true)) {
             return $categories;
         }
@@ -64,39 +61,18 @@ class Gutenberg
     }
 
     /**
-     * Filter allowed block types.
+     * Filter allowed block types from theme-config.json editor.allowed_blocks.
      *
      * @param  bool|string[]  $allowedBlocks  Array of allowed block types or true for all.
      * @param  \WP_Block_Editor_Context  $context  Editor context.
      * @return string[]
      */
-    public static function allowedBlockTypes($allowedBlocks, $context): array
+    public static function allowedBlockTypes(bool|array $allowedBlocks, \WP_Block_Editor_Context $context): array
     {
-        $allowed = [
-            'core/paragraph',
-            'core/image',
-            'core/heading',
-            'core/gallery',
-            'core/list',
-            'core/list-item',
-            'core/quote',
-            'core/shortcode',
-            'core/button',
-            'core/buttons',
-            'core/columns',
-            'core/column',
-            // 'core/cover',
-            'core/group',
-            'core/embed',
-            'core/freeform',
-            'core/html',
-            'core/missing',
-            'core/separator',
-            'core/block',
-            'core/table',
-        ];
+        $config = json_decode(file_get_contents(get_template_directory().'/assets/theme-config.json'), true);
+        $allowed = $config['editor']['allowed_blocks'] ?? [];
 
-        // Add all ACF blocks
+        // Add all registered ACF blocks.
         if (function_exists('acf_get_block_types')) {
             $allowed = array_merge($allowed, array_keys(\acf_get_block_types()));
         }
