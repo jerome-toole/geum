@@ -112,7 +112,7 @@ class Component
         \add_filter('geum/component/after_filters', [__CLASS__, 'buildComponentAttributes'], 20);
 
         // ACF block registration.
-        \add_action('acf/init', [__CLASS__, 'addBlocks']);
+        \add_action('init', [__CLASS__, 'addBlocks'], 5);
         \add_filter('acf/settings/load_json', [__CLASS__, 'loadBlockFieldGroupJSON']);
         \add_action('acf/update_field_group', [__CLASS__, 'saveBlockFieldGroupJSON'], 1);
 
@@ -178,17 +178,8 @@ class Component
 
     public static function addBlocks(): void
     {
-        self::requireFiles(
-            glob(\get_theme_file_path('components/*/acf.php'))
-        );
-    }
-
-    private static function requireFiles(array $files): void
-    {
-        $files = apply_filters('geum/component/before_require_files', $files);
-
-        foreach ($files as $file) {
-            require_once $file;
+        foreach (glob(\get_theme_file_path('components/*/block.json')) as $blockJson) {
+            \register_block_type(\dirname($blockJson));
         }
     }
 

@@ -39,7 +39,7 @@ add_filter('geum/modules/disabled', fn($disabled) => [...$disabled, 'ModuleName'
 | `template.php` | Template markup (uses `$this->property`) |
 | `styles.pcss` | Bundled into main CSS |
 | `scripts.js` | Bundled into main JS |
-| `acf.php` | ACF block config (optional) |
+| `block.json` | ACF block registration & config (optional) |
 | `example.php` | Dev preview examples (optional) |
 | `group_component_{name}.json` | ACF field group (optional) |
 

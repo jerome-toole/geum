@@ -163,6 +163,19 @@ abstract class ComponentBase
     }
 
     /**
+     * ACF block render callback for block.json registration.
+     * Referenced as "renderCallback" in each component's block.json.
+     */
+    public static function renderBlock(
+        array $block,
+        string $content = '',
+        bool $is_preview = false,
+        int $post_id = 0
+    ): void {
+        echo static::fromBlock($block, get_fields() ?: [], $content, $is_preview, $post_id);
+    }
+
+    /**
      * Create component from ACF block data.
      *
      * @param  array  $block  The ACF block array.

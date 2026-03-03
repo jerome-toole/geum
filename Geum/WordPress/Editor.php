@@ -61,7 +61,7 @@ class Editor
     }
 
     /**
-     * Filter allowed block types from theme-config.json editor.allowed_blocks.
+     * Filter allowed block types from config.json settings.editor.allowed_blocks.
      *
      * @param  bool|string[]  $allowedBlocks  Array of allowed block types or true for all.
      * @param  \WP_Block_Editor_Context  $context  Editor context.
@@ -69,8 +69,8 @@ class Editor
      */
     public static function allowedBlockTypes(bool|array $allowedBlocks, \WP_Block_Editor_Context $context): array
     {
-        $config = json_decode(file_get_contents(get_template_directory().'/assets/theme-config.json'), true);
-        $allowed = $config['editor']['allowed_blocks'] ?? [];
+        $editor = \Geum\Config::get('editor', []);
+        $allowed = $editor['allowed_blocks'] ?? [];
 
         // Add all registered ACF blocks.
         if (function_exists('acf_get_block_types')) {

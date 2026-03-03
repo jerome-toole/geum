@@ -7,7 +7,7 @@ Create and modify components in the Geum framework.
 ```bash
 npm run scaffold my-component              # Class + template only
 npm run scaffold my-component --styles     # Add styles.pcss
-npm run scaffold my-component --block      # Add acf.php
+npm run scaffold my-component --block      # Add block.json
 npm run scaffold my-component --all        # All optional files
 ```
 
@@ -19,7 +19,7 @@ Options: `--styles`, `--scripts`, `--block`, `--all`
 components/component-name/
 ├── ComponentName.php                       # Typed class with ::make() factory
 ├── template.php                            # Template markup
-├── acf.php                                 # ACF block registration (optional)
+├── block.json                              # ACF block registration (optional)
 ├── styles.pcss                             # Bundled into main.css (optional)
 ├── scripts.js                              # Bundled into main.js (optional)
 ├── group_component_component_name.json     # ACF field group (optional)
@@ -361,25 +361,29 @@ echo MyComponent::fromBlock($block, $fields, $content, $is_preview, $post_id);
 
 ## ACF Block Registration
 
-`components/my-component/acf.php`:
+`components/my-component/block.json`:
 
-```php
-<?php
-
-use Geum\Components\MyComponent;
-
-acf_register_block_type([
-    'name' => 'my-component',
-    'title' => __('My Component', 'geum'),
-    'category' => 'theme',
-    'icon' => 'admin-generic',
-    'render_callback' => fn(...$args) => print MyComponent::fromBlock(...$args),
-    'supports' => [
-        'anchor' => true,
-        'align' => ['wide', 'full'],
-    ],
-]);
+```json
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/my-component",
+    "title": "My Component",
+    "description": "",
+    "category": "theme-blocks",
+    "icon": "admin-generic",
+    "acf": {
+        "mode": "auto",
+        "renderCallback": "Geum\\Components\\MyComponent::renderBlock"
+    },
+    "supports": {
+        "anchor": true,
+        "align": ["wide", "full"]
+    }
+}
 ```
+
+The `renderBlock` method is inherited from `ComponentBase` — no PHP file needed.
 
 ## Verify
 

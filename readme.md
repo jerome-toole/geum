@@ -333,6 +333,42 @@ class MyComponent extends ComponentBase
 </div>
 ```
 
+### Templating Helpers
+
+Two global functions are available in all PHP templates.
+
+#### `classes(...$args): string`
+
+Builds an escaped `class` attribute value from variadic strings or arrays. Flattens nested arrays, deduplicates, and escapes with `esc_attr()`.
+
+```php
+classes('banner', 'wp-block', 'alignfull')
+// → "banner wp-block alignfull"
+
+// Mix of strings and arrays — append $this->classes last so callers can extend
+classes('card', 'animate-element', $this->classes)
+// → "card animate-element caller-class"
+
+// Conditional — empty strings are filtered out
+classes('menu-item', $isActive ? 'is-active' : '', $this->classes)
+// → "menu-item is-active"
+```
+
+#### `attributes(array $attributes = []): string`
+
+Builds a space-separated string of escaped HTML attributes from a key-value array.
+
+```php
+attributes(['disabled' => true])
+// → 'disabled'
+
+attributes(['id' => 'my-nav', 'aria-label' => 'Main navigation'])
+// → 'id="my-nav" aria-label="Main navigation"'
+
+attributes(['style' => ['color' => 'red', 'font-size' => '1rem']])
+// → 'style="color: red; font-size: 1rem;"'
+```
+
 ---
 
 ## Development Environment (`/_dev`)

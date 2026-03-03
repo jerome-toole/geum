@@ -1,5 +1,45 @@
 {
     "settings": {
+        "editor": {
+            "allowed_blocks": [
+                "core/paragraph",
+                "core/heading",
+                "core/list",
+                "core/list-item",
+                "core/quote",
+                "core/table",
+                "core/image",
+                "core/buttons",
+                "core/button",
+                "core/columns",
+                "core/column",
+                "core/group",
+                "core/row",
+                "core/stack",
+                "core/separator",
+                "core/embed",
+                "core/shortcode",
+                "core/html",
+                "core/freeform",
+                "core/block",
+                "core/missing"
+            ],
+            "disabled_blocks": [
+                "core/pullquote",
+                "core/verse",
+                "core/preformatted",
+                "core/code",
+                "core/gallery",
+                "core/audio",
+                "core/video",
+                "core/file",
+                "core/cover",
+                "core/media-text",
+                "core/spacer",
+                "..."
+            ]
+        },
+
         "deactivate_comments": true,
         "deactivate_posts_post_type": true,
 

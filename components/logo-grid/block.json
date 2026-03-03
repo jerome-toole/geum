@@ -1,0 +1,22 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/logo-grid",
+    "title": "Logo Grid",
+    "description": "A logo grid block",
+    "category": "theme-blocks",
+    "icon": "image-flip-horizontal",
+    "align": "wide",
+    "acf": {
+        "mode": "auto",
+        "renderCallback": "Geum\\Components\\LogoGrid::renderBlock"
+    },
+    "supports": {
+        "anchor": true,
+        "align": ["wide", "full"],
+        "color": {
+            "text": false,
+            "gradients": false
+        }
+    }
+}

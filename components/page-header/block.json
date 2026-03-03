@@ -1,0 +1,25 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "acf/page-header",
+    "title": "Page Header",
+    "category": "theme-blocks",
+    "icon": "cover-image",
+    "keywords": ["hero"],
+    "align": "full",
+    "acf": {
+        "mode": "auto",
+        "postTypes": ["page", "geum-template"],
+        "renderCallback": "Geum\\Components\\PageHeader::renderBlock"
+    },
+    "supports": {
+        "anchor": true,
+        "align": false,
+        "multiple": false,
+        "color": {
+            "background": false,
+            "text": false,
+            "gradients": false
+        }
+    }
+}

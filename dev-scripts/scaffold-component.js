@@ -12,7 +12,7 @@
  * Options:
  *   --styles    Create styles.pcss
  *   --scripts   Create scripts.js
- *   --block     Create acf.php for ACF block
+ *   --block     Create block.json for ACF block
  *   --all       Create all optional files
  */
 
@@ -110,35 +110,27 @@ elements?.forEach((el) => {
 }
 
 /**
- * Generate ACF block content
+ * Generate block.json content
  */
-function generateAcfBlock(name, className) {
+function generateBlockJson(name, className) {
     const title = className.replace(/([A-Z])/g, ' $1').trim();
-    return `<?php
-
-/**
- * Registers an ACF block for this component.
- *
- * @link https://www.advancedcustomfields.com/resources/acf_register_block_type/
- */
-acf_register_block_type([
-    'name' => '${name}',
-    'title' => '${title}',
-    'description' => '',
-    'category' => 'theme-blocks',
-    'icon' => 'admin-generic',
-    'mode' => 'auto',
-    'supports' => [
-        'anchor' => true,
-        'align' => false,
-    ],
-    'render_callback' => function ($block, $content, $is_preview, $post_id) {
-        $args = \\Geum\\Component::generateArgsFromBlock($block, get_fields());
-
-        echo \\Geum\\Components\\${className}::make(...$args);
-    },
-]);
-`;
+    return JSON.stringify({
+        $schema: 'https://schemas.wp.org/trunk/block.json',
+        apiVersion: 3,
+        name: `acf/${name}`,
+        title,
+        description: '',
+        category: 'theme-blocks',
+        icon: 'admin-generic',
+        acf: {
+            mode: 'auto',
+            renderCallback: `Geum\\Components\\${className}::renderBlock`,
+        },
+        supports: {
+            anchor: true,
+            align: false,
+        },
+    }, null, 4) + '\n';
 }
 
 /**
@@ -168,7 +160,7 @@ Usage: node dev-scripts/scaffold-component.js <name> [options]
 Options:
   --styles    Create styles.pcss
   --scripts   Create scripts.js
-  --block     Create acf.php for ACF block
+  --block     Create block.json for ACF block
   --all       Create all optional files
 
 Examples:
@@ -240,10 +232,10 @@ Examples:
     // Optional: ACF block
     if (withBlock) {
         fs.writeFileSync(
-            path.join(componentDir, 'acf.php'),
-            generateAcfBlock(name, className)
+            path.join(componentDir, 'block.json'),
+            generateBlockJson(name, className)
         );
-        console.log(`Created: acf.php`);
+        console.log(`Created: block.json`);
     }
 
     console.log(`\nComponent '${name}' scaffolded successfully.`);
