@@ -7,7 +7,7 @@
 - **Components** - Co-located template, logic, styles, and scripts in portable directories
 - **Modules** - Self-contained features that auto-load (e.g., ACF integration, post types)
 - **Router** - Editable content for archives, search, 404.
-- **CSS Framework** - BEM-style components, custom utilities and patterns (`page-grid`, `stack-*`, `grid-auto`).
+- **CSS Framework** - BEM-style components, custom utilities and patterns (`content-grid`, `stack-*`, `grid-auto`).
 - **Color System** - A contextual color system with automatic foreground calculation and CSS variables.
 - **Tailwind v4** - Tailwind used for custom utilities and available globally, but used sparingly in templates.
 - **ACF Blocks** - Components become Gutenberg blocks with co-located field definitions
@@ -96,7 +96,7 @@ Router::route('/tools/demo', fn() => DemoController::index())
 Tailwind v4 with theme-specific custom utilities for layout, spacing, and animation.
 
 **Layout:**
-- `page-grid` - 12-column grid with full/wide/prose alignment
+- `content-grid` - 12-column grid with full/wide/prose alignment
 - `grid-simple` / `grid-auto` - Flexible CSS grid utilities
 - `flex-grid` - Gap-based flex layouts
 - `stack-*` - Vertical rhythm spacing (e.g., `stack-24`)
@@ -149,7 +149,7 @@ npm run site-setup      # Configure WP site for dev
 npm run dev             # Start Vite dev server
 ```
 
-Access WordPress at your normal URL (e.g., `http://geum.test`). Don't use localhost:5173 directly.
+Access WordPress at your normal URL (.env `APP_URL`). Don't use localhost:5173 directly.
 
 ### Commands
 
@@ -403,7 +403,7 @@ scaffold component from spec → reads .docs/_WEBSITE-SPEC.md → generates file
 **Testing** - Verify changes work:
 ```bash
 # Quick test
-: > ../../debug.log && curl -sL http://geum.test -o /dev/null && cat ../../debug.log
+: > ../../debug.log && curl -sL $APP_URL -o /dev/null && cat ../../debug.log
 
 # Full test with Playwright
 mcp__playwright__browser_navigate → snapshot → console_messages → check debug.log

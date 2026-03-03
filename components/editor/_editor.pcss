@@ -1,16 +1,26 @@
-/* Block Alignments */
-.block-editor-block-list__layout > .wp-block {
-    /* Gutenberg injects a rule that limits the max width of .wp-block to 580px */
-    /* This line overrides it to use the responsive spacing rules for default width content */
-    max-width: var(--width--fluid--s);
+/* Changes require a full rebuild: npm run build */
 
-    &[data-type*='acf/'],
-    .block-editor-block-list__layout.is-root-container > &[data-type*='acf/'] {
-        @apply content-width-full;
+/* Block Alignments */
+.is-root-container.is-root-container {
+    @apply content-grid;
+}
+
+.is-root-container > .wp-block {
+    /* Override Gutenberg's injected max-width: 580px — grid-column controls width */
+    max-width: none;
+
+    &[data-type*='acf/'] {
+        width: 100%;
+        grid-column: wide;
+        max-width: unset;
+
+        &:has(> .acf-block-body > div > .acf-block-preview > .alignfull) {
+            grid-column: full;
+        }
     }
 
     &[data-align='center'],
-    .aligncenter {
+    &.aligncenter {
         display: block;
         margin-right: auto;
         margin-left: auto;
@@ -18,25 +28,26 @@
 
     &[data-align='wide'],
     &.alignwide {
-        @apply content-width-fluid-lg;
+        grid-column: wide;
     }
 
     &[data-align='full'],
-    .alignfull {
-        @apply content-width-full;
+    &.alignfull {
+        grid-column: full;
     }
 
-    .alignright {
-        @apply align-right;
+    &[data-align='left'],
+    &.alignleft {
+        grid-column: 2 / 8;
     }
 
-    .alignleft {
-        @apply align-left;
+    &[data-align='right'],
+    &.alignright {
+        grid-column: 8 / 14;
     }
 
     &:not(.rich-text) {
         margin-block-start: var(--flow-space, var(--space-layout));
-        margin-bottom: var(--block--margin-bottom);
 
         &:first-child {
             margin-top: 0;
@@ -48,10 +59,11 @@
     }
 }
 
-.editor-post-title__block .editor-post-title__input {
-    @apply type-h2;
+.editor-visual-editor__post-title-wrapper .editor-post-title__input {
+    @apply type-h3;
 
     margin-top: 0;
+    margin-bottom: 32px;
 }
 
 .mce-container {
@@ -92,10 +104,11 @@
 /* Router slot placeholders */
 /* */
 .router-slot-placeholder {
+    @apply content-width-lg;
     @apply p-8 text-center rounded-md;
 
-    background: var(--wp--preset--color--base-2, #f5f5f5);
-    border: 2px dashed var(--wp--preset--color--contrast-3, #ddd);
+    background: #f5f5f5;
+    border: 2px dashed #ddd;
 
     strong {
         @apply block mb-2 text-lg;
@@ -104,6 +117,6 @@
     span {
         @apply text-sm;
 
-        color: var(--wp--preset--color--contrast-2, #666);
+        color: #666;
     }
 }

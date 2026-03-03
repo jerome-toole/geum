@@ -2,13 +2,13 @@
 
 namespace Theme\Controllers;
 
-use Geum\Components\Card;
+use Geum\Components\Cards;
+use Geum\Components\NoContent;
+use Geum\Components\Pagination;
+use Geum\WordPress\PageObject;
 
 class ArchiveController
 {
-    /**
-     * Prepare the archive query.
-     */
     public function prepare(): void
     {
         // Modify query if needed
@@ -19,27 +19,23 @@ class ArchiveController
         // });
     }
 
-    /**
-     * Render the archive loop.
-     */
     public static function renderLoop(): string
     {
+        $object = PageObject::get();
+
+        $items = [];
+        while (\have_posts()) {
+            \the_post();
+            $items[]['object'] = \get_post();
+        }
+
         \ob_start();
 
-        if (\have_posts()) {
-            echo '<div class="archive-grid">';
-            while (\have_posts()) {
-                \the_post();
-                echo Card::make(object: \get_post());
-            }
-            echo '</div>';
-
-            \the_posts_pagination([
-                'prev_text' => \__('Previous', 'theme'),
-                'next_text' => \__('Next', 'theme'),
-            ]);
+        if (! empty($items)) {
+            echo Cards::make(items: $items);
+            echo Pagination::make();
         } else {
-            echo '<p>'.\__('No posts found.', 'theme').'</p>';
+            echo NoContent::make(object: $object);
         }
 
         return \ob_get_clean();

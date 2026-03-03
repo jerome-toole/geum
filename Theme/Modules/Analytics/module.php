@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\Analytics;
 
-class Module
+class AnalyticsModule
 {
     public static function init(): void
     {

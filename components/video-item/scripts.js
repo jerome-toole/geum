@@ -47,7 +47,7 @@ class VideoItem {
 document.addEventListener('DOMContentLoaded', () => {
     const videoItems = document.querySelectorAll('.video-item');
 
-    videoItems.forEach((element) => {
+    videoItems?.forEach((element) => {
         new VideoItem(element);
     });
 });

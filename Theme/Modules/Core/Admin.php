@@ -16,11 +16,6 @@ class Admin
             return;
         }
 
-        \wp_enqueue_style(
-            'geum-admin-bar-styles',
-            \Geum\Asset::url('components/admin/admin-bar.css', true),
-            [],
-            false
-        );
+        \Geum\Vite::enqueueStyle('geum-admin-bar-styles', 'components/admin/admin-bar.pcss');
     }
 }

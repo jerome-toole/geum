@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\Articles;
 
-class Module
+class ArticlesModule
 {
     public static function init(): void
     {

@@ -68,7 +68,7 @@ Use `space()` function (converts px to rem):
 
 **Layout variables:**
 - `var(--space-layout)` - Block spacing (32px → 64px responsive)
-- `var(--space-container-padding)` - Side padding (16px → 30px responsive)
+- `var(--container-padding)` - Side padding (16px → 30px responsive)
 - `var(--space-base)` - Text element spacing (16px)
 
 ## Content Flow
@@ -108,7 +108,7 @@ Test at `/_dev/blocks-context/`.
 WordPress block content layout:
 
 ```php
-<div class="page-grid">
+<div class="content-grid">
     <!-- Children span 12-col "wide" area by default -->
     <div class="alignfull"><!-- Full viewport width --></div>
     <div class="alignwide"><!-- Content width --></div>
@@ -162,6 +162,6 @@ Grid: `[full-start] gutter [wide-start] 12-cols [wide-end] gutter [full-end]`
 assets/styles/
 ├── 1-theme/         # Variables: space, type, colors, widths
 ├── 2-base/          # Normalize, fonts, base elements
-├── 3-patterns/      # Reusable: page-grid, buttons, forms, type-styles
+├── 3-patterns/      # Reusable: content-grid, buttons, forms, type-styles
 └── 4-utilities/     # Helpers: alignment, screen-reader, etc.
 ```

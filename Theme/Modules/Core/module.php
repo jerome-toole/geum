@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\Core;
 
-class Module
+class CoreModule
 {
     public static function init(): void
     {

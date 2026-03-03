@@ -8,7 +8,7 @@
 //         // 'group-row',
 //     ];
 
-//     wp.blocks.getBlockVariations('core/group').forEach((variant) => {
+//     wp.blocks.getBlockVariations('core/group')?.forEach((variant) => {
 //         if (!allowedGroupVariants.includes(variant.name)) {
 //             wp.blocks.unregisterBlockVariation('core/group', variant.name);
 //         }

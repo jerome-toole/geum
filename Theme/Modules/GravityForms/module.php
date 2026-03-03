@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\GravityForms;
 
-class Module
+class GravityFormsModule
 {
     public static function init(): void
     {

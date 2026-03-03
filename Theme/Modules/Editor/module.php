@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\Editor;
 
-class Module
+class EditorModule
 {
     public static function init(): void
     {

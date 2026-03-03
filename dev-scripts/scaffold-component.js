@@ -103,7 +103,7 @@ function generateStyles(name) {
 function generateScripts(name) {
     return `const elements = document.querySelectorAll('.${name}');
 
-elements.forEach((el) => {
+elements?.forEach((el) => {
     // Component logic
 });
 `;

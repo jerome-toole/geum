@@ -35,11 +35,11 @@ export default class SiteHeader {
         const observer = new MutationObserver(debounce(() => this.calculateOffset(), 50));
         observer.observe(document.body, { childList: true, subtree: true });
 
-        this.menuTogglerEls.forEach((toggle) => {
+        this.menuTogglerEls?.forEach((toggle) => {
             toggle.addEventListener('click', () => this.toggleMenu());
         });
 
-        this.searchTogglerEls.forEach((toggle) => {
+        this.searchTogglerEls?.forEach((toggle) => {
             toggle.addEventListener('click', () => this.toggleSearch());
         });
 
@@ -62,7 +62,7 @@ export default class SiteHeader {
             offset += adminBar.offsetHeight;
         }
 
-        document.querySelectorAll(OFFSET_SELECTOR).forEach((el) => {
+        document.querySelectorAll(OFFSET_SELECTOR)?.forEach((el) => {
             offset += el.offsetHeight;
         });
 
@@ -85,7 +85,7 @@ export default class SiteHeader {
             this.menuPanelEl.inert = false;
         }
 
-        this.menuTogglerEls.forEach((toggle) => {
+        this.menuTogglerEls?.forEach((toggle) => {
             toggle.setAttribute('aria-expanded', 'true');
         });
 
@@ -98,7 +98,7 @@ export default class SiteHeader {
             this.menuPanelEl.inert = true;
         }
 
-        this.menuTogglerEls.forEach((toggle) => {
+        this.menuTogglerEls?.forEach((toggle) => {
             toggle.setAttribute('aria-expanded', 'false');
         });
 
@@ -121,7 +121,7 @@ export default class SiteHeader {
     openSearch() {
         this.closeMenu();
 
-        this.searchTogglerEls.forEach((toggle) => {
+        this.searchTogglerEls?.forEach((toggle) => {
             toggle.setAttribute('aria-expanded', 'true');
         });
 
@@ -145,7 +145,7 @@ export default class SiteHeader {
     }
 
     closeSearch() {
-        this.searchTogglerEls.forEach((toggle) => {
+        this.searchTogglerEls?.forEach((toggle) => {
             toggle.setAttribute('aria-expanded', 'false');
         });
 
@@ -170,7 +170,7 @@ export default class SiteHeader {
         const parent = this.el.parentElement;
         if (!parent) return;
 
-        Array.from(parent.children).forEach((sibling) => {
+        Array.from(parent.children)?.forEach((sibling) => {
             if (sibling !== this.el && sibling.nodeType === Node.ELEMENT_NODE) {
                 sibling.inert = inert;
             }

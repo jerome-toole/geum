@@ -1,20 +1,41 @@
-/* wp-block-group */
-/* */
 /* When a group contains blocks, apply the same child spacing as content-flow. */
 /* For grid layout groups, switch to CSS grid above md. */
 
 .wp-block-group {
-    @apply content-flow;
-}
+    @apply margin-trim;
+    @apply content-grid;
 
-.wp-block-group.is-layout-grid {
-    @media (width >= theme('screens.md')) {
+    &.has-background {
+        padding-block: var(--space-layout);
+    }
+
+    &.alignfull {
+        @apply content-grid;
+    }
+
+    &:not(.alignfull) {
+        --container-padding: 26px;
+    }
+
+    &:not(.is-layout-grid) {
+        @apply content-flow;
+    }
+
+    &.is-layout-grid {
         display: grid;
-        grid-template-columns: repeat(var(--cols, 2), 1fr);
-        gap: var(--flow-space, var(--space-layout));
 
-        > * {
-            margin-top: 0;
+        @media (width < theme('screens.lg')) {
+            @apply content-flow;
+
+            grid-template-columns: 1fr;
+        }
+
+        @media (width >= theme('screens.lg')) {
+            column-gap: var(--col-gap);
+
+            > * {
+                margin-block: 0;
+            }
         }
     }
 }

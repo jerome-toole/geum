@@ -57,7 +57,7 @@ class Route
         return $this;
     }
 
-    public function withSlot(string $name, callable $renderer): static
+    public function withSlot(string $name, mixed $renderer): static
     {
         $this->slots[$name] = $renderer;
 

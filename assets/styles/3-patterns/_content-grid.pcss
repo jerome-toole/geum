@@ -1,13 +1,15 @@
-@utility page-grid {
-    --page-grid--gap: space(24);
+:root {
+    --content-grid--gap: space(24);
+}
 
+@utility content-grid {
     display: grid;
     grid-template-columns:
-        [full-start] minmax(calc(var(--space-container-padding) - var(--page-grid--gap)), 1fr)
+        [full-start] minmax(calc(var(--container-padding) - var(--content-grid--gap)), 1fr)
         [wide-start] repeat(12, minmax(0, calc(var(--container-lg) / 12)))
-        [wide-end] minmax(calc(var(--space-container-padding) - var(--page-grid--gap)), 1fr)
+        [wide-end] minmax(calc(var(--container-padding) - var(--content-grid--gap)), 1fr)
         [full-end];
-    column-gap: var(--page-grid--gap);
+    column-gap: var(--content-grid--gap);
 
     /* Default: all items span the wide (12-col) area */
     > * {

@@ -123,7 +123,7 @@ export default class Disclosure {
 
         this.options.setInertAttribute && this.el.setAttribute('inert', true);
 
-        this.triggerElements.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
+        this.triggerElements?.forEach((trigger) => trigger.setAttribute('aria-expanded', 'false'));
 
         if (this.options.updateChildTabIndexes === true) {
             this.focusableItems.hideAllFromKeyboard();
@@ -184,7 +184,7 @@ export default class Disclosure {
             this.animation.cancel();
         }
 
-        this.triggerElements.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
+        this.triggerElements?.forEach((trigger) => trigger.setAttribute('aria-expanded', 'true'));
 
         if (this.options.updateChildTabIndexes === true) {
             this.focusableItems.resetTabIndex();
@@ -253,7 +253,7 @@ export default class Disclosure {
      */
     setUpElements() {
         // Bail early - invalid target element passed.
-        if (!this.el || !(this.el instanceof HTMLElement)) {
+        if (!(this.el && this.el instanceof HTMLElement)) {
             console.error('Invalid target element', this.el, this);
             return false;
         }
@@ -271,7 +271,7 @@ export default class Disclosure {
             return false;
         }
 
-        this.triggerElements.forEach((trigger) => {
+        this.triggerElements?.forEach((trigger) => {
             // Improve accessibility of trigger element if it isn't a <button>.
             if (trigger.tagName !== 'BUTTON') {
                 trigger.setAttribute('role', 'button');
@@ -297,7 +297,7 @@ export default class Disclosure {
             return;
         }
 
-        if ([...this.triggerElements].includes(event.relatedTarget)) {
+        if ([...this.triggerElements]?.includes(event.relatedTarget)) {
             return;
         }
 
@@ -315,7 +315,7 @@ export default class Disclosure {
         this[`on${event.type}`](event);
 
         // add event listeners from 'on' options
-        Object.keys(this.options.on).forEach((eventName) => {
+        Object.keys(this.options.on)?.forEach((eventName) => {
             if (eventName === event.type) {
                 this.options.on[eventName](event);
             }
@@ -375,7 +375,7 @@ export default class Disclosure {
 
         if (this.options.collapseOnFocusout === true) {
             this.el.removeEventListener('focusout', this);
-            this.triggerElements.forEach((trigger) => trigger.removeEventListener('blur', this));
+            this.triggerElements?.forEach((trigger) => trigger.removeEventListener('blur', this));
         }
 
         if (this.options.collapseOnEscape === true) {
@@ -422,7 +422,7 @@ export default class Disclosure {
 
         if (this.options.collapseOnFocusout === true) {
             this.el.addEventListener('focusout', this);
-            this.triggerElements.forEach((trigger) => trigger.addEventListener('blur', this));
+            this.triggerElements?.forEach((trigger) => trigger.addEventListener('blur', this));
         }
 
         if (this.options.collapseOnEscape === true) {
@@ -443,7 +443,7 @@ export default class Disclosure {
             switch (typeof this.options.collapseOnOtherElementsExpand) {
                 case 'object':
                     // A nodeList was passed
-                    this.options.collapseOnOtherElementsExpand.forEach((element) => {
+                    this.options.collapseOnOtherElementsExpand?.forEach((element) => {
                         if (event.target === element) {
                             shouldClose = true;
                         }

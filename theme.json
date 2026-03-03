@@ -52,10 +52,7 @@
             "palette": [],
             "text": false
         },
-        "layout": {
-            "contentSize": "765px",
-            "wideSize": "1400px"
-        },
+        "layout": {},
         "shadow": {
             "defaultPresets": false,
             "presets": []

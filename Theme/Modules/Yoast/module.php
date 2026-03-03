@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\Yoast;
 
-class Module
+class YoastModule
 {
     public static function init(): void
     {

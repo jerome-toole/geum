@@ -111,7 +111,7 @@ class Router
     /**
      * Get the router page for the current route.
      */
-    public static function getPage(): ?\WP_Post
+    public static function getPage(bool $publishedOnly = true): ?\WP_Post
     {
         if (! static::$current) {
             return null;
@@ -122,24 +122,20 @@ class Router
             return null;
         }
 
-        return RouterPage::getPageByRole($role);
+        $page = RouterPage::getPageByRole($role);
+
+        if ($publishedOnly && $page && $page->post_status !== 'publish') {
+            return null;
+        }
+
+        return $page;
     }
 
     public static function renderPage(): void
     {
-        if (! static::$current) {
-            return;
-        }
+        $page = static::getPage();
 
-        $role = static::$current->getRole();
-        if (! $role) {
-            return;
-        }
-
-        $pageId = \get_option("geum_router_page_{$role}");
-        $page = $pageId ? \get_post($pageId) : null;
-
-        if ($page && $page->post_status === 'publish') {
+        if ($page) {
             echo \apply_filters('the_content', $page->post_content);
         }
     }

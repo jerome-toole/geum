@@ -6,10 +6,9 @@ use Geum\Components\Cards;
 use Geum\Components\NoContent;
 use Geum\Components\Pagination;
 use Geum\Components\TaxonomyFilters;
-use Geum\Router;
 use Geum\WordPress\PageObject;
 
-class Module
+class EventsModule
 {
     public static function init(): void
     {
@@ -17,10 +16,6 @@ class Module
         LocationTaxonomy::init();
 
         \add_filter('acf/settings/load_json', [__CLASS__, 'loadACFJson']);
-
-        Router::decoratePostType('event', static::class)
-            ->withPage('events')
-            ->withSlot('template-content', [static::class, 'renderArchive']);
     }
 
     public static function renderArchive(): string

@@ -244,18 +244,36 @@ When reading the spec, check for:
 After creating structures:
 
 ```bash
-# Clear log
+APP_URL=$(grep '^APP_URL' .env | cut -d= -f2)
 : > ../../debug.log
-
-# Load site
-curl -sL {{APP_URL}} -o /dev/null -w "%{http_code}\n"
-
-# Check for errors
-cat ../../debug.log
-
-# Verify post type registered
-curl -s "{{APP_URL}}/wp-json/wp/v2/types" | grep "resource-type"
 ```
+
+**1. Check PHP errors** (load the site first):
+```bash
+curl -sL "$APP_URL" -o /dev/null -w "%{http_code}\n"
+cat ../../debug.log
+```
+
+**2. Verify with WP CLI** (run from WP root):
+```bash
+# Post types registered
+wp post-type list --path=../../../../
+
+# Taxonomies registered
+wp taxonomy list --path=../../../../
+
+# Check specific post type exists
+wp post-type get <slug> --path=../../../../
+```
+
+**3. Browser check** — navigate and confirm no visual errors:
+```
+mcp__chrome-devtools__navigate_page with url: "$APP_URL"
+mcp__chrome-devtools__list_console_messages
+mcp__chrome-devtools__take_screenshot
+```
+
+**4. Ask the user** to confirm archive/single pages load correctly for new post types.
 
 ## Dependencies
 

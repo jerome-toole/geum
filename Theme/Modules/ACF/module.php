@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\ACF;
 
-class Module
+class ACFModule
 {
     public static function init(): void
     {

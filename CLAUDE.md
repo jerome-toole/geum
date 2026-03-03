@@ -1,255 +1,65 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Geum is a WordPress development framework built on top of the WordPress ecosystem, designed to provide a modern development experience while adhering to WordPress best practices.
+
+Key features include:
+- **Components**: Typed PHP classes (`Geum\Components\*`) with `::make()` factories, optional `validate()` and `transform()` hooks. Auto-discovered from `components/`. Editor integration via ACF blocks (`acf.php` per component).
+- **Module System**: Encapsulated theme features in `Theme/Modules/*/module.php`, each with a static `init()`. Auto-loaded; disable via `geum/modules/disabled` filter.
+- **Router**: `Theme/Routes/routes.php` handles owned routes and WordPress archive decoration via `Geum\Router`.
+- **ACF Pro**: Custom fields, option pages, and editor blocks. Field groups managed as local JSON in `acf-json/`. Blocks render via `ComponentName::fromBlock()`.
+- **CSS Architecture**: Tailwind + BEM hybrid. Tailwind for layout utilities in templates (`flex`, `gap-4`); per-component `styles.pcss` (BEM) for component styles. Custom type, color, and spacing systems — never use raw Tailwind typography or color classes in components.
+- **Build System**: Vite with per-component entry points. Component `styles.pcss` and `scripts.js` are auto-bundled into the main CSS/JS.
+
 
 ### Dev Workflow
-1. `npm run dev`
-2. Access WP at normal URL (e.g., `http://geum.test`)
-3. HMR auto-detects; don't access localhost:5173 directly
+1. `npm run dev` — HMR auto-detects;
+2. `npm run lint` / `npm run fix` — JS/CSS (Biome)
+3. `./vendor/bin/pint` — PHP formatting (PSR-12)
+4. Access WP at `APP_URL` from `.env`
 
-
-## Architecture
-
-### Directory Structure
-```
-Geum/                  # Core framework
-
-Theme/                 # Custom theme functionality
-
-components/            # UI components (PHP + assets)
-
-assets/                # Build source files
-  styles/              # CSS architecture (1-theme, 2-base, 3-patterns, 4-utilities)
-  scripts/             # JS helpers
-  static/              # Static assets (copied to public/)
-public/                # Built assets (build/manifest.json)
-acf-json/              # General ACF field groups
-```
 
 ### Module System
-Modules in `Theme/Modules/*/module.php` auto-load via `Geum\Module::init()`. Each module has a `Module` class with `init()` method. Disable via `geum/modules/disabled` filter.
-
-### Component System
-Components in `components/` with structure:
-- `ComponentName.php` - Typed class with `::make()` factory
-- `template.php` - Template markup
-- `styles.pcss` - Bundled into main.css
-- `scripts.js` - Bundled into main.js
-- `acf.php` - ACF block config (optional)
-- `example.php` - Dev preview examples (optional)
-- `group_component_{name}.json` - ACF field group (optional)
-
-Namespaced under `Geum\Components`.
-
-**Usage:**
-```php
-use Geum\Components\Accordion;
-use Geum\Components\Card;
-
-echo Accordion::make(
-    heading: 'FAQ',
-    accordion_items: $items,
-);
-
-echo Card::make(object: $post, show_read_more: false);
-
-// From ACF block
-echo Accordion::fromBlock($block, $fields, $content, $is_preview, $post_id);
-```
-
-**Class Structure:**
-```php
-namespace Geum\Components;
-
-use Geum\ComponentBase;
-
-class ComponentName extends ComponentBase
-{
-    protected static string $name = 'component-name';
-
-    public static function make(
-        array $classes = [],
-        string $title = '',
-        ...$others
-    ): ?static {
-        return static::createFromArgs(static::mergeArgs(get_defined_vars()));
-    }
-
-    // Optional: return false to skip rendering
-    protected static function validate(array $args): bool
-    {
-        return !empty($args['title']);
-    }
-
-    // Transform args before rendering
-    protected static function transform(array $args): array
-    {
-        $args['classes'] = array_merge(['component-name'], $args['classes'] ?? []);
-        return $args;
-    }
-}
-```
-
-**Template Access:**
-```php
-// In template.php - use $this->property
-<div class="<?= classes($this->classes) ?>" <?= attributes($this->attributes) ?>>
-    <?= Heading::make(...$this->content['heading']); ?>
-</div>
-```
-
-**External Filtering:**
-```php
-add_filter('geum/component/accordion', function($args) {
-    $args['classes'][] = 'custom-class';
-    return $args;
-});
-```
-
-**Generate Component Classes:**
-```bash
-node dev-scripts/generate-component-class.js accordion     # Single
-node dev-scripts/generate-component-class.js --all        # All
-node dev-scripts/generate-component-class.js --list       # List
-```
-
-### Router System
-Application-level routing for owned routes and WordPress archive decoration.
-
-**Cross-cutting routes in `Theme/Routes/routes.php`:**
-```php
-use Geum\Router;
-use Theme\Controllers\ArchiveController;
-
-// Article archive
-Router::decoratePostType('article', ArchiveController::class)
-    ->withPage('article-listing')
-    ->withSlot('template-content', fn() => ArchiveController::renderLoop());
-
-// 404 page
-Router::decorate404(NotFoundController::class)
-    ->withPage('404')
-    ->withSlot('template-content', fn() => NotFoundController::renderContent());
-```
-
-**Post type modules self-register their own routes in `module.php`:**
-```php
-// Theme/Modules/Events/module.php
-use Geum\Router;
-
-public static function init(): void
-{
-    PostType::init();
-
-    Router::decoratePostType('event', static::class)
-        ->withPage('events')
-        ->withSlot('template-content', [static::class, 'renderArchive']);
-}
-
-public static function renderArchive(): string
-{
-    ob_start();
-    // render loop...
-    return ob_get_clean();
-}
-```
-
-**Route Types:**
-- `archive:{pt}` - Post type archive
-- `post_type:{name}` - CPT archive
-- `taxonomy:{name}` - Taxonomy archive
-- `search` - Search results
-- `404` - Not found
-
-### Build System
-- **Vite 7** with laravel-vite-plugin
-- **Tailwind CSS v4** via PostCSS
-- **Biome** for JS/CSS linting
-- Custom glob import plugins for CSS & JS
-
-**Entry Points:**
-- `assets/main.js` → `public/build/main.js`
-- `assets/main.pcss` → `public/build/main-styles.css`
-- `assets/editor-scripts.js` → `public/build/editor-scripts.js`
-- `assets/editor-styles.pcss` → `public/build/editor-styles.css`
-- `assets/admin-scripts.js` → `public/build/admin-scripts.js`
-
-**Component Assets:**
-- `styles.pcss` / `scripts.js` - Bundled via glob into main entry points
-- Other named files (e.g., `button.js`) - Built as standalone entries
-
-### Configuration Files
-- `config.json` - Framework settings
-- `theme.json` - WordPress FSE/block settings
-- `vite.config.js` - Vite configuration
-- `postcss.config.js` - PostCSS plugins
-- `tailwind.config.js` - Tailwind configuration
-- `biome.json` - Biome linting
-- `pint.json` - Laravel Pint PHP style
-
-### PHP Architecture
-- PSR-4 autoloading: `Geum\` → `Geum/`, `Theme\` → `Theme/`
-- Components classmap in `composer.json`
-- Laravel Pint for formatting (PSR-12)
+Modules in `Theme/Modules/*/module.php` auto-load via `Geum\Module::init()`.
+Each has a static `init()` method. Disable via `geum/modules/disabled` filter.
 
 
-## CSS Architecture
-
-Organized in `assets/styles/` following ITCSS:
-- `1-theme/` - Design tokens, variables
-- `2-base/` - Normalize, base elements
-- `3-patterns/` - Reusable patterns
-- `4-utilities/` - Utility classes
-
-**Tailwind v4** with custom utilities. Import: `@import 'tailwindcss';`
-
-### Color System
-`dev-scripts/postcss-color-system.js` generates from `assets/theme-config.json`:
-
-**CSS Variables** (per color):
-- `--color-{name}` - hex value
-- `--color-{name}--hsl` - HSL format
-- `--color-{name}--foreground` - contrasting text
-
-**Utilities**:
-- `color-context-{name}` - background + foreground + focus + links
-- `has-{name}-background-color` - WP block editor alias
-- `foreground-from-{name}` - text color only
-
-```html
-<section class="color-context-darkgreen">...</section>
-<span class="foreground-from-brand-1">...</span>
-```
+### MCPs to use:
+- **context7** — look up library/framework docs before implementing with any SDK or package
+- **chrome-devtools** — browser testing; navigate, snapshot DOM, check console/network
 
 
-## JavaScript Architecture
+### Styling Rules
 
-- Entry points: `main.js`, `editor-scripts.js`, `admin-scripts.js`
-- Glob imports: `import '../components/*/scripts.js'`
-- Modern ES modules (Vite handles transpilation)
+**Typography**: Use `type-{name}` utilities — `@apply type-h2`, `type-meta`, etc. Never raw Tailwind font/size properties. Defined in `assets/styles/3-patterns/_type-styles.pcss`. Semantic names: `type-hero`, `type-h1`–`type-h6`, `type-base`, `type-meta`.
 
+**Colors**: Defined in `assets/theme-config.json`, processed at build time into CSS custom properties. Each color generates:
+- `--color-{name}` — raw hex
+- `--color-{name}--foreground` — contrasting text color
+- `color-context-{name}` utility — sets background AND `--color-background`, `--color-foreground`, link/focus colors together
 
-## Theme Initialization Flow
+Always use `color-context-{name}` for sections with a background — never set `background-color` alone. Within a color context use `var(--color-foreground)` / `var(--color-background)` for text and backgrounds.
 
-1. `functions.php` loads Composer autoloader
-2. `Geum\Config::init()` loads `config.json`
-3. `Geum\Component::init()` discovers components
-4. `Geum\WordPress\*::init()` classes initialize
-5. `Geum\Router::init()` loads routes
-6. `Geum\Module::init()` loads Theme modules
-7. Theme utilities initialize
+**Spacing**: Use `space(px)` (converts px → rem). Responsive: `spaceFluid(min, max)`. Layout tokens: `var(--space-layout)`, `var(--container-padding)`.
+
+**Patterns vs utilities**: Use Tailwind utilities (`flex`, `gap-4`, `hidden`) for layout directly in templates. Use `@apply` with custom patterns (`type-h2`, `color-context-name`) inside component `.pcss` files — not as inline template classes.
 
 
-## WordPress Integration
+### Testing
+- **PHP errors**: `cat ../../debug.log` after page load
+- **WP data**: WP CLI — run with `--path=../../../../` (e.g. `wp post-type list`)
+- **Rendering/UI**: Chrome DevTools MCP — navigate, snapshot DOM, check console. Prefer DOM over screenshots unless visual testing is needed.
+- **Visual changes**: Take a screenshot and ask the user to confirm before marking done.
+- Get `APP_URL` from `.env`: `APP_URL=$(grep '^APP_URL' .env | cut -d= -f2)`
+- Component previews: `$APP_URL/_dev/`
 
-- ACF Pro for custom fields (`acf-json/`)
-- Extended CPTs for post type registration
-- Plugin deps: ACF Pro, Query Monitor, Safe SVG, Yoast SEO (via Composer)
 
+### Reference
 
-## Testing & Quality
+| Doc | When to read |
+|-----|-------------|
+| [architecture.md](.claude/agent_docs/architecture.md) | Theme init flow, module system internals, WP integration |
+| [css.md](.claude/agent_docs/css.md) | CSS architecture, color system, spacing, type utilities, page grid |
 
-- PHP: Laravel Pint (PSR-12)
-- JS/CSS: Biome
-- Run `npm run lint` to check
-- Run `npm run fix` to fix
+## Skills
+- `.claude/skills/geum-dev/` — Dev workflows (components, CSS, testing, setup, build)
+- `.claude/skills/website-spec/` — Used for writing a WEBSITE_SPEC.md defining pages, routes, templates, and components for a project.

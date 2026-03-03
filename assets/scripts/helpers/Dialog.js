@@ -31,7 +31,7 @@ export default class Dialog {
     }
 
     init() {
-        this.dialogOpenElements.forEach((element) => {
+        this.dialogOpenElements?.forEach((element) => {
             element.addEventListener('click', (e) => {
                 if (element.dataset.dialogContentTemplate) {
                     this.content = document.querySelector(
@@ -43,7 +43,7 @@ export default class Dialog {
             });
         });
 
-        this.dialogCloseElements.forEach((element) => {
+        this.dialogCloseElements?.forEach((element) => {
             element.addEventListener('click', (e) => {
                 this.close(e);
             });

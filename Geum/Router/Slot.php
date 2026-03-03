@@ -49,6 +49,7 @@ class Slot
             'category' => 'theme',
             'icon' => 'layout',
             'mode' => 'preview',
+            'align' => 'full',
             'supports' => [
                 'mode' => false,
                 'multiple' => false,

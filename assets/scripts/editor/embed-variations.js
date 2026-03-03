@@ -5,7 +5,7 @@
 wp.domReady(() => {
     const allowedEmbedVariants = ['youtube', 'vimeo', 'gravity-forms'];
 
-    wp.blocks.getBlockVariations('core/embed').forEach((variant) => {
+    wp.blocks.getBlockVariations('core/embed')?.forEach((variant) => {
         if (!allowedEmbedVariants.includes(variant.name)) {
             wp.blocks.unregisterBlockVariation('core/embed', variant.name);
         }

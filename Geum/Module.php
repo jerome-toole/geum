@@ -18,9 +18,11 @@ class Module
                 continue;
             }
 
-            require_once $path;
+            $class = "Theme\\Modules\\{$name}\\{$name}Module";
 
-            $class = "Theme\\Modules\\{$name}\\Module";
+            if (! class_exists($class, false)) {
+                require_once $path;
+            }
 
             if (class_exists($class) && method_exists($class, 'init')) {
                 $class::init();

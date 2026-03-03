@@ -2,7 +2,7 @@ const animateItems = document.querySelectorAll('.animate');
 
 const animateObserver = new IntersectionObserver(
     (entries) => {
-        entries.forEach((entry) => {
+        entries?.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('animate--play');
             } else if (entry.boundingClientRect.top > 0) {
@@ -16,6 +16,6 @@ const animateObserver = new IntersectionObserver(
     }
 );
 
-animateItems.forEach((item) => {
+animateItems?.forEach((item) => {
     animateObserver.observe(item);
 });

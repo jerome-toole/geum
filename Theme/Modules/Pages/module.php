@@ -2,7 +2,7 @@
 
 namespace Theme\Modules\Pages;
 
-class Module
+class PagesModule
 {
     public static function init(): void
     {

@@ -52,7 +52,7 @@ export default class CookieConsent {
             this.setActive(false);
         });
 
-        this.togglers.forEach((element) => {
+        this.togglers?.forEach((element) => {
             element.setAttribute('aria-expanded', this.isActive());
             element.setAttribute('aria-controls', this.el.id);
             element.addEventListener('click', this.handleTogglerClick.bind(this));
@@ -79,14 +79,14 @@ export default class CookieConsent {
 
             this.bannerEl.focus();
 
-            this.togglers.forEach((element) => {
+            this.togglers?.forEach((element) => {
                 element.setAttribute('aria-expanded', true);
             });
         } else {
             this.prevActiveElement.focus();
             this.el.setAttribute('aria-hidden', true);
 
-            this.togglers.forEach((element) => {
+            this.togglers?.forEach((element) => {
                 element.setAttribute('aria-expanded', false);
             });
         }
@@ -124,7 +124,7 @@ export default class CookieConsent {
      * tags), so we parse it via createContextualFragment to execute correctly.
      */
     activateConsentScripts() {
-        document.querySelectorAll('script[type="text/plain"][data-cookie-consent]').forEach((inert) => {
+        document.querySelectorAll('script[type="text/plain"][data-cookie-consent]')?.forEach((inert) => {
             const target = inert.dataset.consentLocation === 'body' ? document.body : document.head;
             const range = document.createRange();
             range.selectNodeContents(target);

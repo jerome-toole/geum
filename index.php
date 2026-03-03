@@ -6,17 +6,23 @@ $object = \Geum\WordPress\PageObject::get();
 
 site_main_open(object: $object);
 
-ob_start();
-\Geum\Router::renderPage();
-$routerContent = ob_get_clean();
+$routerPage = \Geum\Router::getPage();
 
-if ($routerContent) {
-    echo $routerContent;
+if ($routerPage) {
+    if (! has_block('acf/page-header', $routerPage->ID)) {
+        echo \Geum\Components\PageHeader::make(object: $object);
+    }
+
+    echo apply_filters('the_content', $routerPage->post_content);
 } else {
     $items = [];
     while (have_posts()) {
         the_post();
         $items[]['object'] = get_post();
+    }
+
+    if (! has_block('acf/page-header')) {
+        echo \Geum\Components\PageHeader::make(object: $object);
     }
 
     if (! empty($items)) {

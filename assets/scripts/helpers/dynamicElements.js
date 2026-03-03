@@ -31,9 +31,7 @@
 
 const dynamicElements = {
     registry: new Map(),
-    observer: new MutationObserver((mutations) =>
-        dynamicElements.handleMutations(mutations),
-    ),
+    observer: new MutationObserver((mutations) => dynamicElements.handleMutations(mutations)),
     isObserving: false,
 
     /**
@@ -69,11 +67,9 @@ const dynamicElements = {
      * Initializes existing elements, but waits for DOMContentLoaded if necessary
      */
     initOnDOMContentLoaded(selector, callback) {
-        if (document.readyState === "loading") {
+        if (document.readyState === 'loading') {
             // If the document is still loading, wait for DOMContentLoaded
-            document.addEventListener("DOMContentLoaded", () =>
-                this.initExistingElements(selector, callback),
-            );
+            document.addEventListener('DOMContentLoaded', () => this.initExistingElements(selector, callback));
         } else {
             // If the document is already loaded, initialize immediately
             this.initExistingElements(selector, callback);
@@ -81,9 +77,7 @@ const dynamicElements = {
     },
 
     initExistingElements(selector, callback) {
-        document
-            .querySelectorAll(selector)
-            .forEach((el) => this.initElement(el, callback));
+        document.querySelectorAll(selector)?.forEach((el) => this.initElement(el, callback));
     },
 
     handleMutations(mutations) {
@@ -96,9 +90,7 @@ const dynamicElements = {
                         if (node.matches(selector)) {
                             this.initElement(node, callback);
                         } else {
-                            node.querySelectorAll(selector).forEach((el) =>
-                                this.initElement(el, callback),
-                            );
+                            node.querySelectorAll(selector)?.forEach((el) => this.initElement(el, callback));
                         }
                     });
                 }

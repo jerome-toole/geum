@@ -8,7 +8,7 @@ if (! empty($this->content_flow)) {
     <<?= esc_html($this->inner_el); ?> class="<?= classes($inner_classes) ?>">
 
         <?php if (! empty($this->header) || ! empty($this->content)) { ?>
-            <div class="site-main__content page-grid content-flow">
+            <div class="site-main__content content-grid content-flow">
                 <?php if (! empty($this->header)) { ?>
                     <?= $this->header; ?>
                 <?php } ?>
