@@ -16,6 +16,7 @@ class Admin
         \add_action('wp_dashboard_setup', [__CLASS__, 'removeDraftWidget'], 1);
         \add_filter('get_user_option_admin_color', [__CLASS__, 'adminColor']);
 
+        \add_filter('register_post_type_args', [__CLASS__, 'setPageMenuPosition'], 10, 2);
         \add_action('admin_menu', [__CLASS__, 'addMenusTopLevelItem']);
         \add_filter('custom_menu_order', '__return_true');
         \add_filter('menu_order', [__CLASS__, 'reorderAdminMenu']);
@@ -28,11 +29,24 @@ class Admin
     }
 
     /**
+     * Give the built-in Pages post type a low menu_position so it sorts
+     * first among post types in the admin menu.
+     */
+    public static function setPageMenuPosition(array $args, string $post_type): array
+    {
+        if ($post_type === 'page') {
+            $args['menu_position'] = -1;
+        }
+
+        return $args;
+    }
+
+    /**
      * Add a top-level "Menus" item linking directly to nav-menus.php.
      */
     public static function addMenusTopLevelItem(): void
     {
-        \add_menu_page('Menus', 'Menus', 'manage_options', 'nav-menus.php', '', 'dashicons-menu-alt3');
+        \add_menu_page('Menus', 'Menus', 'manage_options', 'nav-menus.php', '', 'dashicons-welcome-widgets-menus');
     }
 
     /**
@@ -95,7 +109,7 @@ class Admin
             if ($pt->name === 'attachment') {
                 continue;
             }
-            $slugs[] = $pt->name === 'post' ? 'edit.php' : 'edit.php?post_type=' . $pt->name;
+            $slugs[] = $pt->name === 'post' ? 'edit.php' : 'edit.php?post_type='.$pt->name;
         }
 
         return $slugs;
