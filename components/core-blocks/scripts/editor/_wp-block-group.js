@@ -1,5 +1,17 @@
 const { createHigherOrderComponent } = wp.compose;
 
+// Remove the row, stack, and grid variations from core/group. Use the columns block, which provides the right amount of layout control for most use cases.
+wp.hooks.addFilter('blocks.registerBlockType', 'geum/remove-group-variations', (settings, name) => {
+    if (name === 'core/group') {
+        console.log(settings.variations);
+
+        settings.variations = settings.variations?.filter(
+            (v) => !['group-row', 'group-stack', 'group-grid'].includes(v.name)
+        );
+    }
+    return settings;
+});
+
 /**
  * Remove layout editing from core/group by default.
  * The grid variation re-enables it via the filter below.

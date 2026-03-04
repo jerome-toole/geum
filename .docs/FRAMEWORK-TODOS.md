@@ -14,7 +14,7 @@
 - [x] Migrate to classes() from buildClasses() (<header class="<?= classes($this->classes) ?>" <?= attributes($this->attributes) ?>>)
 - [x] rename all acf-json field groups
 
-- [ ] Flow spacing. Make this really robust and configurable. Use --flow-space more broadly. MAybe rename to flow.
+- [ ] Flow spacing. Make this really robust and configurable. Use --flow-space more broadly. Maybe rename to flow.
 - [ ] fix site-header search on desktop.
 - [ ] rename project to Gust
 - [ ] Update colours to be simpler out of the box.

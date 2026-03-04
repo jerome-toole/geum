@@ -16,11 +16,89 @@ class Admin
         \add_action('wp_dashboard_setup', [__CLASS__, 'removeDraftWidget'], 1);
         \add_filter('get_user_option_admin_color', [__CLASS__, 'adminColor']);
 
+        \add_action('admin_menu', [__CLASS__, 'addMenusTopLevelItem']);
+        \add_filter('custom_menu_order', '__return_true');
+        \add_filter('menu_order', [__CLASS__, 'reorderAdminMenu']);
+
         // Post archive page link to all posts admin screen.
         \add_action('admin_bar_menu', [__CLASS__, 'addViewAllPostsToArchivePages'], 80);
 
         // Router page edit link for decorated routes.
         \add_action('admin_bar_menu', [__CLASS__, 'addEditRouterPageLink'], 81);
+    }
+
+    /**
+     * Add a top-level "Menus" item linking directly to nav-menus.php.
+     */
+    public static function addMenusTopLevelItem(): void
+    {
+        \add_menu_page('Menus', 'Menus', 'manage_options', 'nav-menus.php', '', 'dashicons-menu-alt3');
+    }
+
+    /**
+     * Reorder the WP admin menu into three zones:
+     *
+     *  Zone 1 — Content post types (dynamic, ordered by menu_position)
+     *  Zone 2 — Content utilities: Forms, Media, Menus
+     *  Zone 3 — Admin/settings + any unrecognised plugin items
+     */
+    public static function reorderAdminMenu(array $menu_order): array
+    {
+        $separators = ['separator1', 'separator2', 'separator-last'];
+
+        // Zone 1: all public post types ordered by menu_position (excludes admin-only types like ACF).
+        $post_type_zone = self::getPostTypeSlugs();
+
+        // Zone 2: content utilities — only include items actually registered in this install.
+        $utility_zone = array_values(array_filter(
+            ['gf_edit_forms', 'upload.php', 'nav-menus.php'],
+            fn ($slug) => in_array($slug, $menu_order, true)
+        ));
+
+        // Zone 3: core WP admin items — only include if present.
+        $admin_zone = array_values(array_filter(
+            ['themes.php', 'plugins.php', 'users.php', 'tools.php', 'options-general.php'],
+            fn ($slug) => in_array($slug, $menu_order, true)
+        ));
+
+        // Anything not explicitly placed (e.g. new plugins) goes at the end of zone 3.
+        $placed = array_merge(['index.php'], $post_type_zone, $utility_zone, $admin_zone, $separators);
+        $unknown = array_values(array_diff($menu_order, $placed));
+
+        return array_merge(
+            ['index.php', 'separator1'],
+            $post_type_zone,
+            ['separator2'],
+            $utility_zone,
+            ['separator-last'],
+            $admin_zone,
+            $unknown,
+        );
+    }
+
+    /**
+     * Return menu slugs for all public post types, ordered by menu_position.
+     *
+     * Using `public => true` naturally excludes admin-only post types (ACF field groups, etc.)
+     * while including all content post types regardless of how many there are.
+     *
+     * @return string[]
+     */
+    protected static function getPostTypeSlugs(): array
+    {
+        $post_types = \get_post_types(['public' => true, 'show_ui' => true], 'objects');
+
+        uasort($post_types, fn ($a, $b) => ($a->menu_position ?? PHP_INT_MAX) <=> ($b->menu_position ?? PHP_INT_MAX));
+
+        $slugs = [];
+        foreach ($post_types as $pt) {
+            if ($pt->name === 'attachment') {
+                continue;
+            }
+            $slugs[] = $pt->name === 'post' ? 'edit.php' : 'edit.php?post_type=' . $pt->name;
+        }
+
+        return $slugs;
     }
 
     /**
@@ -157,7 +235,7 @@ class Admin
     }
 
     /**
-     * Add an 'Edit Page Content' link to the WP admin bar when viewing a decorated route
+     * Add an 'Edit Page' link to the WP admin bar when viewing a decorated route
      * that has an associated RouterPage. Allows editors to quickly open the linked page
      * in the block editor to manage surrounding content.
      *
@@ -188,7 +266,7 @@ class Admin
         $adminBar->add_menu([
             'id' => 'geum-edit-router-page',
             'title' => sprintf(
-                '%sEdit Page Content%s',
+                '%sEdit Page%s',
                 '<span class="ab-icon" aria-hidden="true"></span><span class="ab-label">',
                 '</span>'
             ),

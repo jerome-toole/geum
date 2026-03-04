@@ -1,0 +1,25 @@
+@utility list-styled {
+    list-style-type: disc;
+    list-style-position: outside;
+    padding-inline-start: calc(1.1em + var(--list--indent));
+
+    &:where(ol) {
+        list-style-type: decimal;
+    }
+
+    li {
+        &::marker {
+            color: var(--list--marker-color, currentColor);
+        }
+
+        & + li {
+            margin-top: var(--list--item--spacing);
+        }
+
+        :is(ol, ul) {
+            padding-left: var(--list--nested-indent);
+            margin-top: var(--list--item--spacing);
+            margin-bottom: var(--list--item--spacing);
+        }
+    }
+}

@@ -173,12 +173,8 @@
     }
 
     .content-grid & {
-        + :where(.alignfull, .alignwide) {
-            margin-top: 0;
-
-            &:where([class*='has-background']) {
-                margin-top: calc(spaceFluid(24, 32) * -1);
-            }
+        + :where(.alignfull) {
+            --flow-space: 0;
         }
     }
 }

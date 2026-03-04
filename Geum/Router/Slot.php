@@ -48,6 +48,7 @@ class Slot
             'description' => \__('Displays dynamic page content.', 'geum'),
             'category' => 'theme',
             'icon' => 'layout',
+            'apiVersion' => 3,
             'mode' => 'preview',
             'align' => 'full',
             'supports' => [

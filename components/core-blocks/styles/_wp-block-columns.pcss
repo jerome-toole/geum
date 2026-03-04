@@ -1,1 +1,36 @@
-/* wp-block-columns - commented out for now */
+/* Columns block: stacks on mobile, flex row on lg+. Mirrors wp-block-group grid behavior. */
+
+.wp-block-columns {
+    @apply margin-trim;
+    @apply content-grid;
+
+    &.has-background {
+        padding-block: var(--space-layout);
+    }
+
+    &.alignfull {
+        @apply content-grid;
+    }
+
+    &:not(.alignfull) {
+        --container-padding: 26px;
+    }
+
+    @media (width < theme('screens.lg')) {
+        @apply content-flow;
+
+        > .wp-block-column {
+            width: 100%;
+        }
+    }
+
+    @media (width >= theme('screens.lg')) {
+        display: flex;
+        column-gap: var(--col-gap);
+
+        > .wp-block-column {
+            margin-block: 0;
+            min-width: 0;
+        }
+    }
+}

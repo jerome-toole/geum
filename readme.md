@@ -14,6 +14,7 @@
 - **Vite Build** - HMR, glob imports, manifest-based cache busting
 - **Dev Environment** - `/_dev` routes for component testing, style guide, and QA
 - **WordPress Optimizations** - Asset handling, color system, image helpers, SVG support, menu utilities
+- **JS Utilities** - Accessible UI helpers including `Disclosure` (expandable sections, accordions, nav menus) and `Dialog` (modal dialogs), plus viewport, mutation/resize observer, and dynamic element utilities
 - **AI Development** - Claude Code skills for AI-assisted development workflows (component scaffolding, testing, website spec generation)
 
 ## Key Features
@@ -457,10 +458,6 @@ Define components, data structures, and pages in `.docs/_WEBSITE-SPEC.md`:
 - **Pages** - Routes and templates
 
 ---
-
-## Name
-
-**Geum** (JEE-um) — A genus of pretty flowers whose wiry stems bear flowers for a long period from late spring through summer, commonly known as avens.
 
 ## Acknowledgements
 

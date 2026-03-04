@@ -64,6 +64,12 @@ class RouterPage
         return (bool) \get_post_meta($postId, '_is_router_page', true);
     }
 
+    public static function isActiveRouterPage(int $postId): bool
+    {
+        $role = static::getRole($postId);
+        return $role !== null && isset(static::$pages[$role]);
+    }
+
     public static function getRole(int $postId): ?string
     {
         $role = \get_post_meta($postId, '_router_role', true);
@@ -89,7 +95,7 @@ class RouterPage
 
     public static function preventDeletion(int $postId): void
     {
-        if (static::isRouterPage($postId)) {
+        if (static::isActiveRouterPage($postId)) {
             \wp_die(
                 \__('Router pages cannot be deleted.', 'geum'),
                 \__('Action Blocked', 'geum'),
@@ -100,7 +106,7 @@ class RouterPage
 
     public static function preventStructuralChanges(array $data, array $postarr): array
     {
-        if (empty($postarr['ID']) || ! static::isRouterPage($postarr['ID'])) {
+        if (empty($postarr['ID']) || ! static::isActiveRouterPage($postarr['ID'])) {
             return $data;
         }
 
@@ -153,12 +159,23 @@ class RouterPage
 
     public static function addRoleBadge(array $states, \WP_Post $post): array
     {
-        if (static::isRouterPage($post->ID)) {
-            $role = static::getRole($post->ID);
-            $label = ucwords(str_replace('-', ' ', $role ?? ''));
+        if (! static::isRouterPage($post->ID)) {
+            return $states;
+        }
+
+        $role = static::getRole($post->ID);
+        $label = ucwords(str_replace('-', ' ', $role ?? ''));
+
+        if (static::isActiveRouterPage($post->ID)) {
             $states['router_page'] = sprintf(
                 /* translators: %s: Router page role name */
                 \__('Role: %s', 'geum'),
+                $label
+            );
+        } else {
+            $states['router_page'] = sprintf(
+                /* translators: %s: Router page role name */
+                \__('Orphaned Route: %s', 'geum'),
                 $label
             );
         }
@@ -168,7 +185,7 @@ class RouterPage
 
     public static function removeTrashAction(array $actions, \WP_Post $post): array
     {
-        if (static::isRouterPage($post->ID)) {
+        if (static::isActiveRouterPage($post->ID)) {
             unset($actions['trash']);
         }
 

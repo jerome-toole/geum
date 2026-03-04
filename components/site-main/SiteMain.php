@@ -9,9 +9,9 @@ use Geum\ComponentBase;
  * SiteMain Component
  *
  * Usage:
- *   site_main_open(object: $post, classes: ['custom']);
+ *   SiteMain::open(classes: ['custom'], object: $post);
  *   // ... content ...
- *   site_main_close();
+ *   SiteMain::close();
  */
 class SiteMain extends ComponentBase
 {
@@ -71,38 +71,5 @@ class SiteMain extends ComponentBase
         include __DIR__.'/close.php';
 
         return ob_get_clean();
-    }
-
-    /**
-     * @deprecated Use site_main_open()/site_main_close() instead.
-     */
-    public static function make(
-        array $classes = [],
-        ?string $inner_el = null,
-        bool $content_flow = true,
-        ...$others
-    ): ?static {
-        return static::createFromArgs(static::mergeArgs(get_defined_vars()));
-    }
-
-    protected static function transform(array $args): array
-    {
-        if (! empty($args['object'])) {
-            if ($args['object'] instanceof \WP_Post) {
-                $args['inner_el'] = 'article';
-            }
-
-            if (! has_block('acf/page-header')) {
-                $args['header'] = \Geum\Components\PageHeader::make(
-                    object: $args['object'],
-                );
-            }
-        }
-
-        if (empty($args['id']) && empty($args['attributes']['id'])) {
-            $args['attributes']['id'] = 'main';
-        }
-
-        return $args;
     }
 }

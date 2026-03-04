@@ -1,9 +1,9 @@
 <?php
-$inner_classes = ['site-main__inner'];
+$content_classes = [];
 if (! empty($args['content_flow'])) {
-    $inner_classes[] = 'content-flow';
+    $content_classes[] = 'content-flow';
 }
 ?>
 <main class="<?= classes('site-main', $args['classes'] ?? []) ?>" <?= attributes($args['attributes'] ?? []) ?>>
-    <<?= esc_html($args['inner_el'] ?? 'div') ?> class="<?= classes($inner_classes) ?>">
-        <div class="site-main__content content-grid">
+    <<?= esc_html($args['inner_el'] ?? 'div') ?> class="site-main__inner">
+        <div class="<?= classes('site-main__content', 'content-grid', $content_classes) ?>">

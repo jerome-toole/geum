@@ -14,8 +14,6 @@
                 "core/columns",
                 "core/column",
                 "core/group",
-                "core/row",
-                "core/stack",
                 "core/separator",
                 "core/embed",
                 "core/shortcode",
@@ -26,6 +24,8 @@
             ],
             "disabled_blocks": [
                 "core/pullquote",
+                "core/row",
+                "core/stack",
                 "core/verse",
                 "core/preformatted",
                 "core/code",

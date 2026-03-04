@@ -1,11 +1,21 @@
 /* Standard element margins */
+a {
+    @apply link;
+}
+
 :is(h1, h2, h3, h4, h5, h6) {
+    --flow-space: 1lh;
+
     text-wrap: balance;
 
     /* Make a tags that are children of headings inherit styling */
     a {
         color: inherit;
         text-decoration: none;
+    }
+
+    + :is(h1, h2, h3, h4, h5, h6) {
+        --flow-space: space(4);
     }
 }
 
@@ -33,11 +43,9 @@ h6 {
     @apply type-h6;
 }
 
-a {
-    @apply link;
-}
-
 p {
+    --flow-space: var(--space-base);
+
     text-wrap: pretty;
 }
 
@@ -64,18 +72,8 @@ pre {
 
 ol,
 ul {
-    padding-left: calc(1.1em + var(--list--indent));
-    list-style-position: outside;
+    --flow-space: var(--space-base);
 
-    li {
-        &::marker {
-            color: var(--list--marker-color, currentColor);
-        }
-    }
-}
-
-li {
-    :is(ol, ul) {
-        padding-left: var(--list--nested-indent);
-    }
+    list-style: none;
+    padding-left: 0;
 }

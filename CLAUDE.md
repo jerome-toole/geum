@@ -46,6 +46,7 @@ Always use `color-context-{name}` for sections with a background — never set `
 
 ### Testing
 - **PHP errors**: `cat ../../debug.log` after page load
+- **WP Login**: If you need to log in but don't have credentials, create a user via WP CLI: `wp user create testadmin --role=administrator --user_pass=strongpassword`
 - **WP data**: WP CLI — run with `--path=../../../../` (e.g. `wp post-type list`)
 - **Rendering/UI**: Chrome DevTools MCP — navigate, snapshot DOM, check console. Prefer DOM over screenshots unless visual testing is needed.
 - **Visual changes**: Take a screenshot and ask the user to confirm before marking done.
